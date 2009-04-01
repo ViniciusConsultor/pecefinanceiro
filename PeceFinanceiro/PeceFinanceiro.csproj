@@ -1,0 +1,181 @@
+﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0F31781F-DBC4-44D0-9820-815AF41FA283}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PeceFinanceiro</RootNamespace>
+    <AssemblyName>PeceFinanceiro</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mobile" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CadastroAluno.aspx.cs">
+      <DependentUpon>CadastroAluno.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CadastroAluno.aspx.designer.cs">
+      <DependentUpon>CadastroAluno.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CadastroProjeto.aspx.cs">
+      <DependentUpon>CadastroProjeto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CadastroProjeto.aspx.designer.cs">
+      <DependentUpon>CadastroProjeto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditarParcelamento.aspx.cs">
+      <DependentUpon>EditarParcelamento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditarParcelamento.aspx.designer.cs">
+      <DependentUpon>EditarParcelamento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListaProjetos.aspx.cs">
+      <DependentUpon>ListaProjetos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListaProjetos.aspx.designer.cs">
+      <DependentUpon>ListaProjetos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListaAlunos.aspx.cs">
+      <DependentUpon>ListaAlunos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListaAlunos.aspx.designer.cs">
+      <DependentUpon>ListaAlunos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListaCadastros.aspx.cs">
+      <DependentUpon>ListaCadastros.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListaCadastros.aspx.designer.cs">
+      <DependentUpon>ListaCadastros.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CadastroFinanceiro.aspx.cs">
+      <DependentUpon>CadastroFinanceiro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CadastroFinanceiro.aspx.designer.cs">
+      <DependentUpon>CadastroFinanceiro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PeceFinanceiro.Master.cs">
+      <DependentUpon>PeceFinanceiro.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PeceFinanceiro.Master.designer.cs">
+      <DependentUpon>PeceFinanceiro.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistrarPagamentos.aspx.cs">
+      <DependentUpon>RegistrarPagamentos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistrarPagamentos.aspx.designer.cs">
+      <DependentUpon>RegistrarPagamentos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios.aspx.cs">
+      <DependentUpon>Relatorios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Relatorios.aspx.designer.cs">
+      <DependentUpon>Relatorios.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CadastroAluno.aspx" />
+    <Content Include="CadastroProjeto.aspx" />
+    <Content Include="EditarParcelamento.aspx" />
+    <Content Include="Icons\add.png" />
+    <Content Include="Icons\cross.png" />
+    <Content Include="Icons\delete.png" />
+    <Content Include="Icons\money.png" />
+    <Content Include="Icons\money_add.png" />
+    <Content Include="Icons\money_dollar.png" />
+    <Content Include="Icons\page_edit.png" />
+    <Content Include="Icons\plus.png" />
+    <Content Include="Icons\tick.png" />
+    <Content Include="Images\bg_header.jpg" />
+    <Content Include="Images\header_right.jpg" />
+    <Content Include="Images\minerva.png" />
+    <Content Include="ListaProjetos.aspx" />
+    <Content Include="ListaAlunos.aspx" />
+    <Content Include="Css\license.txt" />
+    <Content Include="Css\style.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="ListaCadastros.aspx" />
+    <Content Include="CadastroFinanceiro.aspx" />
+    <Content Include="PeceFinanceiro.Master" />
+    <Content Include="RegistrarPagamentos.aspx" />
+    <Content Include="Relatorios.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1037</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

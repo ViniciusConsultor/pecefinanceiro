@@ -1,0 +1,55 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="PeceFinanceiro.master.cs" Inherits="PeceFinanceiro.PeceFinanceiro" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link rel="stylesheet" type="text/css" href="Css/style.css" />
+</head>
+<body>
+    <script type="text/javascript">
+        function setMenuAtivo(menuAtivo){
+            document.getElementById("MenuItemCadastrosFinanceiros").attributes.getNamedItem("class").nodeValue = "";
+            document.getElementById("MenuItemAlunos").attributes.getNamedItem("class").nodeValue = "";
+            document.getElementById("MenuItemProjetos").attributes.getNamedItem("class").nodeValue = "";
+            document.getElementById("MenuItemRegistrarPagamentos").attributes.getNamedItem("class").nodeValue = "";
+            document.getElementById("MenuItemRelatorios").attributes.getNamedItem("class").nodeValue = "";
+            
+            document.getElementById(menuAtivo.toString()).attributes.getNamedItem("class").nodeValue = "active";
+        }
+    </script>
+    <div id="header_image"></div>
+    <div id="header">
+        <h1>PECE</h1>
+        <h2>Sistema Financeiro</h2>
+    </div>
+    
+    <div id="menu">
+                <ul>
+	                <!--
+			                Each list item below represents a tab in the menu. Set the class
+			                of any list item to 'active' to make it, well, active.
+	                -->
+	                <li id="MenuItemCadastrosFinanceiros" class=""><a href="ListaCadastros.aspx">Cadastros Financeiros</a></li>
+	                <li id="MenuItemAlunos" class=""><a href="ListaAlunos.aspx">Alunos</a></li>
+	                <li id="MenuItemProjetos" class=""><a href="ListaProjetos.aspx">Projetos</a></li>
+	                <li id="MenuItemRegistrarPagamentos" class=""><a href="RegistrarPagamentos.aspx">Registrar Pagamentos</a></li>
+	                <li id="MenuItemRelatorios" class=""><a href="Relatorios.aspx">Relatórios</a></li>
+                </ul>
+                <div></div>
+    </div>
+    
+    <form id="form1" runat="server">
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+    
+    <div id="footer">
+        &copy; 2008 My Website. Design by <a href="http://www.nodethirtythree.com/">NodeThirtyThree</a> + <a href="http://www.freecsstemplates.org">Free CSS Templates</a>.
+    </div>
+</body>
+</html>

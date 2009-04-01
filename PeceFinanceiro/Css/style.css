@@ -1,0 +1,423 @@
+/*
+
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+
+Name       : Primitive
+Version    : 1.0
+Released   : 20080425
+
+*/
+
+*
+{
+	margin: 0px;
+}
+
+body
+{
+	font-family: verdana, helvetica, sans-serif;
+	font-size: 13px;
+	padding: 0px;
+	background-color: #ffffff;
+	color: #222222;
+}
+
+a
+{
+	background-color: inherit;
+	color: #0000EE;
+}
+
+a:hover
+{
+	text-decoration: none;
+}
+
+p
+{
+	text-align: justify;
+	margin-bottom: 15px;
+	line-height: 22px;
+}
+
+ul
+{
+	list-style: disc;
+	padding-left: 15px;
+	margin-bottom: 15px;
+}
+
+h3
+{
+	font-size: 20px;
+	margin-bottom: 30px;
+}
+
+h4
+{
+	font-size: 13px;
+	margin-bottom: 5px;
+}
+
+#header
+{
+	/*background-color: #005680;*/
+	background-image: url(../Images/bg_header.jpg);
+	background-repeat:repeat-x;
+	color: #fff;
+	padding: 30px 40px 30px 40px;
+	height: 60px;
+}
+
+#header_image
+{
+    background-image: url(../Images/header_right.jpg);
+    width: 267px;
+    height: 120px;
+    float: right;
+    vertical-align: top;
+}
+
+#header h1
+{
+	font-size: 30px;
+}
+
+#header h2
+{
+	font-size: 14px;
+}
+
+#menu
+{
+	padding: 5px 30px 0px 30px;
+	margin-bottom: 30px;
+	color: #222;
+	background-color: #EEE;
+	border-bottom: solid 1px #CACACA;
+	font-weight: bold;
+}
+
+#menu div
+{
+	clear: both;
+}
+
+#menu ul
+{
+	display: block;
+	position: relative;
+	top: 1px;
+	list-style: none;
+	padding: 0px;
+	margin-bottom: 0px;
+}
+	
+#menu ul li
+{
+	position: relative;
+	float: left;
+	border: solid 1px #CACACA;
+	border-bottom: 0px;
+	margin-right: 5px;
+}
+
+#menu ul li a
+{
+	display: block;
+	padding: 5px 10px 8px 10px;
+	text-decoration: none;
+	background-color: inherit;
+	color: #777;
+}
+
+#menu ul li a:hover
+{
+	background-color: #174480;
+	color: #fff;
+}
+
+#menu ul li.active, #menu ul li.active a, #menu ul li.active a:hover
+{
+	background-color: #ffffff;
+	color: #333;
+}
+
+#container
+{
+	margin: 0px 40px 0px 40px;
+}
+
+#primarycontainer
+{
+	float: left;
+	margin-right: -200px;
+	width: 100%;
+}
+
+#primarycontent
+{
+	margin-right: 240px;
+}
+
+#primarycontent p
+{
+	margin-bottom: 20px;
+}
+
+#secondarycontent
+{
+	float: right;
+	width: 200px;
+}
+
+#footer
+{
+	text-align: center;
+	margin: 20px 0px 0px 0px;
+	padding-top: 15px;
+	border-top: solid 1px #CACACA;
+	clear: both;
+}
+
+/* FORMS */
+.formGenerico
+{
+    background-color: inherit;
+}
+
+.formGenerico fieldset
+{
+    border: dotted 1px #ccc;
+    background-color: #f0f0f0;
+}
+
+.formGenerico fieldset li {
+  list-style: none;
+  padding: 5px;
+  margin: 0;
+}
+
+.formGenerico fieldset fieldset label {
+  display: block;
+  width: auto;
+}
+
+.formGenerico fieldset label {
+  width: 25%;
+  float:left;
+  text-align: right;
+  margin-right: 10px;
+}
+
+
+.formBuscaDiv
+{
+    background-color: inherit;
+}
+
+.formBuscaDiv fieldset
+{
+    border: dotted 1px #ccc;
+    background-color: #eee;
+}
+
+.formBuscaDiv fieldset legend
+{
+    color: #999;
+    font-family: Lucida Console, Arial;
+    font-size: large;
+    font-weight: lighter;
+}
+
+.formBuscaDiv label
+{
+    text-align: right;
+    font-size: small;
+    color: #000;
+    width: 100px;
+    text-align: right;
+}
+
+.textBox
+{
+    border: solid 1px #cccccc;
+    font-family: Verdana, Arial;
+    font-size: small;
+    padding: 3px 3px 3px 3px;
+    margin: 1px 1px 1px 1px;
+}
+
+.textBox:focus
+{
+    border: solid 2px #ff9900;
+    margin: 0px 0px 0px 0px;
+}
+
+/* BOTOES */
+
+.botao
+{
+    margin: 3px 3px 3px 3px;
+    padding: 2px 2px 2px 2px;
+    border: solid 1px #bbb;
+    background-color: #ddd;
+    color: #666;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: small;
+}
+
+.botao:hover
+{
+    background-color: #ddd;
+    border-color: #777;
+    cursor: pointer;
+}
+
+.botaoForm
+{
+    margin: 7px 3px 7px 3px;
+    padding: 5px 5px 5px 5px;
+    border: solid 1px #bbb;
+    background-color: #ddd;
+    color: #666;
+    font-weight: bold;
+    float: right;
+    text-decoration: none;
+    font-size: small;
+}
+
+.botaoForm:hover
+{
+    background-color: #ccc;
+    border-color: #777;
+    cursor: pointer;
+}
+
+.botaoFormTick
+{
+    margin: 7px 3px 7px 3px;
+    padding: 5px 5px 5px 22px;
+    border: solid 1px #bbb;
+    background-color: #ddd;
+    color: #666;
+    font-weight: bold;
+    background-image: url(../Icons/tick.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    float: right;
+    text-decoration: none;
+    font-size: small;
+}
+
+.botaoFormTick:hover
+{
+    background-color: #A2DE9E;
+    border-color: #61C85B;
+    color: #41733C;
+    cursor: pointer;
+}
+
+.botaoFormTick:disabled
+{
+    background-color: #aaa;
+    color: #ccc;
+}
+
+.botaoFormCross
+{
+    margin: 7px 3px 7px 3px;
+    padding: 5px 5px 5px 22px;
+    border: solid 1px #bbb;
+    background-color: #ddd;
+    color: #666;
+    font-weight: bold;
+    background-image: url(../Icons/cross.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    float: right;
+    text-decoration: none;
+    font-size: small;
+}
+.botaoFormCross:hover
+{
+    background-color: #DEA29E;
+    border-color: #C8615B;
+    color: #73413C;
+    cursor: pointer;
+}
+
+
+.botaoAdd
+{
+    margin: 7px 3px 7px 3px;
+    padding: 5px 5px 5px 22px;
+    border: solid 1px #bbb;
+    background-color: #ddd;
+    color: #666;
+    font-weight: bold;
+    background-image: url(../Icons/plus.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    float: right;
+    text-decoration: none;
+    font-size: small;
+}
+
+.botaoAdd:hover
+{
+    background-color: #ddd;
+    border-color: #777;
+    cursor: pointer;
+}
+/* GRIDS */
+.grid
+{
+    background-color:#eee;
+    padding: 0px;
+}
+
+.grid table
+{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.grid table td 
+{
+    border-bottom-width: 1px;
+    border-bottom-color: #ccc;
+    border-bottom-style: dashed;
+    padding: 2px;
+    height: 30px;
+}
+
+.grid table td.EmDia
+{
+    color:Green;
+    font-weight:bold;
+}
+
+.grid table td.Inadimplente
+{
+    color:Red;
+    font-weight:bold;
+}
+
+.grid table th
+{
+    background-color: #777;
+    color:#fff;
+    font-weight:normal;
+    padding: 4px;
+    text-align:left;
+}
+
+.clearit
+{
+	clear: both;
+	height: 1px;
+}
