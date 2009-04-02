@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="Css/style.css" />
 </head>
 <body>
+    <script src="Js/JScripts.js" type="text/javascript"></script>
     <script type="text/javascript">
         function setMenuAtivo(menuAtivo){
             document.getElementById("MenuItemCadastrosFinanceiros").attributes.getNamedItem("class").nodeValue = "";

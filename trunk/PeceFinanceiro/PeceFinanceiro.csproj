@@ -139,6 +139,7 @@
     <Content Include="Images\bg_header.jpg" />
     <Content Include="Images\header_right.jpg" />
     <Content Include="Images\minerva.png" />
+    <Content Include="Js\JScripts.js" />
     <Content Include="ListaProjetos.aspx" />
     <Content Include="ListaAlunos.aspx" />
     <Content Include="Css\license.txt" />

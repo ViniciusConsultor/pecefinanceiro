@@ -14,13 +14,13 @@ namespace PeceFinanceiro {
     public partial class CadastroFinanceiro {
         
         /// <summary>
-        /// DropDownList2 control.
+        /// DropDownListProjetos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList2;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListProjetos;
         
         /// <summary>
         /// LabelValorFinal control.
@@ -32,13 +32,22 @@ namespace PeceFinanceiro {
         protected global::System.Web.UI.WebControls.Label LabelValorFinal;
         
         /// <summary>
-        /// DropDownList1 control.
+        /// HiddenFieldValorCurso control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.HiddenField HiddenFieldValorCurso;
+        
+        /// <summary>
+        /// DropDownListAlunos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListAlunos;
         
         /// <summary>
         /// TextBoxNumeroParcelas control.
@@ -66,6 +75,15 @@ namespace PeceFinanceiro {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxValorComAjuste;
+        
+        /// <summary>
+        /// TextBoxValorParcela control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxValorParcela;
         
         /// <summary>
         /// TextBoxObservacoes control.
