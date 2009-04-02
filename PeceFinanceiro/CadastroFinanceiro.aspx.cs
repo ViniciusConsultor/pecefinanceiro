@@ -15,7 +15,12 @@ namespace PeceFinanceiro
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            this.TextBoxValorComAjuste.Enabled = false;
+            this.TextBoxAjusteValorFinal.Attributes.Add("onkeydown", "ForceNumericInput(event, this, true, false);");
+            this.TextBoxAjusteValorFinal.Attributes.Add("onkeyup", "AtualizaValores();");
+            this.TextBoxDiaPagamento.Attributes.Add("onkeydown", "ForceNumericInput(event, this, false, false)");
+            this.TextBoxNumeroParcelas.Attributes.Add("onkeydown", "ForceNumericInput(event, this, false, false)");
+            this.TextBoxNumeroParcelas.Attributes.Add("onkeyup", "AtualizaValores();");
         }
     }
 }

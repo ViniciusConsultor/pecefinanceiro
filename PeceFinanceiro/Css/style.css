@@ -186,6 +186,7 @@ h4
 .formGenerico
 {
     background-color: inherit;
+    width:100%;
 }
 
 .formGenerico fieldset
@@ -261,7 +262,7 @@ h4
 .botao
 {
     margin: 3px 3px 3px 3px;
-    padding: 2px 2px 2px 2px;
+    padding: 3px 3px 3px 3px;
     border: solid 1px #bbb;
     background-color: #ddd;
     color: #666;
@@ -279,8 +280,8 @@ h4
 
 .botaoForm
 {
-    margin: 7px 3px 7px 3px;
-    padding: 5px 5px 5px 5px;
+    margin: 3px 3px 3px 3px;
+    padding: 2px 2px 2px 2px;
     border: solid 1px #bbb;
     background-color: #ddd;
     color: #666;
@@ -299,8 +300,8 @@ h4
 
 .botaoFormTick
 {
-    margin: 7px 3px 7px 3px;
-    padding: 5px 5px 5px 22px;
+    margin: 3px 3px 3px 3px;
+    padding: 2px 2px 2px 15px;
     border: solid 1px #bbb;
     background-color: #ddd;
     color: #666;
@@ -329,8 +330,8 @@ h4
 
 .botaoFormCross
 {
-    margin: 7px 3px 7px 3px;
-    padding: 5px 5px 5px 22px;
+    margin: 3px 3px 3px 3px;
+    padding: 2px 2px 2px 15px;
     border: solid 1px #bbb;
     background-color: #ddd;
     color: #666;
@@ -353,8 +354,8 @@ h4
 
 .botaoAdd
 {
-    margin: 7px 3px 7px 3px;
-    padding: 5px 5px 5px 22px;
+    margin: 3px 3px 3px 3px;
+    padding: 2px 2px 2px 15px;
     border: solid 1px #bbb;
     background-color: #ddd;
     color: #666;

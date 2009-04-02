@@ -3,3 +3,8 @@ C:\_PROJETOS\PeceFinanceiro\PeceFinanceiro\bin\PeceFinanceiro.pdb
 C:\_PROJETOS\PeceFinanceiro\PeceFinanceiro\obj\Debug\ResolveAssemblyReference.cache
 C:\_PROJETOS\PeceFinanceiro\PeceFinanceiro\obj\Debug\PeceFinanceiro.dll
 C:\_PROJETOS\PeceFinanceiro\PeceFinanceiro\obj\Debug\PeceFinanceiro.pdb
+C:\Documents and Settings\admin\Desktop\Vsf\PeceFinanceiro\bin\PeceFinanceiro.dll
+C:\Documents and Settings\admin\Desktop\Vsf\PeceFinanceiro\bin\PeceFinanceiro.pdb
+C:\Documents and Settings\admin\Desktop\Vsf\PeceFinanceiro\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\admin\Desktop\Vsf\PeceFinanceiro\obj\Debug\PeceFinanceiro.dll
+C:\Documents and Settings\admin\Desktop\Vsf\PeceFinanceiro\obj\Debug\PeceFinanceiro.pdb
