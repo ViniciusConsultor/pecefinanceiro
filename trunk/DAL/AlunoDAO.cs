@@ -21,7 +21,7 @@ namespace Vsf.DAL
                 db.AbreConexao();
                 
                 StringBuilder query =  new StringBuilder("SELECT Aluno.* FROM Aluno");
-                query.Append(" INNER JOIN ProjetoAluno ON Aluno.NumeroPece = ProjetoAluno.IdAluno");
+                query.Append(" INNER JOIN Matricula ON Aluno.NumeroPece = Matricula.IdAluno");
                 query.Append(" WHERE IdProjeto = @codigoProjeto");
                 
                 SqlDataReader reader = db.ExecuteTextReader(query.ToString(), parameters);
@@ -58,9 +58,9 @@ namespace Vsf.DAL
                 db.AbreConexao();
 
                 StringBuilder query = new StringBuilder("SELECT Aluno.* FROM Aluno");
-                query.Append(" INNER JOIN ProjetoAluno ON Aluno.NumeroPece = ProjetoAluno.IdAluno");
+                query.Append(" INNER JOIN Matricula ON Aluno.NumeroPece = Matricula.IdAluno");
                 query.Append(" WHERE IdProjeto = @codigoProjeto");
-                query.Append(" AND ProjetoAluno.idProjetoAluno NOT IN ( SELECT idProjetoAluno FROM Financeiro )");
+                query.Append(" AND Matricula.idMatricula NOT IN ( SELECT idMatricula FROM Financeiro )");
 
                 SqlDataReader reader = db.ExecuteTextReader(query.ToString(), parameters);
                 while (reader.Read())
@@ -131,7 +131,7 @@ namespace Vsf.DAL
 
                 db.AbreConexao();
 
-                StringBuilder query = new StringBuilder("SELECT * FROM ProjetoAluno");
+                StringBuilder query = new StringBuilder("SELECT * FROM Matricula");
                 query.Append(" WHERE IdAluno = @codigoAluno");
                 query.Append(" AND IdProjeto = @codigoProjeto");
 
@@ -139,7 +139,7 @@ namespace Vsf.DAL
                 if (reader.Read())
                 {
                     alunoProjeto = new AlunoProjeto();
-                    alunoProjeto.Id = (reader["idProjetoAluno"] != DBNull.Value) ? Convert.ToInt32(reader["idProjetoAluno"]) : 0;
+                    alunoProjeto.Id = (reader["idMatricula"] != DBNull.Value) ? Convert.ToInt32(reader["idMatricula"]) : 0;
                     alunoProjeto.Status = (StatusAlunoProjeto) Enum.Parse(typeof(StatusAlunoProjeto), (reader["status"] != DBNull.Value) ? Convert.ToString(reader["status"]) : "0");
                     alunoProjeto.Aluno = ObterAlunosPorNumeroPece(codigoAluno);
                     alunoProjeto.Projeto = ProjetoDAO.ObterProjetoPorCodigo(codigoProjeto);
