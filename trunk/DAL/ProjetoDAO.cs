@@ -22,7 +22,7 @@ namespace Vsf.DAL
                 StringBuilder query =  new StringBuilder("SELECT * FROM Projeto");
                 
                 SqlDataReader reader = db.ExecuteTextReader(query.ToString(), parameters);
-                if (reader.Read())
+                while (reader.Read())
                 {
                     Projeto projeto = new Projeto();
                     projeto.Codigo = (reader["CodigoProjeto"] != DBNull.Value) ? Convert.ToString(reader["CodigoProjeto"]) : String.Empty;
@@ -36,13 +36,49 @@ namespace Vsf.DAL
             }
             catch (Exception ex)
             {
-                throw new ApplicationException("DAOProjeto.ObterTodosProjetos(): " + ex, ex);
+                throw new ApplicationException("DAOProjeto.ObterTodosProjetos(): " + ex.ToString(), ex);
             }
             finally
             {
                 db.FechaConexao();
             }
             return listProjeto;
+        }
+
+        public static Projeto ObterProjetoPorCodigo(string codigoProjeto)
+        {
+            Projeto projeto = null;
+            VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@codigoProjeto", codigoProjeto));
+
+                db.AbreConexao();
+
+                StringBuilder query = new StringBuilder("SELECT * FROM Projeto");
+                query.Append(" WHERE CodigoProjeto = @codigoProjeto");
+
+                SqlDataReader reader = db.ExecuteTextReader(query.ToString(), parameters);
+                if (reader.Read())
+                {
+                    projeto = new Projeto();
+                    projeto.Codigo = (reader["CodigoProjeto"] != DBNull.Value) ? Convert.ToString(reader["CodigoProjeto"]) : String.Empty;
+                    projeto.Descricao = (reader["Descricao"] != DBNull.Value) ? Convert.ToString(reader["Descricao"]) : String.Empty; ;
+                    projeto.Nome = (reader["Nome"] != DBNull.Value) ? Convert.ToString(reader["Nome"]) : String.Empty;
+                    projeto.Valor = (reader["ValorProjeto"] != DBNull.Value) ? Convert.ToDouble(reader["ValorProjeto"]) : 0.0;
+                    projeto.Alunos = (new AlunoDAO()).ObterAlunosPorProjeto(projeto);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("DAOProjeto.ObterProjetoPorCodigo(codigoProjeto): " + ex.ToString(), ex);
+            }
+            finally
+            {
+                db.FechaConexao();
+            }
+            return projeto;
         }
     }
 }
