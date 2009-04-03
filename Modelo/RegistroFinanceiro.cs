@@ -4,10 +4,6 @@ using System.Text;
 
 namespace Vsf.Modelo
 {
-    public enum StatusRegistroFinanceiro
-    {
-        Atrasado, EmDia, Cancelado
-    }
 
     public class RegistroFinanceiro
     {
@@ -17,7 +13,7 @@ namespace Vsf.Modelo
         private string _observacoes;
         private int _diaVencimento;
         private DateTime _dataVencimentoPrimeiraParcela;
-        private StatusRegistroFinanceiro _status;
+        private StatusAlunoProjeto _status;
 
 
         public AlunoProjeto AlunoProjeto
@@ -55,7 +51,7 @@ namespace Vsf.Modelo
             set { _dataVencimentoPrimeiraParcela = value; }
         }
 
-        public StatusRegistroFinanceiro Status
+        public StatusAlunoProjeto Status
         {
             get { return _status; }
             set { _status = value; }

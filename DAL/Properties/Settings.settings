@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="StringConexao" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Data Source=WINDOSXPVM\SQLEXPRESS;Initial Catalog=FinanceiroPECE;User ID=pecefinanceiro; Password=pece</Value>
+      <Value Profile="(Default)">Data Source=localhost;Initial Catalog=FinanceiroPECE;User ID=sa; Password=@sa2009</Value>
     </Setting>
   </Settings>
 </SettingsFile>

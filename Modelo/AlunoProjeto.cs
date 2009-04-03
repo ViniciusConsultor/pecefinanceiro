@@ -6,7 +6,7 @@ namespace Vsf.Modelo
 {
     public enum StatusAlunoProjeto
 	{
-	    Inativo, Ativo
+        Inativo = 0, Ativo = 1, Atrasado = 2, EmDia = 3, Cancelado = 4
 	}
     public class AlunoProjeto
     {

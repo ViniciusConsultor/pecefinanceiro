@@ -16,7 +16,7 @@ namespace Vsf.DAL
             try
             {
                 List<SqlParameter> parameters = new List<SqlParameter>();
-                parameters.Add(new SqlParameter("@idProjetoAluno", alunoProjeto.Id));
+                parameters.Add(new SqlParameter("@idMatricula", alunoProjeto.Id));
                 parameters.Add(new SqlParameter("@numeroParcelas", registroFinanceiro.NumeroParcelas));
                 parameters.Add(new SqlParameter("@precoReajustado", registroFinanceiro.PrecoReajustado));
                 parameters.Add(new SqlParameter("@observacoes", registroFinanceiro.Observacoes));
@@ -27,8 +27,8 @@ namespace Vsf.DAL
                 db.AbreConexao();
 
                 StringBuilder query = new StringBuilder("INSERT INTO Financeiro");
-                query.Append(" (idProjetoAluno, NumeroParcelas, PrecoReajustado, Observacoes, DiaPagamento, PrimeiraParcela, Estado)");
-                query.Append(" VALUES (@idProjetoAluno, @numeroParcelas, @precoReajustado, @observacoes, @diaPagamento, @primeiraParcela, @status)");
+                query.Append(" (idMatricula, NumeroParcelas, PrecoReajustado, Observacoes, DiaPagamento, PrimeiraParcela, Estado)");
+                query.Append(" VALUES (@idMatricula, @numeroParcelas, @precoReajustado, @observacoes, @diaPagamento, @primeiraParcela, @status)");
 
                 affected = db.ExecuteTextNonQuery(query.ToString(), parameters);
             }
@@ -54,7 +54,7 @@ namespace Vsf.DAL
                 db.AbreConexao();
 
                 StringBuilder query = new StringBuilder("SELECT * FROM Financeiro");
-                query.Append(" INNER JOIN ProjetoAluno ON Financeiro.idProjetoAluno = ProjetoAluno.idProjetoAluno");
+                query.Append(" INNER JOIN Matricula ON Financeiro.idMatricula = Matricula.idMatricula");
 
                 SqlDataReader reader = db.ExecuteTextReader(query.ToString(), parameters);
                 while (reader.Read())
@@ -66,7 +66,7 @@ namespace Vsf.DAL
                     registro.NumeroParcelas = (reader["NumeroParcelas"] != DBNull.Value) ? Convert.ToInt32(reader["NumeroParcelas"]) : 0;
                     registro.Observacoes = (reader["Observacoes"] != DBNull.Value) ? Convert.ToString(reader["Observacoes"]) : String.Empty;
                     registro.PrecoReajustado = (reader["PrecoReajustado"] != DBNull.Value) ? Convert.ToDouble(reader["PrecoReajustado"]) : 0.0;
-                    registro.Status = (StatusRegistroFinanceiro)Enum.Parse(typeof(StatusRegistroFinanceiro), (reader["status"] != DBNull.Value) ? Convert.ToString(reader["status"]) : "0");
+                    registro.Status = (StatusAlunoProjeto)Enum.Parse(typeof(StatusAlunoProjeto), (reader["status"] != DBNull.Value) ? Convert.ToString(reader["status"]) : "0");
                     
                     listRegistros.Add(registro);
                 }

@@ -113,7 +113,7 @@ namespace PeceFinanceiro
                 errorOccured = true;
                 errorMessage = "Valor inválido para o valor final do curso.";
             }
-            registroFinanceiro.Status = StatusRegistroFinanceiro.EmDia;
+            registroFinanceiro.Status = StatusAlunoProjeto.EmDia;
 
             AlunoNegocio alunoNegocio = new AlunoNegocio();
             AlunoProjeto alunoProjeto = alunoNegocio.ObterRelacionamentoAlunoProjeto(Int32.Parse(DropDownListAlunos.SelectedValue), DropDownListProjetos.SelectedValue);
