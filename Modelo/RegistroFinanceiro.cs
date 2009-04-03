@@ -11,12 +11,20 @@ namespace Vsf.Modelo
 
     public class RegistroFinanceiro
     {
+        private AlunoProjeto _alunoProjeto;
         private int _numeroParcelas;
         private double _precoReajustado;
         private string _observacoes;
         private int _diaVencimento;
         private DateTime _dataVencimentoPrimeiraParcela;
         private StatusRegistroFinanceiro _status;
+
+
+        public AlunoProjeto AlunoProjeto
+        {
+            get { return _alunoProjeto; }
+            set { _alunoProjeto = value; }
+        }
 
         public int NumeroParcelas
         {
@@ -35,7 +43,7 @@ namespace Vsf.Modelo
             get { return _observacoes; }
             set { _observacoes = value; }
         }
-        public int DiaVencimento
+        public int DiaPagamento
         {
             get { return _diaVencimento; }
             set { _diaVencimento = value; }

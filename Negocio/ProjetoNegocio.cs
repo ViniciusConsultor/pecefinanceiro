@@ -12,5 +12,10 @@ namespace Vsf.Negocio
         {
             return ProjetoDAO.ObterTodosProjetos();
         }
+
+        public Projeto ObterProjetoPorCodigo(string codigoProjeto)
+        {
+            return ProjetoDAO.ObterProjetoPorCodigo(codigoProjeto);
+        }
     }
 }

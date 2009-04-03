@@ -8,8 +8,8 @@
     <ProjectGuid>{B742FFDF-AE00-4C83-B319-4419256206E1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Negocio</RootNamespace>
-    <AssemblyName>Negocio</AssemblyName>
+    <RootNamespace>Vsf.Negocio</RootNamespace>
+    <AssemblyName>Vsf.Negocio</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

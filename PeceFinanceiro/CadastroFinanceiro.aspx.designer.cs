@@ -14,6 +14,33 @@ namespace PeceFinanceiro {
     public partial class CadastroFinanceiro {
         
         /// <summary>
+        /// PanelErro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelErro;
+        
+        /// <summary>
+        /// MensagemErro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MensagemErro;
+        
+        /// <summary>
+        /// PanelSucesso control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelSucesso;
+        
+        /// <summary>
         /// DropDownListProjetos control.
         /// </summary>
         /// <remarks>
@@ -77,6 +104,15 @@ namespace PeceFinanceiro {
         protected global::System.Web.UI.WebControls.TextBox TextBoxValorComAjuste;
         
         /// <summary>
+        /// HiddenValorComAjuste control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HiddenValorComAjuste;
+        
+        /// <summary>
         /// TextBoxValorParcela control.
         /// </summary>
         /// <remarks>
@@ -104,6 +140,24 @@ namespace PeceFinanceiro {
         protected global::System.Web.UI.WebControls.TextBox TextBoxDataPrimeiraParcela;
         
         /// <summary>
+        /// CalendarDataPrimeiraParcela control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar CalendarDataPrimeiraParcela;
+        
+        /// <summary>
+        /// CalendarVisibleSignalFromServer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField CalendarVisibleSignalFromServer;
+        
+        /// <summary>
         /// TextBoxDiaPagamento control.
         /// </summary>
         /// <remarks>
@@ -111,6 +165,15 @@ namespace PeceFinanceiro {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBoxDiaPagamento;
+        
+        /// <summary>
+        /// ButtonEditarParcelas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonEditarParcelas;
         
         /// <summary>
         /// ButtonCadastrar control.
@@ -129,14 +192,5 @@ namespace PeceFinanceiro {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonCancelar;
-        
-        /// <summary>
-        /// Button1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
     }
 }

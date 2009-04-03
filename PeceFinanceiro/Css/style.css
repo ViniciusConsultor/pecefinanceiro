@@ -182,6 +182,41 @@ h4
 	clear: both;
 }
 
+/* RESPOSTAS */
+.DivSucesso
+{
+    text-align:center;
+    width: 80%;
+    padding: 10px 10px 10px 30px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    background-image: url(../Icons/tick.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    border: solid 1px;
+    border-color: #61C85B;
+    background-color: #BBFFB2;
+    color: #666;
+}
+
+.DivErro
+{
+    text-align:center;
+    width: 80%;
+    padding: 10px 10px 10px 30px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    background-image: url(../Icons/cross.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    border: solid 1px red;
+    background-color: #FFA29B;
+    color: #666;
+}
+
+
 /* FORMS */
 .formGenerico
 {
@@ -256,6 +291,12 @@ h4
 {
     border: solid 2px #ff9900;
     margin: 0px 0px 0px 0px;
+}
+
+.Calendario
+{
+    position:absolute;
+    background-color:#ffffff;
 }
 
 /* BOTOES */

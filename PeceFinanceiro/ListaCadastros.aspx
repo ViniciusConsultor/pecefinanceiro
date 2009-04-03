@@ -12,7 +12,9 @@
             
                 
                 <div class="grid">
-                    <table>
+                    <asp:GridView ID="GridViewListaRegistros" runat="server">
+                    </asp:GridView>
+                    <!--table>
                     <tr>
                         <th>Nome do Aluno</th>
                         <th>Projeto</th>
@@ -52,7 +54,7 @@
                         <img src="Icons/page_edit.png" alt="Editar Cadastro" title="Editar Cadastro" /> 
                             <img src="Icons/money_add.png" alt="Registrar Pagamento" title="Registrar Pagamento"/></td>
                     </tr>
-                    </table>
+                    </table-->
                 </div>
                 <br />
                 <div>

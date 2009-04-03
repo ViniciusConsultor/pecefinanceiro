@@ -128,6 +128,7 @@
     <Content Include="CadastroProjeto.aspx" />
     <Content Include="EditarParcelamento.aspx" />
     <Content Include="Icons\add.png" />
+    <Content Include="Icons\calender.png" />
     <Content Include="Icons\cross.png" />
     <Content Include="Icons\delete.png" />
     <Content Include="Icons\money.png" />

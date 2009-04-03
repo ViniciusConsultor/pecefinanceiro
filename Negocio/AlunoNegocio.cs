@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Vsf.DAL;
 
-namespace Negocio
+namespace Vsf.Negocio
 {
-    class AlunoNegocio
+    public class AlunoNegocio
     {
+        public Vsf.Modelo.AlunoProjeto ObterRelacionamentoAlunoProjeto(int codigoAluno, string codigoProjeto)
+        {
+            return AlunoDAO.ObterRelacionamentoAlunoProjeto(codigoAluno, codigoProjeto);
+        }
     }
 }
