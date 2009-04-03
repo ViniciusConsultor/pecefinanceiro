@@ -4,7 +4,8 @@ using System.Text;
 
 namespace DAL
 {
-    class ProjetoDAO
+    public class ProjetoDAO
     {
+
     }
 }

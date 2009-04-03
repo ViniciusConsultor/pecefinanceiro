@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Modelo
+namespace Vsf.Modelo
 {
-    class Projeto
+    public class Projeto
     {
     }
 }

@@ -12,19 +12,13 @@
     <script src="Js/JScripts.js" type="text/javascript"></script>
     <script type="text/javascript">
         function setMenuAtivo(menuAtivo){
-            document.getElementById("MenuItemCadastrosFinanceiros").attributes.getNamedItem("class").nodeValue = "";
-            document.getElementById("MenuItemAlunos").attributes.getNamedItem("class").nodeValue = "";
-            document.getElementById("MenuItemProjetos").attributes.getNamedItem("class").nodeValue = "";
-            document.getElementById("MenuItemRegistrarPagamentos").attributes.getNamedItem("class").nodeValue = "";
-            document.getElementById("MenuItemRelatorios").attributes.getNamedItem("class").nodeValue = "";
-            
-            document.getElementById(menuAtivo.toString()).attributes.getNamedItem("class").nodeValue = "active";
+            document.getElementById(menuAtivo.toString()).className = "active";
         }
     </script>
     <div id="header_image"></div>
     <div id="header">
-        <h1>PECE</h1>
-        <h2>Sistema Financeiro</h2>
+        <h1>VSF</h1>
+        <h2>V Sistema Financeiro</h2>
     </div>
     
     <div id="menu">
@@ -33,10 +27,9 @@
 			                Each list item below represents a tab in the menu. Set the class
 			                of any list item to 'active' to make it, well, active.
 	                -->
-	                <li id="MenuItemCadastrosFinanceiros" class=""><a href="ListaCadastros.aspx">Cadastros Financeiros</a></li>
+	                <li id="MenuItemCadastrosFinanceiros" class=""><a href="ListaCadastros.aspx">Registros Financeiros</a></li>
 	                <li id="MenuItemAlunos" class=""><a href="ListaAlunos.aspx">Alunos</a></li>
 	                <li id="MenuItemProjetos" class=""><a href="ListaProjetos.aspx">Projetos</a></li>
-	                <li id="MenuItemRegistrarPagamentos" class=""><a href="RegistrarPagamentos.aspx">Registrar Pagamentos</a></li>
 	                <li id="MenuItemRelatorios" class=""><a href="Relatorios.aspx">Relatórios</a></li>
                 </ul>
                 <div></div>
