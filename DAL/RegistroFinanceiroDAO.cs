@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DAL
+namespace Vsf.DAL
 {
     public class RegistroFinanceiroDAO
     {
+        
     }
 }

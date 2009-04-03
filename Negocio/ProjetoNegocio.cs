@@ -1,10 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Vsf.Modelo;
+using Vsf.DAL;
 
-namespace Negocio
+namespace Vsf.Negocio
 {
-    class ProjetoNegocio
+    public class ProjetoNegocio
     {
+        public List<Projeto> ObterTodosProjetos()
+        {
+            return ProjetoDAO.ObterTodosProjetos();
+        }
     }
 }
