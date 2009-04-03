@@ -9,15 +9,6 @@
     <div id="container">
         <div id="primarycontainer">
             <div id="primarycontent">
-            
-                <div class="formBuscaDiv">
-                    <fieldset>
-                        <legend>Busca</legend>
-                        <label>Palavra Chave: </label><asp:TextBox ID="TextBoxBuscaNomeAluno" runat="server" CssClass="textBox"></asp:TextBox>
-                        <asp:Button ID="ButtonBuscar" runat="server" Text="Buscar" CssClass="botao"/>
-                    </fieldset>
-                </div>
-            <br />
                 <div class="grid">
                     <table>
                     <tr>
@@ -68,7 +59,16 @@
         </div>
 
         <div id="secondarycontent">
-
+            <div class="formBuscaDiv">
+                    <fieldset>
+                        <legend>Busca</legend>
+                        <label>Palavra Chave: </label><br />
+                        <asp:TextBox ID="TextBoxBuscaNomeAluno" runat="server" CssClass="textBox"></asp:TextBox>
+                        <br />
+                        <asp:Button ID="ButtonBuscar" runat="server" Text="Buscar" CssClass="botao"/>
+                    </fieldset>
+                </div>
+            <br />
         </div>
 
         <div class="clearit"></div>
