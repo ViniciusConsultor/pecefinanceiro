@@ -41,6 +41,16 @@
     <Compile Include="RegistroFinanceiroNegocio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\Vsf.DAL.csproj">
+      <Project>{3EC82132-6103-4B72-9D9F-E7920EB73340}</Project>
+      <Name>Vsf.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modelo\Vsf.Modelo.csproj">
+      <Project>{54646173-8417-4DCC-A332-EB704AFD2269}</Project>
+      <Name>Vsf.Modelo</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

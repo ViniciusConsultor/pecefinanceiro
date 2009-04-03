@@ -153,6 +153,16 @@
     <Content Include="Relatorios.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Modelo\Vsf.Modelo.csproj">
+      <Project>{54646173-8417-4DCC-A332-EB704AFD2269}</Project>
+      <Name>Vsf.Modelo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Negocio\Vsf.Negocio.csproj">
+      <Project>{B742FFDF-AE00-4C83-B319-4419256206E1}</Project>
+      <Name>Vsf.Negocio</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

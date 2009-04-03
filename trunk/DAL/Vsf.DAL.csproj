@@ -8,8 +8,8 @@
     <ProjectGuid>{3EC82132-6103-4B72-9D9F-E7920EB73340}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DAL</RootNamespace>
-    <AssemblyName>DAL</AssemblyName>
+    <RootNamespace>Vsf.DAL</RootNamespace>
+    <AssemblyName>Vsf.DAL</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -52,6 +52,16 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Modelo\Vsf.Modelo.csproj">
+      <Project>{54646173-8417-4DCC-A332-EB704AFD2269}</Project>
+      <Name>Vsf.Modelo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Vsf.Common\Vsf.Common.csproj">
+      <Project>{87EAEF87-CC90-47FC-8FC5-7C91604669B0}</Project>
+      <Name>Vsf.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

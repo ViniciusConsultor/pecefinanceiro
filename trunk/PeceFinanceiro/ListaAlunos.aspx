@@ -13,15 +13,15 @@
                     <table>
                     <tr>
                         <th width="20%">Número Pece</th>
-                        <th width="70%">Nome do Aluno</th>
-                        <th width="10%"></th>
+                        <th width="50%">Nome do Aluno</th>
+                        <th width="20%"></th>
                     </tr>
                     
                     <tr>
                         
                         <td>44444</td>
                         <td>João da Silva</td>
-                        <td>
+                        <td align="right">
                             <img src="Icons/page_edit.png" alt="Editar Aluno" title="Editar Aluno"/> <img src="Icons/cross.png" title="Remover Aluno" alt="Remover Aluno"/> 
                             <img src="Icons/money_dollar.png" alt="Cadastro Financeiro" title="Ver Cadastro Financeiro"/></td>
                     </tr>
@@ -29,7 +29,7 @@
                         
                         <td>12345</td>
                         <td>Sust</td>
-                        <td>
+                        <td align="right">
                             <img src="Icons/page_edit.png"  alt="Editar Aluno" title="Editar Aluno"/> <img src="Icons/cross.png" title="Remover Aluno" alt="Remover Aluno"/>
                             <img src="Icons/money_dollar.png" alt="Cadastro Financeiro" title="Ver Cadastro Financeiro"/></td>
                     </tr>
@@ -37,7 +37,7 @@
                        
                         <td>66666</td>
                         <td>Sustança</td>
-                         <td>
+                         <td align="right">
                             <img src="Icons/page_edit.png"  alt="Editar Aluno" title="Editar Aluno"/> <img src="Icons/cross.png" title="Remover Aluno" alt="Remover Aluno"/> 
                             <img src="Icons/money_dollar.png" alt="Cadastro Financeiro" title="Ver Cadastro Financeiro"/></td>
                     </tr>
@@ -45,7 +45,7 @@
                         
                         <td>89898</td>
                         <td>Vitor</td>
-                        <td>
+                        <td align="right">
                             <img src="Icons/page_edit.png"  alt="Editar Aluno" title="Editar Aluno"/> <img src="Icons/cross.png" title="Remover Aluno" alt="Remover Aluno"/>
                             <img src="Icons/money_dollar.png" alt="Cadastro Financeiro" title="Ver Cadastro Financeiro"/></td>
                     </tr>
