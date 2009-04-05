@@ -58,7 +58,7 @@
                 </div>
                 <br />
                 <div>
-                    <a href="CadastroFinanceiro.aspx" class="botaoAdd">Novo Cadastro</a>
+                    <a href="RegistroFinanceiroNovoEditar.aspx" class="botaoAdd">Novo Cadastro</a>
                 </div>
             </div>
         </div>

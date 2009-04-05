@@ -140,7 +140,7 @@ namespace Vsf.DAL
                 {
                     alunoProjeto = new AlunoProjeto();
                     alunoProjeto.Id = (reader["idMatricula"] != DBNull.Value) ? Convert.ToInt32(reader["idMatricula"]) : 0;
-                    alunoProjeto.Status = (StatusAlunoProjeto) Enum.Parse(typeof(StatusAlunoProjeto), (reader["status"] != DBNull.Value) ? Convert.ToString(reader["status"]) : "0");
+                    alunoProjeto.Status = (StatusAlunoProjeto) Enum.Parse(typeof(StatusAlunoProjeto), (reader["estado"] != DBNull.Value) ? Convert.ToString(reader["estado"]) : "0");
                     alunoProjeto.Aluno = ObterAlunosPorNumeroPece(codigoAluno);
                     alunoProjeto.Projeto = ProjetoDAO.ObterProjetoPorCodigo(codigoProjeto);
                 }

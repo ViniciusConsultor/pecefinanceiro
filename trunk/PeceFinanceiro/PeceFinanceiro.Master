@@ -27,9 +27,9 @@
 			                Each list item below represents a tab in the menu. Set the class
 			                of any list item to 'active' to make it, well, active.
 	                -->
-	                <li id="MenuItemCadastrosFinanceiros" class=""><a href="ListaCadastros.aspx">Registros Financeiros</a></li>
-	                <li id="MenuItemAlunos" class=""><a href="ListaAlunos.aspx">Alunos</a></li>
-	                <li id="MenuItemProjetos" class=""><a href="ListaProjetos.aspx">Projetos</a></li>
+	                <li id="MenuItemCadastrosFinanceiros" class=""><a href="RegistroFinanceiroLista.aspx">Registros Financeiros</a></li>
+	                <li id="MenuItemAlunos" class=""><a href="AlunoLista.aspx">Alunos</a></li>
+	                <li id="MenuItemProjetos" class=""><a href="ProjetosLista.aspx">Projetos</a></li>
 	                <li id="MenuItemRelatorios" class=""><a href="Relatorios.aspx">Relatórios</a></li>
                 </ul>
                 <div></div>
