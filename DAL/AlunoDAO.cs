@@ -4,6 +4,7 @@ using System.Text;
 using Vsf.Modelo;
 using Vsf.Common.Database;
 using System.Data.SqlClient;
+using Vsf.Common;
 
 namespace Vsf.DAL
 {
@@ -37,6 +38,7 @@ namespace Vsf.DAL
             }
             catch (Exception ex)
             {
+                Logger.Registrar(0, "Exceção em (DAO) " + ex.Source + " - " + ex.ToString() + " : " + ex.Message + "\n\n StackTrace: " + ex.StackTrace);
                 throw new ApplicationException("DAOAluno.ObterAlunosPorProjeto(): " + ex, ex);
             }
             finally
@@ -75,6 +77,7 @@ namespace Vsf.DAL
             }
             catch (Exception ex)
             {
+                Logger.Registrar(0, "Exceção em (DAO) " + ex.Source + " - " + ex.ToString() + " : " + ex.Message + "\n\n StackTrace: " + ex.StackTrace);
                 throw new ApplicationException("DAOAluno.ObterAlunosPorProjeto(): " + ex, ex);
             }
             finally
@@ -110,6 +113,7 @@ namespace Vsf.DAL
             }
             catch (Exception ex)
             {
+                Logger.Registrar(0, "Exceção em (DAO) " + ex.Source + " - " + ex.ToString() + " : " + ex.Message + "\n\n StackTrace: " + ex.StackTrace);
                 throw new ApplicationException("DAOAluno.ObterAlunosPorNumeroPece(): " + ex, ex);
             }
             finally
@@ -147,6 +151,7 @@ namespace Vsf.DAL
             }
             catch (Exception ex)
             {
+                Logger.Registrar(0, "Exceção em (DAO) " + ex.Source + " - " + ex.ToString() + " : " + ex.Message + "\n\n StackTrace: " + ex.StackTrace);
                 throw new ApplicationException("DAOAluno.ObterAlunosPorProjeto(): " + ex, ex);
             }
             finally
