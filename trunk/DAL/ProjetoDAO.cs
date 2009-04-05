@@ -4,6 +4,7 @@ using System.Text;
 using Vsf.Modelo;
 using System.Data.SqlClient;
 using Vsf.Common.Database;
+using Vsf.Common;
 
 namespace Vsf.DAL
 {
@@ -36,6 +37,7 @@ namespace Vsf.DAL
             }
             catch (Exception ex)
             {
+                Logger.Registrar(0, "Exceção em (DAO) " + ex.Source + " - " + ex.ToString() + " : " + ex.Message + "\n\n StackTrace: " + ex.StackTrace);
                 throw new ApplicationException("DAOProjeto.ObterTodosProjetos(): " + ex.ToString(), ex);
             }
             finally
@@ -73,6 +75,7 @@ namespace Vsf.DAL
             }
             catch (Exception ex)
             {
+                Logger.Registrar(0, "Exceção em (DAO) " + ex.Source + " - " + ex.ToString() + " : " + ex.Message + "\n\n StackTrace: " + ex.StackTrace);
                 throw new ApplicationException("DAOProjeto.ObterProjetoPorCodigo(codigoProjeto): " + ex.ToString(), ex);
             }
             finally

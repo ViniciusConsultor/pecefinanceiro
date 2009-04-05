@@ -4,6 +4,8 @@ using System.Text;
 using Vsf.Common.Database;
 using System.Data.SqlClient;
 using Vsf.Modelo;
+using Vsf.Common;
+using System.Threading;
 
 namespace Vsf.DAL
 {
@@ -34,12 +36,16 @@ namespace Vsf.DAL
             }
             catch (Exception ex)
             {
+                Logger.Registrar(0, "Exceção em (DAO) " + ex.Source + " - " + ex.ToString() + " : " + ex.Message + "\n\n StackTrace: " + ex.StackTrace);
                 throw new ApplicationException("DAOProjeto.ObterProjetoPorCodigo(codigoProjeto): " + ex.ToString(), ex);
             }
             finally
             {
                 db.FechaConexao();
             }
+
+            Logger.Registrar(1, "RegistroFinanceiro inserido para ProjetoAluno número " + alunoProjeto.Id + ".");
+
             return (affected > 0);
         }
 
@@ -73,6 +79,7 @@ namespace Vsf.DAL
             }
             catch (Exception ex)
             {
+                Logger.Registrar(0, "Exceção em (DAO) " + ex.Source + " - " + ex.ToString() + " : " + ex.Message + "\n\n StackTrace: " + ex.StackTrace);
                 throw new ApplicationException("DAOAluno.ObterAlunosPorProjeto(): " + ex, ex);
             }
             finally
