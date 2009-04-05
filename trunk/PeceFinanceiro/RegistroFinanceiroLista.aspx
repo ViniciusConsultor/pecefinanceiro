@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/PeceFinanceiro.Master" AutoEventWireup="true" CodeBehind="ListaCadastros.aspx.cs" Inherits="PeceFinanceiro.ListaCadastros" Title="Untitled Page" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/PeceFinanceiro.Master" AutoEventWireup="true" CodeBehind="RegistroFinanceiroLista.aspx.cs" Inherits="PeceFinanceiro.ListaCadastros" Title="Untitled Page" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 <title>Lista de Cadastro Financeiro - PECE Financeiro</title>
 </asp:Content>
