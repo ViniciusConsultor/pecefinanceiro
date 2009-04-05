@@ -155,5 +155,118 @@ namespace Vsf.DAL
             }
             return alunoProjeto;
         }
+
+        public bool InserirAluno(Aluno aluno)
+        {
+            int affected = 0;
+            VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@NumeroPece", aluno.NumeroPece));
+                parameters.Add(new SqlParameter("@Nome", aluno.Nome));
+                parameters.Add(new SqlParameter("@Endereco", aluno.Endereco));
+                parameters.Add(new SqlParameter("@Telefone", aluno.Telefone));
+                db.AbreConexao();
+
+                StringBuilder query = new StringBuilder("INSERT INTO Aluno");
+                query.Append(" (NumeroPece, Nome, Endereco, Telefone)");
+                query.Append(" VALUES (@NumeroPece, @Nome, @Endereco, @Telefone)");
+                affected = db.ExecuteTextNonQuery(query.ToString(), parameters);
+                
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("DAOAluno.InserirAluno(Aluno): " + ex.ToString(), ex);
+            }
+            finally
+            {
+                db.FechaConexao();
+            }
+            return (affected > 0);
+        }
+
+        public bool InserirVariasMatriculas(Aluno aluno, List<Projeto> projetosDoAluno)
+        {
+            int affected = 0;
+            try
+            {
+                foreach (Projeto projeto in projetosDoAluno)
+                {
+                    affected += InserirMatricula(aluno, projeto);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("DAOAluno.InserirVariasMatriculas(Aluno,Projetos): " + ex.ToString(), ex);
+            }
+            
+            return (affected > 0);
+        }
+
+        private int InserirMatricula(Aluno aluno, Projeto projeto)
+        {
+            
+            int affected = 0;
+            VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
+            try
+            {       
+                    List<SqlParameter> parameters = new List<SqlParameter>();
+                    parameters.Add(new SqlParameter("@IdAluno", aluno.NumeroPece));
+                    parameters.Add(new SqlParameter("@IdProjeto", projeto.Codigo));
+                    db.AbreConexao();
+
+                    StringBuilder query = new StringBuilder("INSERT INTO Matricula");
+                    query.Append(" (IdAluno, IdProjeto,Estado)");
+                    query.Append(" VALUES (@IdAluno, @IdProjeto,0)");
+                    affected = db.ExecuteTextNonQuery(query.ToString(), parameters);
+                
+
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("DAOAluno.InserirMatricula(Aluno,Projeto): " + ex.ToString(), ex);
+            }
+            finally
+            {
+                db.FechaConexao();
+            }
+            return (affected);
+        }
+
+        public List<Aluno> ObterTodosAlunos()
+        {
+            List<Aluno> listAlunos = new List<Aluno>();
+            VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+
+                db.AbreConexao();
+
+                StringBuilder query = new StringBuilder("SELECT * FROM Aluno");
+                
+                SqlDataReader reader = db.ExecuteTextReader(query.ToString(), parameters);
+                while (reader.Read())
+                {
+                    Aluno aluno = new Aluno();
+                    aluno.NumeroPece = Int32.Parse(reader["NumeroPece"].ToString());
+                    aluno.Nome = reader["Nome"].ToString();
+                    aluno.Endereco = reader["Endereco"].ToString();
+                    aluno.Telefone = reader["Telefone"].ToString();
+                    listAlunos.Add(aluno);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("DAOAluno.ObterTodosAlunos(): " + ex, ex);
+            }
+            finally
+            {
+                db.FechaConexao();
+            }
+            return listAlunos;
+        }
     }
 }

@@ -68,6 +68,7 @@ namespace Vsf.DAL
                     projeto.Nome = (reader["Nome"] != DBNull.Value) ? Convert.ToString(reader["Nome"]) : String.Empty;
                     projeto.Valor = (reader["ValorProjeto"] != DBNull.Value) ? Convert.ToDouble(reader["ValorProjeto"]) : 0.0;
                     projeto.Alunos = (new AlunoDAO()).ObterAlunosPorProjeto(projeto);
+
                 }
             }
             catch (Exception ex)
@@ -79,6 +80,44 @@ namespace Vsf.DAL
                 db.FechaConexao();
             }
             return projeto;
+        }
+
+        public static List<Projeto> ObterProjetosDoAluno(int codigoPece)
+        {
+            List<Projeto> listProjeto = new List<Projeto>();
+            VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@codigoPece", codigoPece));
+
+                db.AbreConexao();
+
+                StringBuilder query = new StringBuilder("SELECT * FROM Projeto ");
+                query.Append(" WHERE CodigoProjeto in ");
+                query.Append(" (SELECT IdProjeto FROM Matricula ");
+                query.Append(" WHERE IdAluno = @codigoPece) ");
+
+                SqlDataReader reader = db.ExecuteTextReader(query.ToString(), parameters);
+                while (reader.Read())
+                {
+                   listProjeto.Add(new Projeto(
+                        (reader["CodigoProjeto"] != DBNull.Value) ? Convert.ToString(reader["CodigoProjeto"]) : String.Empty,
+                        (reader["Nome"] != DBNull.Value) ? Convert.ToString(reader["Nome"]) : String.Empty,
+                        (reader["Descricao"] != DBNull.Value) ? Convert.ToString(reader["Descricao"]) : String.Empty,
+                        (reader["ValorProjeto"] != DBNull.Value) ? Convert.ToDouble(reader["ValorProjeto"]) : 0.0
+                        ));
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("DAOProjeto.ObterProjetoPorCodigo(codigoProjeto): " + ex.ToString(), ex);
+            }
+            finally
+            {
+                db.FechaConexao();
+            }
+            return listProjeto;
         }
     }
 }
