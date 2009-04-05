@@ -12,6 +12,17 @@ namespace Vsf.Modelo
         private double _valor;
         private List<Aluno> _alunos;
 
+        public Projeto()
+        {
+        }
+        public Projeto(string codigo, string nome, string descricao, double valor)
+        {
+            _codigo = codigo;
+            _nome = nome;
+            _descricao = descricao;
+            _valor = valor;
+            
+        }
 
         public string Codigo
         {

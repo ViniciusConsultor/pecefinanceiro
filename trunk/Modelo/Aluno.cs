@@ -11,6 +11,19 @@ namespace Vsf.Modelo
         private string _endereco;
         private string _telefone;
 
+        public Aluno()
+        {
+
+        }
+
+        public Aluno(int numeroPece, string nome, string endereco, string telefone)
+        {
+            _numeroPece = numeroPece;
+            _nome = nome;
+            _endereco = endereco;
+            _telefone = telefone;
+        }
+
         public int NumeroPece
         {
             get { return _numeroPece; }
