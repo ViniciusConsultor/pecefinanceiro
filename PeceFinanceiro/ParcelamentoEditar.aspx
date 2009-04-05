@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/PeceFinanceiro.Master" AutoEventWireup="true" CodeBehind="EditarParcelamento.aspx.cs" Inherits="PeceFinanceiro.EditarParcelamento" Title="Untitled Page" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/PeceFinanceiro.Master" AutoEventWireup="true" CodeBehind="ParcelamentoEditar.aspx.cs" Inherits="PeceFinanceiro.EditarParcelamento" Title="Untitled Page" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
