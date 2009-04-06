@@ -51,6 +51,13 @@
     <Compile Include="AlunoNovoEditar.aspx.designer.cs">
       <DependentUpon>AlunoNovoEditar.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ProjetoNovoEditar.aspx.cs">
       <DependentUpon>ProjetoNovoEditar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -125,6 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AlunoNovoEditar.aspx" />
+    <Content Include="Login.aspx" />
     <Content Include="ProjetoNovoEditar.aspx" />
     <Content Include="ParcelamentoEditar.aspx" />
     <Content Include="Icons\add.png" />

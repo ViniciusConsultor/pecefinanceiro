@@ -410,6 +410,27 @@ h4
     font-size: small;
 }
 
+.login
+{
+    background-color: #ddd;
+    border-color: #777;
+    cursor: pointer;
+    width: 40%;
+    text-align: center;
+    margin-right:auto;
+    margin-left:auto;
+    margin-top:20%;
+    margin-bottom:20%;
+}
+.login h1
+{
+    color: Black;
+    font-size: medium;
+    font-weight:bold;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
 .botaoAdd:hover
 {
     background-color: #ddd;
