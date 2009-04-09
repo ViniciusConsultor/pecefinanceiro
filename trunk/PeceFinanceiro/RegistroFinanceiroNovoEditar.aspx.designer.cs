@@ -86,6 +86,15 @@ namespace PeceFinanceiro {
         protected global::System.Web.UI.WebControls.TextBox TextBoxNumeroParcelas;
         
         /// <summary>
+        /// PlaceHolderValorComAjuste control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolderValorComAjuste;
+        
+        /// <summary>
         /// TextBoxAjusteValorFinal control.
         /// </summary>
         /// <remarks>
@@ -111,6 +120,15 @@ namespace PeceFinanceiro {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField HiddenValorComAjuste;
+        
+        /// <summary>
+        /// PlaceHolderValorParcela control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder PlaceHolderValorParcela;
         
         /// <summary>
         /// TextBoxValorParcela control.

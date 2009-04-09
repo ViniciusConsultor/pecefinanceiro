@@ -18,6 +18,11 @@ namespace PeceFinanceiro
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            LoadGridViewListaRegistros();
+        }
+
+        private void LoadGridViewListaRegistros()
+        {
             RegistroFinanceiroNegocio registroNegocio = new RegistroFinanceiroNegocio();
             List<RegistroFinanceiro> listRegistros = registroNegocio.ObterTodosRegistros();
 
@@ -61,7 +66,6 @@ namespace PeceFinanceiro
             GridViewListaRegistros.Columns.Add(cmdField);
 
             GridViewListaRegistros.DataBind();
-
         }
 
         protected void GridViewListaRegistros_RowEditing(object sender, GridViewEditEventArgs e)
@@ -85,7 +89,8 @@ namespace PeceFinanceiro
             if (e.CommandName == "Select")
             {
                 List<AlunoProjeto> listAlunoProjeto = (List<AlunoProjeto>)GridViewListaRegistros.DataSource;
-                Int32 IdAlunoProjeto = listAlunoProjeto[Int32.Parse(e.CommandArgument.ToString())].Id;
+                int index = Int32.Parse(Convert.ToString(e.CommandArgument));
+                Int32 IdAlunoProjeto = listAlunoProjeto[index].Id;
 
                 Response.Redirect("RegistroPagamentos.aspx?idRegistro=" + IdAlunoProjeto);
             }

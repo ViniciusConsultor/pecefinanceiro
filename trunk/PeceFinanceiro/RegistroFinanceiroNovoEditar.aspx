@@ -95,21 +95,25 @@
                                     <label>Número de Parcelas</label>
                                     <asp:TextBox ID="TextBoxNumeroParcelas" runat="server" Width="10%" CssClass="textBox">1</asp:TextBox>
                                 </li>
+                                <asp:PlaceHolder ID="PlaceHolderValorComAjuste" runat="server">
+                                    <li>
+                                        <label>Ajuste no Valor do Curso</label>
+                                        <div id="DivSinalPositivo" style="display:none; position:relative; float:left; cursor: pointer;" onclick="javascript:ToggleSinal()" ><img src="Icons/add.png" alt="Sinal do ajuste" title="Clique para mudar o sinal."/></div>
+                                        <div id="DivSinalNegativo" style="position:relative; float:left; cursor: pointer;" onclick="javascript:ToggleSinal()"><img src="Icons/delete.png" alt="Sinal do ajuste" title="Clique para mudar o sinal."/></div>
+                                        <asp:TextBox ID="TextBoxAjusteValorFinal" runat="server" Width="15%" CssClass="textBox"></asp:TextBox>
+                                    </li>
+                                </asp:PlaceHolder>
                                 <li>
-                                    <label>Ajuste no Valor do Curso</label>
-                                    <div id="DivSinalPositivo" style="display:none; position:relative; float:left; cursor: pointer;" onclick="javascript:ToggleSinal()" ><img src="Icons/add.png" alt="Sinal do ajuste" title="Clique para mudar o sinal."/></div>
-                                    <div id="DivSinalNegativo" style="position:relative; float:left; cursor: pointer;" onclick="javascript:ToggleSinal()"><img src="Icons/delete.png" alt="Sinal do ajuste" title="Clique para mudar o sinal."/></div>
-                                    <asp:TextBox ID="TextBoxAjusteValorFinal" runat="server" Width="15%" CssClass="textBox"></asp:TextBox>
-                                </li>
-                                <li>
-                                    <label>Valor com Ajuste</label>
+                                    <label>Valor Final</label>
                                     <asp:TextBox ID="TextBoxValorComAjuste" runat="server" Width="15%" CssClass="textBox"></asp:TextBox>
                                     <asp:HiddenField ID="HiddenValorComAjuste" runat="server" />
                                 </li>
-                                <li>
-                                    <label>Valor da Parcela</label>
-                                    <asp:TextBox ID="TextBoxValorParcela" runat="server" Width="15%" CssClass="textBox"></asp:TextBox>
-                                </li>
+                                 <asp:PlaceHolder ID="PlaceHolderValorParcela" runat="server">
+                                    <li>
+                                        <label>Valor da Parcela</label>
+                                        <asp:TextBox ID="TextBoxValorParcela" runat="server" Width="15%" CssClass="textBox"></asp:TextBox>
+                                    </li>
+                                </asp:PlaceHolder>
                                 <li>
                                     <label>Observações</label>
                                     <asp:TextBox ID="TextBoxObservacoes" runat="server" TextMode="MultiLine" CssClass="textBox" Width="50%" Rows="4"></asp:TextBox>

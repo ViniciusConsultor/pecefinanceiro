@@ -23,5 +23,10 @@ namespace Vsf.Negocio
         {
             throw new NotImplementedException();
         }
+
+        public RegistroFinanceiro ObterRegistroPorId(int idRegistroFinanceiro)
+        {
+            return RegistroFinanceiroDAO.ObterRegistroPorId(idRegistroFinanceiro);
+        }
     }
 }

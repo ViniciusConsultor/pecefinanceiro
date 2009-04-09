@@ -88,6 +88,45 @@ namespace Vsf.DAL
             }
             return listRegistros;
         }
+
+        public static RegistroFinanceiro ObterRegistroPorId(int idRegistroFinanceiro)
+        {
+            RegistroFinanceiro registroFinanceiro = new RegistroFinanceiro();
+            VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@idMatricula", idRegistroFinanceiro));
+
+                db.AbreConexao();
+
+                StringBuilder query = new StringBuilder("SELECT * FROM Financeiro");
+                query.Append(" INNER JOIN Matricula ON Financeiro.idMatricula = Matricula.idMatricula");
+                query.Append(" WHERE Financeiro.idMatricula = @idMatricula");
+
+                SqlDataReader reader = db.ExecuteTextReader(query.ToString(), parameters);
+                while (reader.Read())
+                {
+                    registroFinanceiro.AlunoProjeto = AlunoDAO.ObterRelacionamentoAlunoProjeto(Convert.ToInt32(reader["IdAluno"]), Convert.ToString(reader["IdProjeto"]));
+                    registroFinanceiro.DataVencimentoPrimeiraParcela = (reader["PrimeiraParcela"] != DBNull.Value) ? Convert.ToDateTime(reader["PrimeiraParcela"]) : DateTime.MinValue;
+                    registroFinanceiro.DiaPagamento = (reader["DiaPagamento"] != DBNull.Value) ? Convert.ToDateTime(reader["DiaPagamento"]).Day : 0;
+                    registroFinanceiro.NumeroParcelas = (reader["NumeroParcelas"] != DBNull.Value) ? Convert.ToInt32(reader["NumeroParcelas"]) : 0;
+                    registroFinanceiro.Observacoes = (reader["Observacoes"] != DBNull.Value) ? Convert.ToString(reader["Observacoes"]) : String.Empty;
+                    registroFinanceiro.PrecoReajustado = (reader["PrecoReajustado"] != DBNull.Value) ? Convert.ToDouble(reader["PrecoReajustado"]) : 0.0;
+                    registroFinanceiro.Status = (StatusAlunoProjeto)Enum.Parse(typeof(StatusAlunoProjeto), (reader["estado"] != DBNull.Value) ? Convert.ToString(reader["estado"]) : "0");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Registrar(0, "Exceção em (DAO) " + ex.Source + " - " + ex.ToString() + " : " + ex.Message + "\n\n StackTrace: " + ex.StackTrace);
+                throw new ApplicationException("DAOAluno.ObterRegistroPorId(): " + ex, ex);
+            }
+            finally
+            {
+                db.FechaConexao();
+            }
+            return registroFinanceiro;
+        }
     }
 }
 
