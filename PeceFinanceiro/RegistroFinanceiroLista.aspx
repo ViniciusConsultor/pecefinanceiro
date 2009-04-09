@@ -12,7 +12,11 @@
             
                 
                 <div class="grid">
-                    <asp:GridView ID="GridViewListaRegistros" runat="server">
+                    <asp:GridView ID="GridViewListaRegistros" runat="server" 
+                        onrowcommand="GridViewListaRegistros_RowCommand" 
+                        onrowdeleting="GridViewListaRegistros_RowDeleting" 
+                        onrowediting="GridViewListaRegistros_RowEditing" 
+                        onselectedindexchanged="GridViewListaRegistros_SelectedIndexChanged">
                     </asp:GridView>
                     <!--table>
                     <tr>

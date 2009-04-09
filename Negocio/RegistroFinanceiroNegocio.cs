@@ -18,5 +18,10 @@ namespace Vsf.Negocio
         {
             return RegistroFinanceiroDAO.ObterTodosRegistros();
         }
+
+        public void RemoverRegistroFinanceiro(int IdAlunoProjeto)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
