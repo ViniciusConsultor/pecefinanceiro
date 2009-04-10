@@ -28,5 +28,10 @@ namespace Vsf.Negocio
         {
             return RegistroFinanceiroDAO.ObterRegistroPorId(idRegistroFinanceiro);
         }
+
+        public bool AtualizarRegistroFinanceiro(RegistroFinanceiro registroFinanceiro)
+        {
+            return RegistroFinanceiroDAO.AtualizarRegistroFinanceiro(registroFinanceiro);
+        }
     }
 }

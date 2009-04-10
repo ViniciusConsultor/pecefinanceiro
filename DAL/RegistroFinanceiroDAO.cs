@@ -24,13 +24,12 @@ namespace Vsf.DAL
                 parameters.Add(new SqlParameter("@observacoes", registroFinanceiro.Observacoes));
                 parameters.Add(new SqlParameter("@diaPagamento", registroFinanceiro.DiaPagamento));
                 parameters.Add(new SqlParameter("@primeiraParcela", registroFinanceiro.DataVencimentoPrimeiraParcela));
-                parameters.Add(new SqlParameter("@status", registroFinanceiro.Status));
 
                 db.AbreConexao();
 
                 StringBuilder query = new StringBuilder("INSERT INTO Financeiro");
-                query.Append(" (idMatricula, NumeroParcelas, PrecoReajustado, Observacoes, DiaPagamento, PrimeiraParcela, Estado)");
-                query.Append(" VALUES (@idMatricula, @numeroParcelas, @precoReajustado, @observacoes, @diaPagamento, @primeiraParcela, @status)");
+                query.Append(" (idMatricula, NumeroParcelas, PrecoReajustado, Observacoes, DiaPagamento, PrimeiraParcela)");
+                query.Append(" VALUES (@idMatricula, @numeroParcelas, @precoReajustado, @observacoes, @diaPagamento, @primeiraParcela)");
 
                 affected = db.ExecuteTextNonQuery(query.ToString(), parameters);
             }
@@ -126,6 +125,48 @@ namespace Vsf.DAL
                 db.FechaConexao();
             }
             return registroFinanceiro;
+        }
+
+        public static bool AtualizarRegistroFinanceiro(RegistroFinanceiro registroFinanceiro)
+        {
+            int affected = 0;
+            VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@idMatricula", registroFinanceiro.AlunoProjeto.Id));
+                parameters.Add(new SqlParameter("@numeroParcelas", registroFinanceiro.NumeroParcelas));
+                parameters.Add(new SqlParameter("@precoReajustado", registroFinanceiro.PrecoReajustado));
+                parameters.Add(new SqlParameter("@observacoes", registroFinanceiro.Observacoes));
+                parameters.Add(new SqlParameter("@diaPagamento", registroFinanceiro.DiaPagamento));
+                parameters.Add(new SqlParameter("@primeiraParcela", registroFinanceiro.DataVencimentoPrimeiraParcela));
+                parameters.Add(new SqlParameter("@status", registroFinanceiro.Status));
+
+                db.AbreConexao();
+
+                StringBuilder query = new StringBuilder("UPDATE Financeiro SET");
+                query.Append(" NumeroParcelas = @numeroParcelas,");
+                query.Append(" PrecoReajustado = @precoReajustado,");
+                query.Append(" Observacoes = @observacoes,");
+                query.Append(" DiaPagamento = @diaPagamento,");
+                query.Append(" PrimeiraParcela = @primeiraParcela");
+                query.Append(" WHERE idMatricula = @idMatricula");
+
+                affected = db.ExecuteTextNonQuery(query.ToString(), parameters);
+            }
+            catch (Exception ex)
+            {
+                Logger.Registrar(0, "Exceção em (DAO) " + ex.Source + " - " + ex.ToString() + " : " + ex.Message + "\n\n StackTrace: " + ex.StackTrace);
+                throw new ApplicationException("DAOProjeto.AtualizarRegistroFinanceiro(codigoProjeto): " + ex.ToString(), ex);
+            }
+            finally
+            {
+                db.FechaConexao();
+            }
+
+            Logger.Registrar(1, "RegistroFinanceiro inserido para ProjetoAluno número " + registroFinanceiro.AlunoProjeto.Id + ".");
+
+            return (affected > 0);
         }
     }
 }

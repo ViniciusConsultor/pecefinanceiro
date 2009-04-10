@@ -18,7 +18,7 @@ namespace PeceFinanceiro
     public partial class CadastroFinanceiro : System.Web.UI.Page
     {
         CultureInfo _culture = new CultureInfo("pt-BR");
-        RegistroFinanceiro registroFinanceiro = null;
+        RegistroFinanceiro registroFinanceiroGlobal = null;
         protected void Page_Load(object sender, EventArgs e)
         {
             BindJSEvents();
@@ -30,29 +30,27 @@ namespace PeceFinanceiro
                 int idRegistroSelecionado = -1;
                 if (!(Request.QueryString["idRegistro"] == null))
                 {
+                    HiddenFieldEditando.Value = "true";
                     idRegistroSelecionado = Int32.Parse(Request.QueryString["idRegistro"]);
                     RegistroFinanceiroNegocio registroNegocio = new RegistroFinanceiroNegocio();
-                    registroFinanceiro = registroNegocio.ObterRegistroPorId(idRegistroSelecionado);
+                    registroFinanceiroGlobal = registroNegocio.ObterRegistroPorId(idRegistroSelecionado);
 
-                    SelecionaProjeto(registroFinanceiro.AlunoProjeto.Projeto.Codigo);
-                    SelecionaDdlAluno(registroFinanceiro.AlunoProjeto.Aluno.NumeroPece);
-                    FillAllFieldsToEdit(registroFinanceiro);
+                    SelecionaProjeto(registroFinanceiroGlobal.AlunoProjeto.Projeto.Codigo);
+                    SelecionaDdlAluno(registroFinanceiroGlobal.AlunoProjeto.Aluno.NumeroPece);
+                    FillAllFieldsToEdit(registroFinanceiroGlobal);
                 }
                 else
                 {
                     SelecionaProjeto("");
                 }
-
             }
 
             VerificaAlunoSelecionado();
 
-            this.TextBoxValorComAjuste.ReadOnly = true;
-            this.TextBoxValorParcela.ReadOnly = true;
-            this.TextBoxDataPrimeiraParcela.ReadOnly = true;
+            SetEnabledFieldsWhileEditing(Boolean.Parse(HiddenFieldEditando.Value));
+
             PanelSucesso.Visible = false;
             PanelErro.Visible = false;
-            ButtonEditarParcelas.Visible = false;
         }
 
         private void VerificaAlunoSelecionado()
@@ -76,19 +74,31 @@ namespace PeceFinanceiro
             this.TextBoxValorComAjuste.Enabled = enabled;
             this.TextBoxValorParcela.Enabled = enabled;
             this.ButtonCadastrar.Enabled = enabled;
+
         }
 
         private void FillAllFieldsToEdit(RegistroFinanceiro registroFinanceiro)
         {
             this.TextBoxValorComAjuste.Text = registroFinanceiro.PrecoReajustado.ToString("#0.00").Replace('.', ',');
+            this.HiddenValorComAjuste.Value = registroFinanceiro.PrecoReajustado.ToString("#0.00").Replace('.', ',');
             this.TextBoxNumeroParcelas.Text = Convert.ToString(registroFinanceiro.NumeroParcelas);
             this.TextBoxDiaPagamento.Text = Convert.ToString(registroFinanceiro.DiaPagamento);
             this.TextBoxDataPrimeiraParcela.Text = Convert.ToString(registroFinanceiro.DataVencimentoPrimeiraParcela);
 
-            this.TextBoxValorComAjuste.ReadOnly = false;
-            this.PlaceHolderValorComAjuste.Visible = false;
-            this.PlaceHolderValorParcela.Visible = false;
-            this.ButtonEditarParcelas.Visible = true;
+            SetEnabledFieldsWhileEditing(true);
+        }
+
+        private void SetEnabledFieldsWhileEditing(bool editing)
+        {
+            this.TextBoxValorComAjuste.ReadOnly = !editing;
+            this.PlaceHolderValorComAjuste.Visible = !editing;
+            this.PlaceHolderValorParcela.Visible = !editing;
+            this.ButtonEditarParcelas.Visible = editing;
+            this.DropDownListAlunos.Enabled = !editing;
+            this.DropDownListProjetos.Enabled = !editing;
+            this.TextBoxValorComAjuste.ReadOnly = !editing;
+            this.TextBoxValorParcela.ReadOnly = !editing;
+            this.TextBoxDataPrimeiraParcela.ReadOnly = !editing;
         }
 
         private void SelecionaDdlAluno(int idAluno)
@@ -111,6 +121,8 @@ namespace PeceFinanceiro
             this.TextBoxAjusteValorFinal.Attributes.Add("onkeyup", "AtualizaValores();");
             this.TextBoxDiaPagamento.Attributes.Add("onkeydown", "ForceNumericInput(event, this, false, false)");
             this.TextBoxNumeroParcelas.Attributes.Add("onkeydown", "ForceNumericInput(event, this, false, false)");
+            this.TextBoxValorComAjuste.Attributes.Add("onkeydown", "ForceNumericInput(event, this, true, false)");
+            this.TextBoxValorComAjuste.Attributes.Add("onkeyup", "AtualizaValores();");
             this.TextBoxNumeroParcelas.Attributes.Add("onkeyup", "AtualizaValores();");
         }
 
@@ -190,47 +202,101 @@ namespace PeceFinanceiro
         protected void ButtonCadastrar_Click(object sender, EventArgs e)
         {
             bool errorOccured = false;
-            string errorMessage = String.Empty;
+            string errorMessage = "Ocorreram erros durante o processamento. <ul>";
 
             RegistroFinanceiro registroFinanceiro = new RegistroFinanceiro();
-            registroFinanceiro.DataVencimentoPrimeiraParcela = DateTime.Parse(this.TextBoxDataPrimeiraParcela.Text, _culture);
-            registroFinanceiro.DiaPagamento = Int32.Parse(this.TextBoxDiaPagamento.Text);
-            registroFinanceiro.NumeroParcelas = Int32.Parse(this.TextBoxNumeroParcelas.Text);
+            DateTime dtVencimentoParcela = new DateTime();
+            if (DateTime.TryParse(this.TextBoxDataPrimeiraParcela.Text, _culture, DateTimeStyles.None, out dtVencimentoParcela))
+                registroFinanceiro.DataVencimentoPrimeiraParcela = dtVencimentoParcela;
+            else
+            {
+                errorOccured = true;
+                errorMessage += "<li>Data de Vencimento da Primeira parcela inválida</li>";
+            }
+            
+            int diaPagamento = 0;
+            if (Int32.TryParse(this.TextBoxDiaPagamento.Text, out diaPagamento))
+                registroFinanceiro.DiaPagamento = diaPagamento;
+            else
+            {
+                errorOccured = true;
+                errorMessage += "<li>Dia de vencimento de parcelas deve ser preenchido</li>";
+            }
+
+            int intNumeroParcelas = 0;
+            if (Int32.TryParse(this.TextBoxNumeroParcelas.Text, out intNumeroParcelas))
+                registroFinanceiro.NumeroParcelas = intNumeroParcelas;
+            else
+            {
+                errorOccured = true;
+                errorMessage += "<li>Número de parcelas deve ser preenchido</li>";
+            }
+
+            errorMessage += "</ul>";
+            
             registroFinanceiro.Observacoes = this.TextBoxObservacoes.Text;
+            
             Double valorReajustado = 0.0;
-            if (Double.TryParse(this.HiddenValorComAjuste.Value.Replace(',','.'), out valorReajustado) && valorReajustado > 0)
+            if (Double.TryParse(this.HiddenValorComAjuste.Value, NumberStyles.Currency, _culture, out valorReajustado) && valorReajustado > 0)
                 registroFinanceiro.PrecoReajustado = valorReajustado;
             else
             {
                 errorOccured = true;
-                errorMessage = "Valor inválido para o valor final do curso.";
+                errorMessage += "Valor inválido para o valor final do curso.";
             }
             registroFinanceiro.Status = StatusAlunoProjeto.EmDia;
 
             AlunoNegocio alunoNegocio = new AlunoNegocio();
             AlunoProjeto alunoProjeto = alunoNegocio.ObterRelacionamentoAlunoProjeto(Int32.Parse(DropDownListAlunos.SelectedValue), DropDownListProjetos.SelectedValue);
 
+            registroFinanceiro.AlunoProjeto = alunoProjeto;
+
             RegistroFinanceiroNegocio financeiroNegocio = new RegistroFinanceiroNegocio();
-            if (financeiroNegocio.IncluirRegistroFinanceiro(registroFinanceiro, alunoProjeto))
+            if (errorOccured)
             {
-                PanelSucesso.Visible = true;
-                ButtonEditarParcelas.Visible = true;
+                ShowErrorMessage(errorMessage);
             }
             else
             {
-                ShowErrorMessage(errorMessage);
+
+                if (!Boolean.Parse(HiddenFieldEditando.Value))
+                {
+                    if (financeiroNegocio.IncluirRegistroFinanceiro(registroFinanceiro, alunoProjeto))
+                    {
+                        ShowSuccessMessage("Cadastro realizado com sucesso. <a href=\"ParcelamentoEditar.aspx?idRegistro=" + registroFinanceiro.AlunoProjeto.Id + "\">Clique aqui para editar o parcelamento deste registro.</a>");
+                        ButtonEditarParcelas.Visible = true;
+                    }
+                }
+                else
+                {
+                    if(financeiroNegocio.AtualizarRegistroFinanceiro(registroFinanceiro))
+                        ShowSuccessMessage("Cadastro atualizado com sucesso."); ;
+                }
             }
         }
 
         private void ShowErrorMessage(string errorMessage)
         {
+            PanelSucesso.Visible = false;
             PanelErro.Visible = true;
             MensagemErro.Text = errorMessage;
+        }
+        private void ShowSuccessMessage(string successMessage)
+        {
+            PanelErro.Visible = false;
+            PanelSucesso.Visible = true;
+            MensagemSucesso.Text = successMessage;
         }
 
         protected void ButtonCancelar_Click(object sender, EventArgs e)
         {
             Response.Redirect("RegistroFinanceiroLista.aspx");
+        }
+
+        protected void ButtonEditarParcelas_Click(object sender, EventArgs e)
+        {
+            if(registroFinanceiroGlobal != null)
+                Response.Redirect("ParcelamentoEditar.aspx?idRegistro=" + registroFinanceiroGlobal.AlunoProjeto.Id);
         }
 
 

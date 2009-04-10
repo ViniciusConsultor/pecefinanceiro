@@ -3,9 +3,11 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 <script type="text/javascript">
+      var editando = "false";
+
       this.setMenuAtivo("MenuItemCadastrosFinanceiros");
       
-      var SinalPostivo = false;
+      var SinalPositivo = false;
       
       var calendarAtivo = false;
       
@@ -21,36 +23,42 @@
       }
       
       function ToggleSinal(){
-        if(SinalPostivo){
-            document.getElementById("DivSinalPositivo").style.display = "none";
-            document.getElementById("DivSinalNegativo").style.display = "";
-            SinalPostivo = false;
-        } else {
-            document.getElementById("DivSinalPositivo").style.display = "";
-            document.getElementById("DivSinalNegativo").style.display = "none";
-            SinalPostivo = true;
-        }
-        AtualizaValores();
+        if(editando == "false")
+            if(SinalPositivo){
+                document.getElementById("DivSinalPositivo").style.display = "none";
+                document.getElementById("DivSinalNegativo").style.display = "";
+                SinalPositivo = false;
+            } else {
+                document.getElementById("DivSinalPositivo").style.display = "";
+                document.getElementById("DivSinalNegativo").style.display = "none";
+                SinalPositivo = true;
+            }
+            AtualizaValores();
       }
       
       function AtualizaValores(){
-        var valorAjuste = moeda2float(document.getElementById("ctl00$ContentPlaceHolder1$TextBoxAjusteValorFinal").value);
-        var valorCurso = moeda2float(document.getElementById("ctl00$ContentPlaceHolder1$HiddenFieldValorCurso").value);
-        var valorFinal = 0.0;
-        var nParcelas = 0.0;
-        var valorParcela = 0.0;
-        if(isNaN(valorAjuste))
-            valorAjuste = 0.0;
-        valorFinal = valorCurso + valorAjuste;
-        if(!SinalPostivo){
-            valorFinal = valorCurso - valorAjuste;    
-            }
-        document.getElementById("ctl00$ContentPlaceHolder1$TextBoxValorComAjuste").value = float2moeda(valorFinal);
-        document.getElementById("ctl00$ContentPlaceHolder1$HiddenValorComAjuste").value = valorFinal;
-            
-        nParcelas = parseFloat(document.getElementById("ctl00$ContentPlaceHolder1$TextBoxNumeroParcelas").value);
-        valorParcela = valorFinal / nParcelas;
-        document.getElementById("ctl00$ContentPlaceHolder1$TextBoxValorParcela").value = float2moeda(valorParcela);
+        if(editando == "false") {
+            var valorAjuste = moeda2float(document.getElementById("ctl00$ContentPlaceHolder1$TextBoxAjusteValorFinal").value);
+            var valorCurso = moeda2float(document.getElementById("ctl00$ContentPlaceHolder1$HiddenFieldValorCurso").value);
+            var valorFinal = 0.0;
+            var nParcelas = 0.0;
+            var valorParcela = 0.0;
+            if(isNaN(valorAjuste))
+                valorAjuste = 0.0;
+            valorFinal = valorCurso + valorAjuste;
+            if(!SinalPositivo){
+                valorFinal = valorCurso - valorAjuste;    
+                }
+            document.getElementById("ctl00$ContentPlaceHolder1$TextBoxValorComAjuste").value = float2moeda(valorFinal);
+            document.getElementById("ctl00$ContentPlaceHolder1$HiddenValorComAjuste").value = float2moeda(valorFinal);
+                
+            nParcelas = parseFloat(document.getElementById("ctl00$ContentPlaceHolder1$TextBoxNumeroParcelas").value);
+            valorParcela = valorFinal / nParcelas;
+            document.getElementById("ctl00$ContentPlaceHolder1$TextBoxValorParcela").value = float2moeda(valorParcela);
+        } else {
+            var valorFinal = moeda2float(document.getElementById("ctl00$ContentPlaceHolder1$TextBoxValorComAjuste").value);
+            document.getElementById("ctl00$ContentPlaceHolder1$HiddenValorComAjuste").value = float2moeda(valorFinal);
+        }
       }
       
 </script>
@@ -64,12 +72,13 @@
                     </asp:Panel>
                     <asp:Panel ID="PanelSucesso" runat="server">
                         <div class="DivSucesso">
-                            Cadastro realizado com sucesso! <a href="EditarParcelamento.aspx">Editar Parcelas</a>
+                            <asp:Label ID="MensagemSucesso" runat="server">Cadastro realizado com sucesso! <a href="ParcelamentoEditar.aspx">Editar Parcelas</a></asp:Label>
                         </div>
                     </asp:Panel>
                     <div class="formGenerico">
                         <fieldset>
                             <legend>Cadastro Financeiro</legend>
+                            <asp:HiddenField ID="HiddenFieldEditando" runat="server" Value="false" />
                             <ul>
                                 <li>
                                     <label>Projeto</label>
@@ -130,12 +139,13 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <label>Dia de Pagamento</label>
+                                    <label>Dia de Vencimento</label>
                                     <asp:TextBox ID="TextBoxDiaPagamento" runat="server" Width="8%" CssClass="textBox"></asp:TextBox>
                                 </li>
                                 <li>
                                 <br />
-                                    <asp:Button ID="ButtonEditarParcelas" runat="server" Text="Editar Parcelas" CssClass="botao"/>
+                                    <asp:Button ID="ButtonEditarParcelas" runat="server" Text="Editar Parcelas" 
+                                        CssClass="botao" onclick="ButtonEditarParcelas_Click"/>
                                 </li>
                             </ul>
                             
@@ -150,6 +160,8 @@
     </div>
 
 <script type="text/javascript">
+    editando = document.getElementById("ctl00$ContentPlaceHolder1$HiddenFieldEditando").value;
+    
     AtualizaValores();
     
     if(document.getElementById("ctl00$ContentPlaceHolder1$CalendarVisibleSignalFromServer").value == "true"){
