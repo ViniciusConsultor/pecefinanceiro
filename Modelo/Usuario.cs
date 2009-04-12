@@ -7,7 +7,8 @@ namespace Vsf.Modelo
     public class Usuario
     {
         private int _idUsuario;
-        private string _nomeUsuario;
+        private string _login;
+        private string _nome;
 
         public int IdUsuario
         {
@@ -15,10 +16,15 @@ namespace Vsf.Modelo
             set { _idUsuario = value; }
         }
 
-        public string NomeUsuario
+        public string Login
         {
-            get { return _nomeUsuario; }
-            set { _nomeUsuario = value; }
+            get { return _login; }
+            set { _login = value; }
+        }
+        public string Nome
+        {
+            get { return _nome; }
+            set { _nome = value; }
         }
     }
 }
