@@ -21,6 +21,8 @@
         <h2></h2>
     </div>
     
+    <form id="form1" runat="server">
+    
     <div id="menu">
                 <ul>
 	                <!--
@@ -31,11 +33,14 @@
 	                <li id="MenuItemAlunos" class=""><a href="AlunoLista.aspx">Alunos</a></li>
 	                <li id="MenuItemProjetos" class=""><a href="ProjetosLista.aspx">Projetos</a></li>
 	                <li id="MenuItemRelatorios" class=""><a href="Relatorios.aspx">Relatórios</a></li>
+                    <li>
+                    </li>
+                    <asp:Button ID="Button1" runat="server" CssClass="botao" 
+                        onclick="Button1_Click" Text="Logout" />
                 </ul>
                 <div></div>
     </div>
     
-    <form id="form1" runat="server">
     <div>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         </asp:ContentPlaceHolder>

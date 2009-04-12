@@ -12,7 +12,10 @@ Released   : 20080425
 
 *
 {
-	margin: 0px;
+	height: 26px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 0px;
 }
 
 body
@@ -113,6 +116,7 @@ h4
 	list-style: none;
 	padding: 0px;
 	margin-bottom: 0px;
+	left: 0px;
 }
 	
 #menu ul li
