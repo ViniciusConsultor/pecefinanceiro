@@ -31,7 +31,7 @@
                                         Width="138px"></asp:TextBox>
                                </li>
                                 <li>
-                                    <label>Projetos</label>
+                                    <label>Projetos Disponíveis</label>
                                     <asp:ListBox ID="ListBoxProjetosDisponiveis" runat="server" 
                                         DataSourceID="ListaTodosProjetos" DataTextField="Nome" DataValueField="Codigo" 
                                         Width="166px"></asp:ListBox>
@@ -44,7 +44,7 @@
                                 <li>
                                     &nbsp;</li>
                                 <li>
-                                    <label>&nbsp;</label>
+                                    <label>Projetos Matriculados</label>
                                     <asp:ListBox ID="ListBoxProjetosMatriculados" runat="server" Rows="5" Width="40%" 
                                         CssClass="textBox" DataSourceID="ListaTodosProjetosdoAluno" 
                                         DataTextField="Nome" DataValueField="Codigo">
