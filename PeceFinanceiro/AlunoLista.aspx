@@ -45,9 +45,10 @@
             <div class="formBuscaDiv">
                     <fieldset>
                         <legend>Busca</legend>
-                        <label>Palavra Chave: </label><br />
-                        <asp:TextBox ID="TextBoxBuscaNomeAluno" runat="server" CssClass="textBox"></asp:TextBox>
-                        <br />
+                        <label>Nome: </label><br />
+                        <asp:TextBox ID="TextBoxBuscaNomeAluno" runat="server" CssClass="textBox"></asp:TextBox><br />
+                        <label>Numero Pece: </label><br />
+                        <asp:TextBox ID="TextBoxBuscaNumeroPece" runat="server" CssClass="textBox"></asp:TextBox><br />
                         <asp:Button ID="ButtonBuscar" runat="server" Text="Buscar" CssClass="botao"/>
                     </fieldset>
                 </div>
