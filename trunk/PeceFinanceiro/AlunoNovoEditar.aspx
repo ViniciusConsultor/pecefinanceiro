@@ -27,7 +27,8 @@
                                </li>
                                <li>
                                     <label>Telefone</label>
-                                    <asp:TextBox ID="TextBoxTelefone" runat="server" CssClass="textBox" Width="434px"></asp:TextBox>
+                                    <asp:TextBox ID="TextBoxTelefone" runat="server" CssClass="textBox" 
+                                        Width="138px"></asp:TextBox>
                                </li>
                                 <li>
                                     <label>Projetos</label>
