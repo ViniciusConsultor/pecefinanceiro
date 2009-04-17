@@ -21,6 +21,14 @@
                                     <label>Nome</label>
                                     <asp:TextBox ID="TextBoxNome" runat="server" CssClass="textBox" Width="434px"></asp:TextBox>
                                </li>
+                               <li>
+                                    <label>Endereço</label>
+                                    <asp:TextBox ID="TextBoxEndereco" runat="server" CssClass="textBox" Width="434px"></asp:TextBox>
+                               </li>
+                               <li>
+                                    <label>Telefone</label>
+                                    <asp:TextBox ID="TextBoxTelefone" runat="server" CssClass="textBox" Width="434px"></asp:TextBox>
+                               </li>
                                 <li>
                                     <label>Projetos</label>
                                     <asp:ListBox ID="ListBoxProjetosDisponiveis" runat="server" 
