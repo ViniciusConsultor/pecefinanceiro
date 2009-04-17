@@ -25,7 +25,8 @@ namespace PeceFinanceiro
         protected void Page_Load(object sender, EventArgs e)
         {
             LabelMensagem.Visible = false;
-            if (Request.QueryString["operacao"].Equals("editar"))
+            String operacao = (Request.QueryString["operacao"] !=null ? Request.QueryString["operacao"].ToString() : "");
+            if (operacao.Equals("editar"))
             {
                 _operacao = "editar";
             }
