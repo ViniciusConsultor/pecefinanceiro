@@ -84,5 +84,35 @@ namespace Vsf.DAL
                 db.FechaConexao();
             }
         }
+
+        public bool InserirUsuario(Usuario usuario, string senha)
+        {
+            int affected = 0;
+            VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@Nome", usuario.Nome));
+                parameters.Add(new SqlParameter("@NomeAcesso", usuario.Login));
+                parameters.Add(new SqlParameter("@SenhaAcesso", senha));
+                parameters.Add(new SqlParameter("@TipoUsuario", usuario.Tipo));
+                db.AbreConexao();
+
+                StringBuilder query = new StringBuilder("INSERT INTO Usuario");
+                query.Append(" (Nome, NomeAcesso, SenhaAcesso, TipoUsuario)");
+                query.Append(" VALUES (@Nome, @NomeAcesso, @SenhaAcesso, @TipoUsuario)");
+                affected = db.ExecuteTextNonQuery(query.ToString(), parameters);
+
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("DAOUsuario.InserirUsuario(Aluno): " + ex.ToString(), ex);
+            }
+            finally
+            {
+                db.FechaConexao();
+            }
+            return (affected > 0);
+        }
     }
 }

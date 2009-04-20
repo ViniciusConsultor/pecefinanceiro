@@ -273,5 +273,41 @@ namespace Vsf.DAL
             }
             return listAlunos;
         }
+
+        public Aluno ObterAlunoPeloNumeroPece(int numeroPece)
+        {
+            {
+                Aluno Aluno = new Aluno();
+                VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
+                try
+                {
+                    List<SqlParameter> parameters = new List<SqlParameter>();
+                    parameters.Add(new SqlParameter("@NumeroPece", numeroPece));
+                    db.AbreConexao();
+
+                    StringBuilder query = new StringBuilder(" SELECT * FROM Aluno ");
+                    query.Append(" WHERE NumeroPece = @NumeroPece ");
+
+                    SqlDataReader reader = db.ExecuteTextReader(query.ToString(), parameters);
+                    if (reader.Read())
+                    {
+
+                        Aluno.NumeroPece = Int32.Parse(reader["NumeroPece"].ToString());
+                        Aluno.Nome = reader["Nome"].ToString();
+                        Aluno.Endereco = reader["Endereco"].ToString();
+                        Aluno.Telefone = reader["Telefone"].ToString();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new ApplicationException("DAOAluno.ObterTodosAlunoPeloNumeroPece(): " + ex, ex);
+                }
+                finally
+                {
+                    db.FechaConexao();
+                }
+                return Aluno;
+            }
+        }
     }
 }

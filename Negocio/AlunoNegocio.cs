@@ -33,5 +33,10 @@ namespace Vsf.Negocio
 
         }
 
+
+        public Aluno ObterAlunoPeloNumeroPece(int numeroPece)
+        {
+            return alunodao.ObterAlunoPeloNumeroPece(numeroPece);
+        }
     }
 }

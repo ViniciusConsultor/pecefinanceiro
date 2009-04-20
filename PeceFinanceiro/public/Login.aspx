@@ -18,6 +18,7 @@
             PasswordRequiredErrorMessage="Digite a Senha." UserNameLabelText="Usuário:" 
             UserNameRequiredErrorMessage="Digite o Usuário.">
         </asp:Login>
+        <asp:HyperLink ID="HyperLinkNovoUsuario" runat="server" NavigateUrl="NovoUsuario.aspx">Criar Novo Usuario</asp:HyperLink>
     </div>
     </form>
     

@@ -98,6 +98,13 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="public\NovoUsuario.aspx.cs">
+      <DependentUpon>NovoUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="public\NovoUsuario.aspx.designer.cs">
+      <DependentUpon>NovoUsuario.aspx</DependentUpon>
+    </Compile>
     <Compile Include="RegistroFinanceiroLista.aspx.cs">
       <DependentUpon>RegistroFinanceiroLista.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -160,6 +167,7 @@
     <Content Include="Css\license.txt" />
     <Content Include="Css\style.css" />
     <Content Include="Default.aspx" />
+    <Content Include="public\NovoUsuario.aspx" />
     <Content Include="RegistroFinanceiroLista.aspx" />
     <Content Include="RegistroFinanceiroNovoEditar.aspx" />
     <Content Include="PeceFinanceiro.Master" />

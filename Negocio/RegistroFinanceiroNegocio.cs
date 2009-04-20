@@ -33,5 +33,24 @@ namespace Vsf.Negocio
         {
             return RegistroFinanceiroDAO.AtualizarRegistroFinanceiro(registroFinanceiro);
         }
+
+
+        /// <summary>
+        /// Verifica se já foi gerado um registro financeiro para um par aluno-projeto (Matricula) 
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="p_2"></param>
+        /// <returns></returns>
+        public bool ExisteRegistroFinanceiroParaMatricula(AlunoProjeto matricula)
+        {
+            if (ObterRegistroPorId(matricula.Id).AlunoProjeto != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
