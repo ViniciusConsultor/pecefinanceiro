@@ -18,11 +18,13 @@ namespace PeceFinanceiro
                       
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void ButtonLogout_Click(object sender, EventArgs e)
         {
             FormsAuthentication.SignOut();
             FormsAuthentication.RedirectToLoginPage();
         }
+
+        
 
        
 

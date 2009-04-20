@@ -35,8 +35,8 @@
 	                <li id="MenuItemRelatorios" class=""><a href="Relatorios.aspx">Relatórios</a></li>
                     <li>
                     </li>
-                    <asp:Button ID="Button1" runat="server" CssClass="botao" 
-                        onclick="Button1_Click" Text="Logout" />
+                    <asp:Button ID="ButtonLogout" runat="server" CssClass="botao" 
+                        onclick="ButtonLogout_Click" Text="Logout" />
                 </ul>
                 <div></div>
     </div>

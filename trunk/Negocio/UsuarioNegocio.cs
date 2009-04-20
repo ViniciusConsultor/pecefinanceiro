@@ -20,5 +20,36 @@ namespace Vsf.Negocio
         {
             return _usuariodao.Autenticar(login,senha);
         }
+        /// <summary>
+        /// Tenta inserir um usuário novo<br></br>
+        /// Retorna "0" se inseriu com sucesso<br></br>
+        /// Retorna "-1" se o usuario já existe<br></br>
+        /// Retorna "-2" se houve erro na inserção<br></br>
+        /// 
+        /// </summary>
+        /// <param name="novousuario"></param>
+        /// <returns>
+        /// 
+        /// </returns>
+        public int InserirUsuario(Usuario novousuario, String senha)
+        {
+            //verifica se o login já nao existe
+            if (_usuariodao.ConsultarUsuarioPeloLogin(novousuario.Login) != null)
+            {
+                return -1;
+            }
+            else
+            {
+                if (_usuariodao.InserirUsuario(novousuario, senha))
+                {
+                    return 0;
+                }
+                else
+                {
+                    return -2;
+                }
+            }
+                        
+        }
     }
 }

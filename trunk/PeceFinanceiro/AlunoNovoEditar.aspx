@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/PeceFinanceiro.Master" AutoEventWireup="true" CodeBehind="AlunoNovoEditar.aspx.cs" Inherits="PeceFinanceiro.CadastroAluno" Title="Untitled Page" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/PeceFinanceiro.Master" AutoEventWireup="true" CodeBehind="AlunoNovoEditar.aspx.cs" Inherits="PeceFinanceiro.CadastroAluno" Title="PECE Financeiro - Aluno" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -8,6 +8,17 @@
     <div id="container">
             <div id="primarycontainer">
                 <div id="primarycontent">
+                <asp:Panel ID="PanelErro" runat="server">
+                     <div class="DivErro">
+                            <asp:Label ID="MensagemErro" runat="server"></asp:Label><br />
+                            
+                       </div>
+                    </asp:Panel>
+                    <asp:Panel ID="PanelSucesso" runat="server">
+                        <div class="DivSucesso">
+                            <asp:Label ID="MensagemSucesso" runat="server">Cadastro realizado com sucesso! <a href="ParcelamentoEditar.aspx">Editar Parcelas</a></asp:Label>
+                        </div>
+                    </asp:Panel>
                     <div class="formGenerico">
                         <fieldset>
                             <legend>Dados do Aluno</legend>
@@ -15,7 +26,11 @@
                                 <li>
                                     <label>Número PECE</label>
                                     <asp:TextBox ID="TextBoxNumeroPece" runat="server" Width="20%" 
-                                        CssClass="textBox" ></asp:TextBox>
+                                        CssClass="textBox" CausesValidation="True" ></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator_NumeroPECE" 
+                                        runat="server" ErrorMessage="* Campo Obrigatório" CssClass="DivErro" 
+                                        ControlToValidate="TextBoxNumeroPece"></asp:RequiredFieldValidator>
+                                    
                                 </li>
                                 <li>
                                     <label>Nome</label>
@@ -33,12 +48,21 @@
                                 <li>
                                     <label>Projetos Disponíveis</label>
                                     <asp:ListBox ID="ListBoxProjetosDisponiveis" runat="server" 
-                                        DataSourceID="ListaTodosProjetos" DataTextField="Nome" DataValueField="Codigo" 
-                                        Width="166px"></asp:ListBox>
+                                         DataTextField="Nome" DataValueField="Codigo" 
+                                        Width="166px" DataSourceID="ListaProjetosDisponiveisDoAluno" 
+                                        onselectedindexchanged="ButtonAdicionarProjeto_Click"></asp:ListBox>
                                     <asp:Button ID="ButtonAdicionarProjeto" runat="server" Text="Adicionar" 
                                         CssClass="botao" onclick="ButtonAdicionarProjeto_Click" />
-                                    <asp:ObjectDataSource ID="ListaTodosProjetos" runat="server" 
+                                    <asp:ObjectDataSource ID="ListaProjetosDisponiveis" runat="server" 
                                         SelectMethod="ObterTodosProjetos" TypeName="Vsf.Negocio.ProjetoNegocio">
+                                    </asp:ObjectDataSource>
+                                    <asp:ObjectDataSource ID="ListaProjetosDisponiveisDoAluno" runat="server" 
+                                        SelectMethod="ObterProjetosDisponiveisAoAluno" 
+                                        TypeName="Vsf.Negocio.ProjetoNegocio">
+                                        <SelectParameters>
+                                            <asp:QueryStringParameter DefaultValue="0" Name="codigoPece" 
+                                                QueryStringField="IdAluno" Type="Int32" />
+                                        </SelectParameters>
                                     </asp:ObjectDataSource>
                                 </li>
                                 <li>
