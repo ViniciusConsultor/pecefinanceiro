@@ -73,7 +73,7 @@ namespace PeceFinanceiro
             List<AlunoProjeto> listAlunoProjeto = (List<AlunoProjeto>)GridViewListaRegistros.DataSource;
             Int32 IdAlunoProjeto = listAlunoProjeto[e.NewEditIndex].Id;
 
-            Response.Redirect("RegistroFinanceiroNovoEditar.aspx?idRegistro=" + IdAlunoProjeto);
+            Response.Redirect("RegistroFinanceiroNovoEditar.aspx?idMatricula=" + IdAlunoProjeto);
         }
 
         protected void GridViewListaRegistros_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -81,7 +81,7 @@ namespace PeceFinanceiro
             List<AlunoProjeto> listAlunoProjeto = (List<AlunoProjeto>)GridViewListaRegistros.DataSource;
             Int32 IdAlunoProjeto = listAlunoProjeto[e.RowIndex].Id;
 
-            Response.Redirect("RegistroFinanceiroRemover.aspx?idRegistro=" + IdAlunoProjeto);
+            Response.Redirect("RegistroFinanceiroRemover.aspx?idMatricula=" + IdAlunoProjeto);
         }
 
         protected void GridViewListaRegistros_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -92,7 +92,7 @@ namespace PeceFinanceiro
                 int index = Int32.Parse(Convert.ToString(e.CommandArgument));
                 Int32 IdAlunoProjeto = listAlunoProjeto[index].Id;
 
-                Response.Redirect("RegistroPagamentos.aspx?idRegistro=" + IdAlunoProjeto);
+                Response.Redirect("RegistroPagamentos.aspx?idMatricula=" + IdAlunoProjeto);
             }
         }
 

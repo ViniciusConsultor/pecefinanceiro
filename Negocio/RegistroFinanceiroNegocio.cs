@@ -11,7 +11,11 @@ namespace Vsf.Negocio
 
         public bool IncluirRegistroFinanceiro(RegistroFinanceiro registroFinanceiro, AlunoProjeto alunoProjeto)
         {
-            return RegistroFinanceiroDAO.IncluirRegistroFinanceiro(registroFinanceiro, alunoProjeto);
+            int newId = 0;
+            newId = RegistroFinanceiroDAO.IncluirRegistroFinanceiro(registroFinanceiro, alunoProjeto);
+            registroFinanceiro.IdRegistro = newId;
+            ParcelaNegocio parcelaNegocio = new ParcelaNegocio();
+            return (parcelaNegocio.GerarParcelas(registroFinanceiro).Count > 0);
         }
 
         public List<RegistroFinanceiro> ObterTodosRegistros()
@@ -29,6 +33,11 @@ namespace Vsf.Negocio
             return RegistroFinanceiroDAO.ObterRegistroPorId(idRegistroFinanceiro);
         }
 
+        public RegistroFinanceiro ObterRegistroPorMatricula(int idMatricula)
+        {
+            return RegistroFinanceiroDAO.ObterRegistroPorMatricula(idMatricula);
+        }
+
         public bool AtualizarRegistroFinanceiro(RegistroFinanceiro registroFinanceiro)
         {
             return RegistroFinanceiroDAO.AtualizarRegistroFinanceiro(registroFinanceiro);
@@ -43,7 +52,7 @@ namespace Vsf.Negocio
         /// <returns></returns>
         public bool ExisteRegistroFinanceiroParaMatricula(AlunoProjeto matricula)
         {
-            if (ObterRegistroPorId(matricula.Id).AlunoProjeto != null)
+            if (ObterRegistroPorMatricula(matricula.Id).AlunoProjeto != null)
             {
                 return true;
             }

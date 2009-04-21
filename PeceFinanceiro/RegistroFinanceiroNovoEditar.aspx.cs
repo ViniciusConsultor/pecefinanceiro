@@ -26,23 +26,23 @@ namespace PeceFinanceiro
             if (!IsPostBack)
             {
                 FillComboProjetos();
+            }
 
-                int idRegistroSelecionado = -1;
-                if (!(Request.QueryString["idRegistro"] == null))
-                {
-                    HiddenFieldEditando.Value = "true";
-                    idRegistroSelecionado = Int32.Parse(Request.QueryString["idRegistro"]);
-                    RegistroFinanceiroNegocio registroNegocio = new RegistroFinanceiroNegocio();
-                    registroFinanceiroGlobal = registroNegocio.ObterRegistroPorId(idRegistroSelecionado);
+            int idRegistroSelecionado = -1;
+            if (!(Request.QueryString["idMatricula"] == null))
+            {
+                HiddenFieldEditando.Value = "true";
+                idRegistroSelecionado = Int32.Parse(Request.QueryString["idMatricula"]);
+                RegistroFinanceiroNegocio registroNegocio = new RegistroFinanceiroNegocio();
+                registroFinanceiroGlobal = registroNegocio.ObterRegistroPorMatricula(idRegistroSelecionado);
 
-                    SelecionaProjeto(registroFinanceiroGlobal.AlunoProjeto.Projeto.Codigo);
-                    SelecionaDdlAluno(registroFinanceiroGlobal.AlunoProjeto.Aluno.NumeroPece);
-                    FillAllFieldsToEdit(registroFinanceiroGlobal);
-                }
-                else
-                {
-                    SelecionaProjeto("");
-                }
+                SelecionaProjeto(registroFinanceiroGlobal.AlunoProjeto.Projeto.Codigo);
+                SelecionaDdlAluno(registroFinanceiroGlobal.AlunoProjeto.Aluno.NumeroPece);
+                if(!IsPostBack) FillAllFieldsToEdit(registroFinanceiroGlobal);
+            }
+            else
+            {
+                if (!IsPostBack) SelecionaProjeto("");
             }
 
             VerificaAlunoSelecionado();
@@ -83,7 +83,8 @@ namespace PeceFinanceiro
             this.HiddenValorComAjuste.Value = registroFinanceiro.PrecoReajustado.ToString("#0.00").Replace('.', ',');
             this.TextBoxNumeroParcelas.Text = Convert.ToString(registroFinanceiro.NumeroParcelas);
             this.TextBoxDiaPagamento.Text = Convert.ToString(registroFinanceiro.DiaPagamento);
-            this.TextBoxDataPrimeiraParcela.Text = Convert.ToString(registroFinanceiro.DataVencimentoPrimeiraParcela);
+            this.TextBoxDataPrimeiraParcela.Text = Convert.ToString(registroFinanceiro.DataVencimentoPrimeiraParcela.ToString("d", _culture));
+            this.TextBoxObservacoes.Text = registroFinanceiro.Observacoes;
 
             SetEnabledFieldsWhileEditing(true);
         }
@@ -296,7 +297,7 @@ namespace PeceFinanceiro
         protected void ButtonEditarParcelas_Click(object sender, EventArgs e)
         {
             if(registroFinanceiroGlobal != null)
-                Response.Redirect("ParcelamentoEditar.aspx?idRegistro=" + registroFinanceiroGlobal.AlunoProjeto.Id);
+                Response.Redirect("ParcelamentoEditar.aspx?idRegistro=" + registroFinanceiroGlobal.IdRegistro);
         }
 
 

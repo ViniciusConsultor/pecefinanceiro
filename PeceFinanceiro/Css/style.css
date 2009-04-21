@@ -291,6 +291,16 @@ h4
     margin: 1px 1px 1px 1px;
 }
 
+.textBoxRight
+{
+    border: solid 1px #cccccc;
+    font-family: Verdana, Arial;
+    font-size: small;
+    padding: 3px 3px 3px 3px;
+    margin: 1px 1px 1px 1px;
+    text-align:right;
+}
+
 .textBox:focus
 {
     border: solid 2px #ff9900;
@@ -483,6 +493,38 @@ h4
     padding: 4px;
     text-align:left;
 }
+
+.gridParcelas
+{
+    background-color:#eee;
+    padding: 0px;
+}
+
+.gridParcelas table
+{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.gridParcelas table td 
+{
+    border-bottom-width: 1px;
+    border-bottom-color: #ccc;
+    border-bottom-style: dashed;
+    padding: 2px;
+    height: 30px;
+    text-align:center;
+}
+
+.gridParcelas table th
+{
+    background-color: #777;
+    color:#fff;
+    font-weight:normal;
+    padding: 4px;
+    text-align:center;
+}
+
 
 .clearit
 {
