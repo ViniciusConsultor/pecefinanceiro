@@ -25,8 +25,8 @@ namespace Vsf.Common.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=WINDOSXPVM\\SQLEXPRESS;Initial Catalog=FinanceiroPECE;User ID=pecefina" +
-            "nceiro; Password=pece")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=201.52.6.201;Initial Catalog=FinanceiroPECE;user id=labsoft2;password" +
+            "=l4b$oft2;")]
         public string StringConexao {
             get {
                 return ((string)(this["StringConexao"]));
