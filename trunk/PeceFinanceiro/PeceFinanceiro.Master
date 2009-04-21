@@ -23,6 +23,12 @@
     
     <form id="form1" runat="server">
     
+    <div style="float:right; text-align: right; vertical-align:middle;">
+        Nome de usuário: <asp:Label ID="LoginName" runat="server"><%=Session["usuario"] != null? ((Vsf.Modelo.Usuario)Session["usuario"]).Login : "John Doe"%></asp:Label>
+                <asp:Button ID="ButtonLogout" runat="server" CssClass="botao" 
+                        onclick="ButtonLogout_Click" Text="Logout" />
+                        </div>
+    
     <div id="menu">
                 <ul>
 	                <!--
@@ -33,10 +39,6 @@
 	                <li id="MenuItemAlunos" class=""><a href="AlunoLista.aspx">Alunos</a></li>
 	                <li id="MenuItemProjetos" class=""><a href="ProjetosLista.aspx">Projetos</a></li>
 	                <li id="MenuItemRelatorios" class=""><a href="Relatorios.aspx">Relatórios</a></li>
-                    <li>
-                    </li>
-                    <asp:Button ID="ButtonLogout" runat="server" CssClass="botao" 
-                        onclick="ButtonLogout_Click" Text="Logout" />
                 </ul>
                 <div></div>
     </div>

@@ -14,49 +14,49 @@ namespace PeceFinanceiro {
     public partial class EditarParcelamento {
         
         /// <summary>
-        /// Label4 control.
+        /// LabelNomeAluno control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label4;
+        protected global::System.Web.UI.WebControls.Label LabelNomeAluno;
         
         /// <summary>
-        /// LabelValorCurso control.
+        /// LabelProjeto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelValorCurso;
+        protected global::System.Web.UI.WebControls.Label LabelProjeto;
         
         /// <summary>
-        /// Label1 control.
+        /// LabelValor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label LabelValor;
         
         /// <summary>
-        /// Label2 control.
+        /// LabelNumeroParcelas control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Label LabelNumeroParcelas;
         
         /// <summary>
-        /// Label6 control.
+        /// GridViewParcelas control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label6;
+        protected global::System.Web.UI.WebControls.GridView GridViewParcelas;
         
         /// <summary>
         /// TextBox1 control.

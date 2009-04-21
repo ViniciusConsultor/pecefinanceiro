@@ -14,30 +14,50 @@
                             <ul>
                                 <li>
                                     <label>Aluno</label>
-                                    <asp:Label runat="server" ID="Label4">João da Silva (44444)</asp:Label>
+                                    <asp:Label runat="server" ID="LabelNomeAluno">João da Silva (44444)</asp:Label>
                                 </li>
                                 <li>
-                                    <label>Valor do Projeto</label>
-                                    <asp:Label runat="server" ID="LabelValorCurso">R$ 5.000,00</asp:Label>
+                                    <label>Projeto</label>
+                                    <asp:Label runat="server" ID="LabelProjeto">Projeto</asp:Label>
                                 </li>
                                 <li>
-                                    <label>Valor do Ajuste</label>
-                                    <asp:Label runat="server" ID="Label1">- R$ 500,00</asp:Label>
-                                </li>
-                                <li>
-                                    <label>Valor Final</label>
-                                    <asp:Label runat="server" ID="Label2">R$ 4.500,00</asp:Label>
+                                    <label>Valor</label>
+                                    <asp:Label runat="server" ID="LabelValor">R$ 4.500,00</asp:Label>
                                 </li>
                                 <li>
                                     <label>Número de Parcelas</label>
-                                    <asp:Label runat="server" ID="Label6">12</asp:Label>
+                                    <asp:Label runat="server" ID="LabelNumeroParcelas">12</asp:Label>
                                 </li>
                             </ul>
                         </fieldset>
                         <fieldset>
                             <legend>Parcelas</legend>
-                            <div class="grid">
-                                <table>
+                            <div class="gridParcelas">
+                                
+                                <asp:GridView ID="GridViewParcelas" runat="server" AutoGenerateColumns="False">
+                                    <Columns>
+                                        <asp:BoundField DataField="NumeroParcela" HeaderText="Numero" />
+                                        <asp:TemplateField HeaderText="Vencimento">
+                                            <ItemTemplate>
+                                                <asp:TextBox ID="TextBoxVencimento" runat="server" 
+                                                    Text='<%# Eval("DtVencimento", "{0:dd/MM/yyyy}") %>' 
+                                                    CssClass="textBoxRight" Width="90%"></asp:TextBox>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Valor">
+                                            <ItemTemplate>
+                                                <asp:TextBox ID="TextBox2" runat="server" 
+                                                    Text='<%# Eval("ValorParcela", "{0:#0.00}") %>' CssClass="textBoxRight" 
+                                                    Width="90%"></asp:TextBox>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                    <EmptyDataTemplate>
+                                        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                                    </EmptyDataTemplate>
+                                </asp:GridView>
+                                
+                                <!--table>
                                     <tr>
                                         <th width="10%">Parcela</th>
                                         <th width="30%">Valor da Parcela</th>
@@ -103,7 +123,7 @@
                                         <td><asp:TextBox ID="TextBox22" runat="server" Width="50%" CssClass="textBox">R$ 375</asp:TextBox></td>
                                         <td><asp:TextBox ID="TextBox23" runat="server" Width="50%" CssClass="textBox">10/03/2010</asp:TextBox></td>
                                     </tr>
-                                </table>
+                                </table-->
                             </div>
                             <ul>
                                 <li>
@@ -112,7 +132,8 @@
                                 </li>
                             </ul>
                             <asp:Button ID="Button2" runat="server" Text="Salvar" Enabled="false" CssClass="botaoFormTick"/>
-                            <asp:Button ID="Button3" runat="server" Text="Cancelar" CssClass="botaoFormCross"/>
+                            <asp:Button ID="Button3" runat="server" Text="Cancelar" 
+                                CssClass="botaoFormCross" onclick="Button3_Click"/>
                         </fieldset>
                     </div>
                 </div>

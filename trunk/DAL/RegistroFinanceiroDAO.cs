@@ -11,9 +11,9 @@ namespace Vsf.DAL
 {
     public class RegistroFinanceiroDAO
     {
-        public static bool IncluirRegistroFinanceiro(Vsf.Modelo.RegistroFinanceiro registroFinanceiro, Vsf.Modelo.AlunoProjeto alunoProjeto)
+        public static int IncluirRegistroFinanceiro(Vsf.Modelo.RegistroFinanceiro registroFinanceiro, Vsf.Modelo.AlunoProjeto alunoProjeto)
         {
-            int affected = 0;
+            int newId = 0;
             VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
             try
             {
@@ -30,8 +30,9 @@ namespace Vsf.DAL
                 StringBuilder query = new StringBuilder("INSERT INTO Financeiro");
                 query.Append(" (idMatricula, NumeroParcelas, PrecoReajustado, Observacoes, DiaPagamento, PrimeiraParcela)");
                 query.Append(" VALUES (@idMatricula, @numeroParcelas, @precoReajustado, @observacoes, @diaPagamento, @primeiraParcela)");
+                query.Append(" SELECT SCOPE_IDENTITY()");
 
-                affected = db.ExecuteTextNonQuery(query.ToString(), parameters);
+                newId = Convert.ToInt32(db.ExecuteScalar(query.ToString(), parameters));
             }
             catch (Exception ex)
             {
@@ -45,7 +46,7 @@ namespace Vsf.DAL
 
             Logger.Registrar(1, "RegistroFinanceiro inserido para ProjetoAluno número " + alunoProjeto.Id + ".");
 
-            return (affected > 0);
+            return newId;
         }
 
         public static List<RegistroFinanceiro> ObterTodosRegistros()
@@ -65,6 +66,7 @@ namespace Vsf.DAL
                 while (reader.Read())
                 {
                     RegistroFinanceiro registro = new RegistroFinanceiro();
+                    registro.IdRegistro = (reader["IdFinanceiro"] != DBNull.Value) ? Convert.ToInt32(reader["IdFinanceiro"]) : 0;
                     registro.AlunoProjeto = AlunoDAO.ObterRelacionamentoAlunoProjeto(Convert.ToInt32(reader["IdAluno"]), Convert.ToString(reader["IdProjeto"]));
                     registro.DataVencimentoPrimeiraParcela = (reader["PrimeiraParcela"] != DBNull.Value) ? Convert.ToDateTime(reader["PrimeiraParcela"]) : DateTime.MinValue;
                     registro.DiaPagamento = (reader["DiaPagamento"] != DBNull.Value) ? Convert.ToDateTime(reader["DiaPagamento"]).Day : 0;
@@ -88,14 +90,14 @@ namespace Vsf.DAL
             return listRegistros;
         }
 
-        public static RegistroFinanceiro ObterRegistroPorId(int idRegistroFinanceiro)
+        public static RegistroFinanceiro ObterRegistroPorMatricula(int idMatricula)
         {
             RegistroFinanceiro registroFinanceiro = new RegistroFinanceiro();
             VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
             try
             {
                 List<SqlParameter> parameters = new List<SqlParameter>();
-                parameters.Add(new SqlParameter("@idMatricula", idRegistroFinanceiro));
+                parameters.Add(new SqlParameter("@idMatricula", idMatricula));
 
                 db.AbreConexao();
 
@@ -106,6 +108,7 @@ namespace Vsf.DAL
                 SqlDataReader reader = db.ExecuteTextReader(query.ToString(), parameters);
                 while (reader.Read())
                 {
+                    registroFinanceiro.IdRegistro = (reader["IdFinanceiro"] != DBNull.Value) ? Convert.ToInt32(reader["IdFinanceiro"]) : 0;
                     registroFinanceiro.AlunoProjeto = AlunoDAO.ObterRelacionamentoAlunoProjeto(Convert.ToInt32(reader["IdAluno"]), Convert.ToString(reader["IdProjeto"]));
                     registroFinanceiro.DataVencimentoPrimeiraParcela = (reader["PrimeiraParcela"] != DBNull.Value) ? Convert.ToDateTime(reader["PrimeiraParcela"]) : DateTime.MinValue;
                     registroFinanceiro.DiaPagamento = (reader["DiaPagamento"] != DBNull.Value) ? Convert.ToDateTime(reader["DiaPagamento"]).Day : 0;
@@ -126,6 +129,47 @@ namespace Vsf.DAL
             }
             return registroFinanceiro;
         }
+
+        public static RegistroFinanceiro ObterRegistroPorId(int idRegistro)
+        {
+            RegistroFinanceiro registroFinanceiro = new RegistroFinanceiro();
+            VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@idRegistro", idRegistro));
+
+                db.AbreConexao();
+
+                StringBuilder query = new StringBuilder("SELECT * FROM Financeiro");
+                query.Append(" INNER JOIN Matricula ON Financeiro.idMatricula = Matricula.idMatricula");
+                query.Append(" WHERE Financeiro.idFinanceiro = @idRegistro");
+
+                SqlDataReader reader = db.ExecuteTextReader(query.ToString(), parameters);
+                while (reader.Read())
+                {
+                    registroFinanceiro.IdRegistro = (reader["IdFinanceiro"] != DBNull.Value) ? Convert.ToInt32(reader["IdFinanceiro"]) : 0;
+                    registroFinanceiro.AlunoProjeto = AlunoDAO.ObterRelacionamentoAlunoProjeto(Convert.ToInt32(reader["IdAluno"]), Convert.ToString(reader["IdProjeto"]));
+                    registroFinanceiro.DataVencimentoPrimeiraParcela = (reader["PrimeiraParcela"] != DBNull.Value) ? Convert.ToDateTime(reader["PrimeiraParcela"]) : DateTime.MinValue;
+                    registroFinanceiro.DiaPagamento = (reader["DiaPagamento"] != DBNull.Value) ? Convert.ToDateTime(reader["DiaPagamento"]).Day : 0;
+                    registroFinanceiro.NumeroParcelas = (reader["NumeroParcelas"] != DBNull.Value) ? Convert.ToInt32(reader["NumeroParcelas"]) : 0;
+                    registroFinanceiro.Observacoes = (reader["Observacoes"] != DBNull.Value) ? Convert.ToString(reader["Observacoes"]) : String.Empty;
+                    registroFinanceiro.PrecoReajustado = (reader["PrecoReajustado"] != DBNull.Value) ? Convert.ToDouble(reader["PrecoReajustado"]) : 0.0;
+                    registroFinanceiro.Status = (StatusAlunoProjeto)Enum.Parse(typeof(StatusAlunoProjeto), (reader["estado"] != DBNull.Value) ? Convert.ToString(reader["estado"]) : "0");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Registrar(0, "Exceção em (DAO) " + ex.Source + " - " + ex.ToString() + " : " + ex.Message + "\n\n StackTrace: " + ex.StackTrace);
+                throw new ApplicationException("DAOAluno.ObterRegistroPorId(): " + ex, ex);
+            }
+            finally
+            {
+                db.FechaConexao();
+            }
+            return registroFinanceiro;
+        }
+
 
         public static bool AtualizarRegistroFinanceiro(RegistroFinanceiro registroFinanceiro)
         {
