@@ -220,6 +220,21 @@ h4
     list-style-type: none;
 }
 
+.DivMensagem
+{
+    text-align:center;
+    width: 80%;
+    padding: 10px 10px 10px 30px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    background-image: url(../Icons/cross.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    border: solid 1px red;
+    background-color: Yellow;
+    color: #666;
+}
 
 /* FORMS */
 .formGenerico
@@ -232,6 +247,7 @@ h4
 {
     border: dotted 1px #ccc;
     background-color: #f0f0f0;
+	width: 682px;
 }
 
 .formGenerico fieldset li {
@@ -246,9 +262,9 @@ h4
 }
 
 .formGenerico fieldset label {
-  width: 25%;
+  width: 34%;
   float:left;
-  text-align: right;
+  text-align: left;
   margin-right: 10px;
 }
 
