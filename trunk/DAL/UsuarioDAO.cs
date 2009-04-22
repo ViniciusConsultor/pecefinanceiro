@@ -69,6 +69,7 @@ namespace Vsf.DAL
                     usuario.Login = (reader["NomeAcesso"] != DBNull.Value) ? Convert.ToString(reader["NomeAcesso"]) : String.Empty;
                     usuario.IdUsuario = (reader["IdUsuario"] != DBNull.Value) ? Convert.ToInt32(reader["IdUsuario"]) : 0;
                     usuario.Nome = (reader["Nome"] != DBNull.Value) ? Convert.ToString(reader["Nome"]) : String.Empty;
+                    usuario.Tipo = (reader["Nome"] != DBNull.Value) ? Convert.ToInt32(reader["TipoUsuario"]) : 0;
 
                     return usuario;
                 }
@@ -107,6 +108,69 @@ namespace Vsf.DAL
             catch (Exception ex)
             {
                 throw new ApplicationException("DAOUsuario.InserirUsuario(Aluno): " + ex.ToString(), ex);
+            }
+            finally
+            {
+                db.FechaConexao();
+            }
+            return (affected > 0);
+        }
+
+        public List<Usuario> ObterTodosUsuarios()
+        {
+            VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
+            List<Usuario> listusuarios = new List<Usuario>();
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                db.AbreConexao();
+
+                StringBuilder query = new StringBuilder("SELECT * FROM Usuario");
+                SqlDataReader reader = db.ExecuteTextReader(query.ToString(), parameters);
+
+                while (reader.Read())
+                {
+                    Usuario usuario = new Usuario();
+                    usuario.Login = (reader["NomeAcesso"] != DBNull.Value) ? Convert.ToString(reader["NomeAcesso"]) : String.Empty;
+                    usuario.IdUsuario = (reader["IdUsuario"] != DBNull.Value) ? Convert.ToInt32(reader["IdUsuario"]) : 0;
+                    usuario.Nome = (reader["Nome"] != DBNull.Value) ? Convert.ToString(reader["Nome"]) : String.Empty;
+                    usuario.Tipo = (reader["Nome"] != DBNull.Value) ? Convert.ToInt32(reader["TipoUsuario"]) : 0;
+                    listusuarios.Add(usuario);
+                 }
+                
+            }
+            catch (Exception ex)
+            {
+                Logger.Registrar(0, "Exceção em (DAO) " + ex.Source + " - " + ex.ToString() + " : " + ex.Message + "\n\n StackTrace: " + ex.StackTrace);
+                throw new ApplicationException("DAOUsuario.ConsultarUsuarioPeloLogin(): " + ex, ex);
+            }
+            finally
+            {
+                db.FechaConexao();
+            }
+
+            return listusuarios;
+        }
+
+        public bool RemoverUsuario(String usuario)
+        {
+            int affected = 0;
+            VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@NomeAcesso", usuario));
+                db.AbreConexao();
+
+                StringBuilder query = new StringBuilder("DELETE FROM Usuario");
+                query.Append(" WHERE NomeAcesso=@NomeAcesso ");
+                
+                affected = db.ExecuteTextNonQuery(query.ToString(), parameters);
+
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("DAOUsuario.RemoverUsuario(Usuario): " + ex.ToString(), ex);
             }
             finally
             {

@@ -11,6 +11,10 @@ namespace Vsf.Negocio
     {
         UsuarioDAO _usuariodao = new UsuarioDAO();
 
+        public List<Usuario> ObterTodosUsuarios()
+        {
+            return _usuariodao.ObterTodosUsuarios();
+        }
         public Usuario ConsultarUsuario(string login)
         {
             return _usuariodao.ConsultarUsuarioPeloLogin(login);
@@ -50,6 +54,11 @@ namespace Vsf.Negocio
                 }
             }
                         
+        }
+
+        public bool RemoverUsuario(String login)
+        {
+            return _usuariodao.RemoverUsuario(login); ;
         }
     }
 }
