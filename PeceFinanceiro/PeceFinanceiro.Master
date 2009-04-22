@@ -24,7 +24,7 @@
     <form id="form1" runat="server">
     
     <div style="float:right; text-align: right; vertical-align:middle;">
-        Nome de usuário: <asp:Label ID="LoginName" runat="server"><%=Session["usuario"] != null? ((Vsf.Modelo.Usuario)Session["usuario"]).Login : "John Doe"%></asp:Label>
+        Nome de usuário: <asp:Label ID="LoginName" runat="server"></asp:Label>
                 <asp:Button ID="ButtonLogout" runat="server" CssClass="botao" 
                         onclick="ButtonLogout_Click" Text="Logout" />
                         </div>
@@ -35,10 +35,22 @@
 			                Each list item below represents a tab in the menu. Set the class
 			                of any list item to 'active' to make it, well, active.
 	                -->
-	                <li id="MenuItemCadastrosFinanceiros" class=""><a href="RegistroFinanceiroLista.aspx">Registros Financeiros</a></li>
-	                <li id="MenuItemAlunos" class=""><a href="AlunoLista.aspx">Alunos</a></li>
-	                <li id="MenuItemProjetos" class=""><a href="ProjetosLista.aspx">Projetos</a></li>
-	                <li id="MenuItemRelatorios" class=""><a href="Relatorios.aspx">Relatórios</a></li>
+	                <asp:ContentPlaceHolder runat="server" id ="PlHolderMenuItemCadastrosFinanceiros" >
+	                    <li id="MenuItemCadastrosFinanceiros" class=""><a href="RegistroFinanceiroLista.aspx">Registros Financeiros</a></li>
+	                </asp:ContentPlaceHolder>
+                    
+	                <asp:ContentPlaceHolder runat= "server" Id = "PlHolderMenuItemAlunos" >
+	                    <li id="MenuItemAlunos" class=""><a href="AlunoLista.aspx">Alunos</a></li>
+	                </asp:ContentPlaceHolder>
+	                <asp:ContentPlaceHolder runat= "server" Id = "PlHolderMenuItemProjetos">
+	                    <li id="MenuItemProjetos" class=""><a href="ProjetosLista.aspx">Projetos</a></li>
+	                </asp:ContentPlaceHolder>
+	                <asp:ContentPlaceHolder runat= "server" Id = "PlHolderMenuItemRelatorios">
+	                    <li id="MenuItemRelatorios" class=""><a href="Relatorios.aspx">Relatórios</a></li>
+	                </asp:ContentPlaceHolder>
+	                <asp:ContentPlaceHolder runat= "server" Id = "PlHolderMenuItemUsuarios">
+	                    <li id="MenuItemUsuarios" class=""><a href="UsuarioLista.aspx">Usuários</a></li>
+	                </asp:ContentPlaceHolder>
                 </ul>
                 <div></div>
     </div>

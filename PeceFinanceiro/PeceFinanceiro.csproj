@@ -98,6 +98,13 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="UsuarioNovoEditar.aspx.cs">
+      <DependentUpon>UsuarioNovoEditar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UsuarioNovoEditar.aspx.designer.cs">
+      <DependentUpon>UsuarioNovoEditar.aspx</DependentUpon>
+    </Compile>
     <Compile Include="RegistroFinanceiroLista.aspx.cs">
       <DependentUpon>RegistroFinanceiroLista.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -134,6 +141,20 @@
     <Compile Include="Relatorios.aspx.designer.cs">
       <DependentUpon>Relatorios.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UsuarioLista.aspx.cs">
+      <DependentUpon>UsuarioLista.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UsuarioLista.aspx.designer.cs">
+      <DependentUpon>UsuarioLista.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UsuarioRemover.aspx.cs">
+      <DependentUpon>UsuarioRemover.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UsuarioRemover.aspx.designer.cs">
+      <DependentUpon>UsuarioRemover.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="AlunoNovoEditar.aspx" />
@@ -160,11 +181,14 @@
     <Content Include="Css\license.txt" />
     <Content Include="Css\style.css" />
     <Content Include="Default.aspx" />
+    <Content Include="UsuarioNovoEditar.aspx" />
     <Content Include="RegistroFinanceiroLista.aspx" />
     <Content Include="RegistroFinanceiroNovoEditar.aspx" />
     <Content Include="PeceFinanceiro.Master" />
     <Content Include="RegistroPagamentos.aspx" />
     <Content Include="Relatorios.aspx" />
+    <Content Include="UsuarioLista.aspx" />
+    <Content Include="UsuarioRemover.aspx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Modelo\Vsf.Modelo.csproj">

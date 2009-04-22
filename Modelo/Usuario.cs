@@ -32,7 +32,12 @@ namespace Vsf.Modelo
             set { _tipo = value; }
         }
 
+
+        public bool isAdmin()
+        {
+            return (_tipo==1);
         }
+    }
 
     
 }
