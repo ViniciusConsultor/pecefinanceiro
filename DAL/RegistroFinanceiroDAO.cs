@@ -213,7 +213,60 @@ namespace Vsf.DAL
             return (affected > 0);
         }
 
-        
+
+
+        public static List<RegistroFinanceiro> BuscarRegistrosPorAlunoEProjeto(string aluno, string projeto)
+        {
+            List<RegistroFinanceiro> listRegistros = new List<RegistroFinanceiro>();
+            VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@aluno", aluno));
+                parameters.Add(new SqlParameter("@projeto", projeto));
+
+                db.AbreConexao();
+
+                StringBuilder query = new StringBuilder("SELECT * FROM Financeiro");
+                query.Append(" INNER JOIN Matricula ON Financeiro.idMatricula = Matricula.idMatricula");
+                query.Append(" LEFT JOIN Aluno ON Matricula.IdAluno = Aluno.NumeroPece");
+                query.Append(" LEFT JOIN Projeto ON Matricula.IdProjeto = Projeto.CodigoProjeto");
+                if (!projeto.Equals(String.Empty))
+                {
+                    query.Append(" WHERE Projeto.Nome LIKE @projeto");
+                    if (!aluno.Equals(String.Empty))
+                        query.Append("      AND Aluno.Nome LIKE @aluno");
+                } else if(!aluno.Equals(String.Empty))
+                    query.Append(" WHERE Aluno.Nome LIKE @aluno");
+
+                SqlDataReader reader = db.ExecuteTextReader(query.ToString(), parameters);
+                while (reader.Read())
+                {
+                    RegistroFinanceiro registro = new RegistroFinanceiro();
+                    registro.IdRegistro = (reader["IdFinanceiro"] != DBNull.Value) ? Convert.ToInt32(reader["IdFinanceiro"]) : 0;
+                    registro.AlunoProjeto = AlunoDAO.ObterRelacionamentoAlunoProjeto(Convert.ToInt32(reader["IdAluno"]), Convert.ToString(reader["IdProjeto"]));
+                    registro.DataVencimentoPrimeiraParcela = (reader["PrimeiraParcela"] != DBNull.Value) ? Convert.ToDateTime(reader["PrimeiraParcela"]) : DateTime.MinValue;
+                    registro.DiaPagamento = (reader["DiaPagamento"] != DBNull.Value) ? Convert.ToDateTime(reader["DiaPagamento"]).Day : 0;
+                    registro.NumeroParcelas = (reader["NumeroParcelas"] != DBNull.Value) ? Convert.ToInt32(reader["NumeroParcelas"]) : 0;
+                    registro.Observacoes = (reader["Observacoes"] != DBNull.Value) ? Convert.ToString(reader["Observacoes"]) : String.Empty;
+                    registro.PrecoReajustado = (reader["PrecoReajustado"] != DBNull.Value) ? Convert.ToDouble(reader["PrecoReajustado"]) : 0.0;
+                    registro.Status = (StatusAlunoProjeto)Enum.Parse(typeof(StatusAlunoProjeto), (reader["estado"] != DBNull.Value) ? Convert.ToString(reader["estado"]) : "0");
+
+                    listRegistros.Add(registro);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Registrar(0, "Exceção em (DAO) " + ex.Source + " - " + ex.ToString() + " : " + ex.Message + "\n\n StackTrace: " + ex.StackTrace);
+                throw new ApplicationException("DAOAluno.ObterAlunosPorProjeto(): " + ex, ex);
+            }
+            finally
+            {
+                db.FechaConexao();
+            }
+            return listRegistros;
+        }
     }
 }
+
 
