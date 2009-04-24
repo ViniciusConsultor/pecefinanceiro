@@ -157,7 +157,7 @@ namespace Vsf.DAL
                     AlunoParcela alunoParcela = new AlunoParcela();
                     alunoParcela.Nome = (reader["aluno"] != DBNull.Value) ? Convert.ToString(reader["aluno"]) : string.Empty;
                     alunoParcela.NumeroPece = (reader["NumeroPece"] != DBNull.Value) ? Convert.ToInt32(reader["NumeroPece"]) : 0;
-                    alunoParcela.ParcelaVencida = (reader["DataVencimento"] != DBNull.Value) ? Convert.ToDateTime(reader["DataVencimento"]) : DateTime.MinValue;
+                    alunoParcela.ParcelaVencida = (reader["DataVencimento"] != DBNull.Value) ? Convert.ToDateTime(reader["DataVencimento"]).Date : DateTime.MinValue;
                     alunoParcela.ValorParcela = (reader["ValorPagar"] != DBNull.Value) ? Convert.ToDecimal(reader["ValorPagar"]) : 0;
                     listaAlunoParcela.Add(alunoParcela);
                 }
