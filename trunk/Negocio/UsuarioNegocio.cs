@@ -60,5 +60,10 @@ namespace Vsf.Negocio
         {
             return _usuariodao.RemoverUsuario(login); ;
         }
+
+        public bool AtualizarUsuario(Usuario _usuario, String senha)
+        {
+            return _usuariodao.AtualizarUsuario(_usuario,senha);
+        }
     }
 }

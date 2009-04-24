@@ -178,5 +178,43 @@ namespace Vsf.DAL
             }
             return (affected > 0);
         }
+
+        public bool AtualizarUsuario(Usuario usuario, String senha)
+        {
+            int affected = 0;
+            VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@Nome", usuario.Nome));
+                parameters.Add(new SqlParameter("@TipoUsuario", usuario.Tipo));
+                if (!senha.Equals(""))
+                {
+                    parameters.Add(new SqlParameter("@SenhaAcesso", senha));
+                }
+                parameters.Add(new SqlParameter("@NomeAcesso", usuario.Login));
+                
+                db.AbreConexao();
+
+                StringBuilder query = new StringBuilder("UPDATE Usuario");
+                query.Append(" set Nome = @Nome, TipoUsuario=@TipoUsuario ");
+                if (!senha.Equals(""))
+                {
+                    query.Append(" , SenhaAcesso=@SenhaAcesso ");
+                }
+                query.Append(" WHERE (NomeAcesso=@NomeAcesso)");
+                affected = db.ExecuteTextNonQuery(query.ToString(), parameters);
+
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("DAOUsuario.InserirUsuario(Aluno): " + ex.ToString(), ex);
+            }
+            finally
+            {
+                db.FechaConexao();
+            }
+            return (affected > 0);
+        }
     }
 }
