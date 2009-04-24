@@ -53,6 +53,7 @@ namespace PeceFinanceiro
             this.LabelNomeAluno.Text = registro.AlunoProjeto.NomeAluno;
             this.LabelNumeroParcelas.Text = Convert.ToString(registro.NumeroParcelas);
             this.LabelValor.Text = registro.PrecoReajustado.ToString("R$ #0.00");
+            this.HiddenFieldValorTotal.Value = registro.PrecoReajustado.ToString("#0.00");
         }
 
         protected void Button3_Click(object sender, EventArgs e)
@@ -93,7 +94,6 @@ namespace PeceFinanceiro
                     {
                         sucesso = false;
                         ShowErrorMessage("Vencimento ou Valor de parcela inválidos na parcela " + (i + 1).ToString());
-                        break;
                     }
                     i++;
                 }

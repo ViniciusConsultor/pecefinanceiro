@@ -17,7 +17,7 @@ namespace Vsf.DAL
             {
                 List<SqlParameter> parameters = new List<SqlParameter>();
                 parameters.Add(new SqlParameter("@numeroParcela", parcela.NumeroParcela));
-                parameters.Add(new SqlParameter("@dataVencimento", parcela.DtVencimento));
+                parameters.Add(new SqlParameter("@dataVencimento", parcela.DataVencimento));
                 parameters.Add(new SqlParameter("@valorPagar", parcela.ValorParcela));
                 parameters.Add(new SqlParameter("@idFinanceiro", idRegistro));
                 db.AbreConexao();
@@ -61,7 +61,8 @@ namespace Vsf.DAL
                     parcela.ValorPago = (reader["NumeroParcela"] != DBNull.Value)? Convert.ToDouble(reader["ValorPago"]) : 0.0;
                     parcela.ObservacaoPagamento = (reader["Observacao"] != DBNull.Value)? Convert.ToString(reader["Observacao"]) : String.Empty;
                     parcela.NumeroParcela = (reader["NumeroParcela"] != DBNull.Value)? Convert.ToInt32(reader["NumeroParcela"]) : 0;
-                    parcela.DtVencimento = (reader["DataVencimento"] != DBNull.Value)? Convert.ToDateTime(reader["DataVencimento"]) : DateTime.MinValue;
+                    parcela.DataVencimento = (reader["DataVencimento"] != DBNull.Value)? Convert.ToDateTime(reader["DataVencimento"]) : DateTime.MinValue;
+                    parcela.DataPagamento = (reader["DataPagamento"] != DBNull.Value) ? Convert.ToDateTime(reader["DataPagamento"]) : DateTime.MinValue;
                     parcela.Pago = (reader["Pago"] != DBNull.Value) ? Convert.ToBoolean(reader["Pago"]) : false;
                     listParcela.Add(parcela);
                 }
@@ -85,7 +86,7 @@ namespace Vsf.DAL
             {
                 List<SqlParameter> parameters = new List<SqlParameter>();
                 parameters.Add(new SqlParameter("@numeroParcela", parcela.NumeroParcela));
-                parameters.Add(new SqlParameter("@dataVencimento", parcela.DtVencimento));
+                parameters.Add(new SqlParameter("@dataVencimento", parcela.DataVencimento));
                 parameters.Add(new SqlParameter("@valorPagar", parcela.ValorParcela));
                 parameters.Add(new SqlParameter("@idFinanceiro", idRegistro));
                 db.AbreConexao();
@@ -100,7 +101,41 @@ namespace Vsf.DAL
             }
             catch (Exception ex)
             {
-                throw new ApplicationException("DAOAluno.InserirAluno(Aluno): " + ex.ToString(), ex);
+                throw new ApplicationException("DAOAluno.EditarParcela(Aluno): " + ex.ToString(), ex);
+            }
+            finally
+            {
+                db.FechaConexao();
+            }
+            return (affected > 0);
+        }
+
+        public static bool RegistrarPagamento(Parcela parcela, int idRegistro)
+        {
+            int affected = 0;
+            VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@numeroParcela", parcela.NumeroParcela));
+                parameters.Add(new SqlParameter("@dataPagamento", parcela.DataPagamento));
+                parameters.Add(new SqlParameter("@valorPago", parcela.ValorPago));
+                parameters.Add(new SqlParameter("@pago", parcela.Pago));
+                parameters.Add(new SqlParameter("@idFinanceiro", idRegistro));
+                db.AbreConexao();
+
+                StringBuilder query = new StringBuilder("UPDATE Parcelas SET");
+                query.Append(" DataPagamento = @dataPagamento,");
+                query.Append(" ValorPago = @valorPago,");
+                query.Append(" Pago = @pago");
+                query.Append(" WHERE IdFinanceiro = @idFinanceiro");
+                query.Append(" AND NumeroParcela = @numeroParcela");
+
+                affected = db.ExecuteTextNonQuery(query.ToString(), parameters);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("DAOAluno.RegistrarPagamento(Aluno): " + ex.ToString(), ex);
             }
             finally
             {
