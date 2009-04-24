@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Vsf.Modelo;
-using System.Data.SqlClient;
 using Vsf.Common.Database;
+using System.Data.SqlClient;
+using Vsf.Modelo;
 using Vsf.Common;
+using System.Threading;
 
 namespace Vsf.DAL
 {
@@ -121,6 +122,108 @@ namespace Vsf.DAL
                 db.FechaConexao();
             }
             return listProjeto;
+        }
+
+        public static bool DeletarProjeto(String codigoProjeto)
+        {
+            int affected = 0;
+            VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@CodigoProjeto", codigoProjeto));
+                
+                db.AbreConexao();
+
+                StringBuilder query = new StringBuilder("UPDATE PROJETO");
+                query.Append(" SET Estado=1 ");
+                query.Append(" WHERE CodigoProjeto=@CodigoProjeto");
+
+                affected = db.ExecuteTextNonQuery(query.ToString(), parameters);
+            }
+            catch (Exception ex)
+            {
+                Logger.Registrar(0, "Exceção em (DAO) " + ex.Source + " - " + ex.ToString() + " : " + ex.Message + "\n\n StackTrace: " + ex.StackTrace);
+                throw new ApplicationException("DAOProjeto.DeletarProjeto(codigoProjeto): " + ex.ToString(), ex);
+            }
+            finally
+            {
+                db.FechaConexao();
+            }
+
+            Logger.Registrar(1, "Projeto deletado com número de projeto " + codigoProjeto + ".");
+
+            return (affected > 0);
+        }
+
+        public static bool IncluirProjeto(Projeto novoProjeto)
+        {
+            int affected = 0;
+            VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@codigoProjeto", novoProjeto.Codigo));
+                parameters.Add(new SqlParameter("@nome", novoProjeto.Nome));
+                parameters.Add(new SqlParameter("@descricao", novoProjeto.Descricao));
+                parameters.Add(new SqlParameter("@valorProjeto", novoProjeto.Valor));
+                   
+                db.AbreConexao();
+
+                StringBuilder query = new StringBuilder("INSERT INTO PROJETO");
+                query.Append(" (CodigoProjeto, Nome, Descricao, ValorProjeto, Estado)");
+                query.Append(" VALUES (@codigoProjeto, @nome, @descricao, @valorProjeto,1)");
+
+                affected = db.ExecuteTextNonQuery(query.ToString(), parameters);
+            }
+            catch (Exception ex)
+            {
+                Logger.Registrar(0, "Exceção em (DAO) " + ex.Source + " - " + ex.ToString() + " : " + ex.Message + "\n\n StackTrace: " + ex.StackTrace);
+                throw new ApplicationException("DAOProjeto.IncluirProjeto(novoProjeto): " + ex.ToString(), ex);
+            }
+            finally
+            {
+                db.FechaConexao();
+            }
+
+            Logger.Registrar(1, "Projeto inserido com número de projeto " + novoProjeto.Codigo + ".");
+
+            return (affected > 0);
+        }
+
+        public static bool AtualizarProjeto(Projeto atualizarProjeto)
+        {
+            int affected = 0;
+            VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@CodigoProjeto", atualizarProjeto.Codigo));
+                parameters.Add(new SqlParameter("@nome", atualizarProjeto.Nome));
+                parameters.Add(new SqlParameter("@descricao", atualizarProjeto.Descricao));
+                parameters.Add(new SqlParameter("@valorProjeto", atualizarProjeto.Valor));
+
+                db.AbreConexao();
+
+                StringBuilder query = new StringBuilder("UPDATE PROJETO");
+                query.Append(" SET Nome=@nome,Descricao=@descricao,ValorProjeto=@valorProjeto");
+                query.Append(" WHERE CodigoProjeto=@CodigoProjeto");
+
+                affected = db.ExecuteTextNonQuery(query.ToString(), parameters);
+            }
+            catch (Exception ex)
+            {
+                Logger.Registrar(0, "Exceção em (DAO) " + ex.Source + " - " + ex.ToString() + " : " + ex.Message + "\n\n StackTrace: " + ex.StackTrace);
+                throw new ApplicationException("DAOProjeto.AtualizarProjeto(atualizarProjeto): " + ex.ToString(), ex);
+            }
+            finally
+            {
+                db.FechaConexao();
+            }
+
+            Logger.Registrar(1, "Projeto atualizado com número de projeto " + atualizarProjeto.Codigo + ".");
+
+            return (affected > 0);
         }
 
         public static List<Projeto> ObterProjetosDisponiveisAoAluno(int codigoPece)

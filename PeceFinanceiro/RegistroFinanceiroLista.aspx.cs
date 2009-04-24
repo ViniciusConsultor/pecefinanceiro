@@ -72,7 +72,7 @@ namespace PeceFinanceiro
         {
             List<AlunoProjeto> listAlunoProjeto = (List<AlunoProjeto>)GridViewListaRegistros.DataSource;
             Int32 IdAlunoProjeto = listAlunoProjeto[e.NewEditIndex].Id;
-
+            
             Response.Redirect("RegistroFinanceiroNovoEditar.aspx?idMatricula=" + IdAlunoProjeto);
         }
 
