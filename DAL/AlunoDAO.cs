@@ -462,6 +462,63 @@ namespace Vsf.DAL
             return (affected > 0);
         }
 
-        
+
+
+        public List<Aluno> BuscaAlunoPeloNumeroPeceENome(string NumeroPece, string Nome)
+        {
+            VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
+            List<Aluno> listaalunos = new List<Aluno>();
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                if (!NumeroPece.Equals(""))
+                {
+                    parameters.Add(new SqlParameter("@IdAluno", "%" + NumeroPece + "%"));
+                }
+                if (!Nome.Equals(""))
+                {
+                    parameters.Add(new SqlParameter("@Nome", "%" + Nome + "%"));
+                }
+
+                db.AbreConexao();
+
+                StringBuilder query = new StringBuilder("SELECT * FROM Aluno ");
+                query.Append(" WHERE ");
+                if (!NumeroPece.Equals(""))
+                {
+                    query.Append(" IdAluno LIKE @IdAluno ");
+                }
+                if (!NumeroPece.Equals("") && !Nome.Equals(""))
+                {
+                    query.Append(" OR ");
+                }
+                if (!Nome.Equals(""))
+                {
+                    query.Append(" Nome LIKE @Nome ");
+                }
+                SqlDataReader reader = db.ExecuteTextReader(query.ToString(), parameters);
+
+                while (reader.Read())
+                {
+                    Aluno aluno = new Aluno();
+                    aluno.Nome = (reader["Nome"] != DBNull.Value) ? Convert.ToString(reader["Nome"]) : String.Empty;
+                    aluno.NumeroPece = (reader["IdAluno"] != DBNull.Value) ? Convert.ToInt32(reader["IdAluno"]) : 0;
+                    aluno.Telefone = (reader["Telefone"] != DBNull.Value) ? Convert.ToString(reader["Telefone"]) : String.Empty;
+                    aluno.Endereco = (reader["Endereco"] != DBNull.Value) ? Convert.ToString(reader["Endereco"]) : String.Empty;
+                    listaalunos.Add(aluno);
+
+                }
+                return listaalunos;
+            }
+            catch (Exception ex)
+            {
+                Logger.Registrar(0, "Exceção em (DAO) " + ex.Source + " - " + ex.ToString() + " : " + ex.Message + "\n\n StackTrace: " + ex.StackTrace);
+                throw new ApplicationException("DAOAluno.BuscaAlunoPeloNumeroPeceENome(NumeroPece,Nome): " + ex, ex);
+            }
+            finally
+            {
+                db.FechaConexao();
+            }
+        }
     }
 }
