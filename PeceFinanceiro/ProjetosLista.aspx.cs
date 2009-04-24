@@ -16,6 +16,7 @@ namespace PeceFinanceiro
 {
     public partial class ListaProjetos : System.Web.UI.Page
     {
+        ProjetoNegocio projetoNegocio = new ProjetoNegocio();
         protected void Page_Load(object sender, EventArgs e)
         {
             LoadGridViewListaProjetos();
@@ -86,6 +87,15 @@ namespace PeceFinanceiro
         protected void GridViewListaProjetos_SelectedIndexChanged(object sender, EventArgs e)
         {
             //implementar
+        }
+
+        protected void ButtonBuscar_Click(object sender, EventArgs e)
+        {
+            List<Projeto> listaProjeto = new List<Projeto>();
+            listaProjeto = projetoNegocio.BuscaProjetosPeloCodigoENome(this.TextBoxBuscaCodigoProjeto.Text, this.TextBoxBuscaNomeProjeto.Text);
+            //GridViewListaUsuarios.Columns.Clear();
+            GridViewListaProjetos.DataSource = listaProjeto;
+            GridViewListaProjetos.DataBind();
         }
 
     }
