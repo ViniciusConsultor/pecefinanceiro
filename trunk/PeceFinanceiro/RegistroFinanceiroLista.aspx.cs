@@ -46,10 +46,10 @@ namespace PeceFinanceiro
             bfProjeto.HeaderText = "Projeto";
             GridViewListaRegistros.Columns.Add(bfProjeto);
 
-            BoundField bfStatus = new BoundField();
-            bfStatus.DataField = "Status";
-            bfStatus.HeaderText = "Status";
-            GridViewListaRegistros.Columns.Add(bfStatus);
+            //BoundField bfStatus = new BoundField();
+            //bfStatus.DataField = "Status";
+            //bfStatus.HeaderText = "Status";
+            //GridViewListaRegistros.Columns.Add(bfStatus);
 
             CommandField cmdField = new CommandField();
             cmdField.ButtonType = ButtonType.Image;
@@ -99,6 +99,20 @@ namespace PeceFinanceiro
         protected void GridViewListaRegistros_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        protected void ButtonBuscar_Click(object sender, EventArgs e)
+        {
+            RegistroFinanceiroNegocio registroNegocio = new RegistroFinanceiroNegocio();
+            List<RegistroFinanceiro> listRegistros = registroNegocio.BuscarRegistrosPorAlunoEProjeto(TextBoxBuscaNomeAluno.Text, TextBoxProjeto.Text);
+
+            List<AlunoProjeto> listAlunoProjeto = new List<AlunoProjeto>();
+
+            foreach (RegistroFinanceiro reg in listRegistros)
+                listAlunoProjeto.Add(reg.AlunoProjeto);
+
+            GridViewListaRegistros.DataSource = listAlunoProjeto;
+            GridViewListaRegistros.DataBind();
         }
     }
 }

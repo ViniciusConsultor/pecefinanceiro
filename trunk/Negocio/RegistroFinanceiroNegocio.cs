@@ -61,5 +61,10 @@ namespace Vsf.Negocio
                 return false;
             }
         }
+
+        public List<RegistroFinanceiro> BuscarRegistrosPorAlunoEProjeto(string aluno, string projeto)
+        {
+            return RegistroFinanceiroDAO.BuscarRegistrosPorAlunoEProjeto(aluno, projeto);
+        }
     }
 }

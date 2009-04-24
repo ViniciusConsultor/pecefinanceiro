@@ -32,22 +32,9 @@
                         <legend>Busca</legend>
                         <label>Nome do Aluno</label><br /><asp:TextBox ID="TextBoxBuscaNomeAluno" runat="server" CssClass="textBox"></asp:TextBox>
                         <label>Projeto</label> <br />
-                        <asp:DropDownList ID="DropDownListBuscaProjeto" runat="server" CssClass="textBox">
-                            <asp:ListItem Selected="True"></asp:ListItem>
-                            <asp:ListItem>1766 aut</asp:ListItem>
-                            <asp:ListItem>1767 seg</asp:ListItem>
-                        </asp:DropDownList>
-                        <br />
-                        <label>Status</label> <br />
-                        <asp:DropDownList ID="DropDownList1" runat="server" CssClass="textBox">
-                            <asp:ListItem Selected="True"></asp:ListItem>
-                            <asp:ListItem>Em dia</asp:ListItem>
-                            <asp:ListItem>Inadimplente</asp:ListItem>
-                            <asp:ListItem>Inativo</asp:ListItem>
-                            <asp:ListItem>Removido</asp:ListItem>
-                        </asp:DropDownList>
-                        <br />
-                        <asp:Button ID="ButtonBuscar" runat="server" Text="Buscar" CssClass="botao"/>
+                        <asp:TextBox ID="TextBoxProjeto" runat="server" CssClass="textBox"></asp:TextBox>
+                        <asp:Button ID="ButtonBuscar" runat="server" Text="Buscar" CssClass="botao" 
+                            onclick="ButtonBuscar_Click"/>
                     </fieldset>
                 </div>
             <br />
