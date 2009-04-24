@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/PeceFinanceiro.Master" AutoEventWireup="true"
-    CodeBehind="UsuarioNovoEditar.aspx.cs" Inherits="PeceFinanceiro.NovoUsuario" %>
+    CodeBehind="UsuarioNovoEditar.aspx.cs" Inherits="PeceFinanceiro.NovoUsuario" EnableEventValidation="false"  %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <% if ((bool)Session["isadmin"])
