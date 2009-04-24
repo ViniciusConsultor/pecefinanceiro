@@ -2,12 +2,12 @@
     CodeBehind="UsuarioNovoEditar.aspx.cs" Inherits="PeceFinanceiro.NovoUsuario" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <% if (Session["isadmin"])
+    <% if ((bool)Session["isadmin"])
        { %>
     <script type="text/javascript">
         this.setMenuAtivo("MenuItemUsuarios");
     </script>
-    <% } %> %>
+    <% } %> 
 <form action="">
     <div id="container">
         <div id="primarycontainer">
