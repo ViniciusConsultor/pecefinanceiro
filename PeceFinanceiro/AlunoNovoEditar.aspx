@@ -1,4 +1,4 @@
-ï»¿<%@ Page Language="C#" MasterPageFile="~/PeceFinanceiro.Master" AutoEventWireup="true" CodeBehind="AlunoNovoEditar.aspx.cs" Inherits="PeceFinanceiro.CadastroAluno" Title="PECE Financeiro - Aluno" %>
+<%@ Page Language="C#" MasterPageFile="~/PeceFinanceiro.Master" AutoEventWireup="true" CodeBehind="AlunoNovoEditar.aspx.cs" Inherits="PeceFinanceiro.CadastroAluno" Title="PECE Financeiro - Aluno" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -24,11 +24,11 @@
                             <legend>Dados do Aluno</legend>
                             <ul>
                                 <li>
-                                    <label>NÃºmero PECE</label>
+                                    <label>Número PECE</label>
                                     <asp:TextBox ID="TextBoxNumeroPece" runat="server" Width="20%" 
-                                        CssClass="textBox" CausesValidation="True" ></asp:TextBox>
+                                        CssClass="textBox" ></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator_NumeroPECE" 
-                                        runat="server" ErrorMessage="* Campo ObrigatÃ³rio" CssClass="DivErro" 
+                                        runat="server" ErrorMessage="* Campo Obrigatório" CssClass="DivErro" 
                                         ControlToValidate="TextBoxNumeroPece"></asp:RequiredFieldValidator>
                                     
                                 </li>
@@ -37,7 +37,7 @@
                                     <asp:TextBox ID="TextBoxNome" runat="server" CssClass="textBox" Width="434px"></asp:TextBox>
                                </li>
                                <li>
-                                    <label>EndereÃ§o</label>
+                                    <label>Endereço</label>
                                     <asp:TextBox ID="TextBoxEndereco" runat="server" CssClass="textBox" Width="434px"></asp:TextBox>
                                </li>
                                <li>
@@ -46,49 +46,37 @@
                                         Width="138px"></asp:TextBox>
                                </li>
                                 <li>
-                                    <label>Projetos DisponÃ­veis</label>
+                                    <label>Projetos Disponíveis</label>
                                     <asp:ListBox ID="ListBoxProjetosDisponiveis" runat="server" 
-                                         DataTextField="Nome" DataValueField="Codigo" 
-                                        Width="166px" DataSourceID="ListaProjetosDisponiveisDoAluno" 
-                                        onselectedindexchanged="ButtonAdicionarProjeto_Click"></asp:ListBox>
+                                          Width="166px" AppendDataBoundItems="False" OnSelectedIndexChanged ="ButtonAdicionarProjeto_Click" DataTextField="Nome" DataValueField="Codigo"></asp:ListBox>
                                     <asp:Button ID="ButtonAdicionarProjeto" runat="server" Text="Adicionar" 
                                         CssClass="botao" onclick="ButtonAdicionarProjeto_Click" />
-                                    <asp:ObjectDataSource ID="ListaProjetosDisponiveis" runat="server" 
-                                        SelectMethod="ObterTodosProjetos" TypeName="Vsf.Negocio.ProjetoNegocio">
-                                    </asp:ObjectDataSource>
-                                    <asp:ObjectDataSource ID="ListaProjetosDisponiveisDoAluno" runat="server" 
-                                        SelectMethod="ObterProjetosDisponiveisAoAluno" 
-                                        TypeName="Vsf.Negocio.ProjetoNegocio">
-                                        <SelectParameters>
-                                            <asp:QueryStringParameter DefaultValue="0" Name="codigoPece" 
-                                                QueryStringField="IdAluno" Type="Int32" />
-                                        </SelectParameters>
-                                    </asp:ObjectDataSource>
+                                    
                                 </li>
-                                <li>
-                                    &nbsp;</li>
+                                <li>&nbsp;</li>
                                 <li>
                                     <label>Projetos Matriculados</label>
                                     <asp:ListBox ID="ListBoxProjetosMatriculados" runat="server" Rows="5" Width="40%" 
-                                        CssClass="textBox" DataSourceID="ListaTodosProjetosdoAluno" 
-                                        DataTextField="Nome" DataValueField="Codigo">
+                                        CssClass="textBox" >
                                     </asp:ListBox>
-                                    <asp:ObjectDataSource ID="ListaTodosProjetosdoAluno" runat="server" 
-                                        SelectMethod="ObterProjetosDoAluno" TypeName="Vsf.Negocio.ProjetoNegocio">
-                                        <SelectParameters>
-                                            <asp:QueryStringParameter DefaultValue="0" Name="codigoPece" 
-                                                QueryStringField="idAluno" Type="Int32" />
-                                        </SelectParameters>
-                                    </asp:ObjectDataSource>
                                     <asp:Button ID="ButtonRemoverProjeto" runat="server" Text="Remover" 
                                         CssClass="botao" onclick="ButtonRemoverProjeto_Click" />
                                     <asp:Label ID="LabelMensagem" runat="server" ForeColor="Red" Text="Label" 
                                         Visible="False"></asp:Label>
                                 </li>
+                                <li>
+                                    <label>Projetos Com Registro Financeiro</label>
+                                    <asp:ListBox ID="ListBoxProjetosComRegistroFinanceiro" runat="server" Rows="5" Width="40%" 
+                                        CssClass="textBox"  Enabled="False">
+                                        
+                                    </asp:ListBox>
+                                    
+                                </li>
                             </ul>
                             <asp:Button ID="ButtonCadastrar" runat="server" Text="Salvar" 
                                 CssClass="botaoFormTick" onclick="ButtonCadastrar_Click"/>
-                            <asp:Button ID="ButtonCancelar" runat="server" Text="Cancelar" CssClass="botaoFormCross"/>
+                            <asp:Button ID="ButtonCancelar" runat="server" Text="Cancelar" 
+                                CssClass="botaoFormCross" onclick="ButtonCancelar_Click"/>
                             <asp:Button ID="Button1" runat="server" Text="Limpar Campos" CssClass="botaoForm"/>
                         </fieldset>
                     </div>

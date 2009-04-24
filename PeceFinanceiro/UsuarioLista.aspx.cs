@@ -91,11 +91,14 @@ namespace PeceFinanceiro
 
         protected void ButtonBuscar_Click(object sender, EventArgs e)
         {
-            List<Usuario> listaUsuariosBusca= new List<Usuario>();
-            listaUsuariosBusca = _usuarioNegocio.BuscaUsuariosPeloLoginENome(TextBoxBuscaLogin.Text, TextBoxBuscaNomeUsuario.Text);
-            //GridViewListaUsuarios.Columns.Clear();
-            GridViewListaUsuarios.DataSource = listaUsuariosBusca;
-            GridViewListaUsuarios.DataBind();
+            if (!(TextBoxBuscaLogin.Text.Equals("") && TextBoxBuscaNomeUsuario.Text.Equals("")))
+            {
+                List<Usuario> listaUsuariosBusca = new List<Usuario>();
+                listaUsuariosBusca = _usuarioNegocio.BuscaUsuariosPeloLoginENome(TextBoxBuscaLogin.Text, TextBoxBuscaNomeUsuario.Text);
+                //GridViewListaUsuarios.Columns.Clear();
+                GridViewListaUsuarios.DataSource = listaUsuariosBusca;
+                GridViewListaUsuarios.DataBind();
+            }
         }
     }
 }

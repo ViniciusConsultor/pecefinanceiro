@@ -113,24 +113,6 @@ namespace PeceFinanceiro {
         protected global::System.Web.UI.WebControls.Button ButtonAdicionarProjeto;
         
         /// <summary>
-        /// ListaProjetosDisponiveis control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource ListaProjetosDisponiveis;
-        
-        /// <summary>
-        /// ListaProjetosDisponiveisDoAluno control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource ListaProjetosDisponiveisDoAluno;
-        
-        /// <summary>
         /// ListBoxProjetosMatriculados control.
         /// </summary>
         /// <remarks>
@@ -138,15 +120,6 @@ namespace PeceFinanceiro {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListBox ListBoxProjetosMatriculados;
-        
-        /// <summary>
-        /// ListaTodosProjetosdoAluno control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource ListaTodosProjetosdoAluno;
         
         /// <summary>
         /// ButtonRemoverProjeto control.
@@ -165,6 +138,15 @@ namespace PeceFinanceiro {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LabelMensagem;
+        
+        /// <summary>
+        /// ListBoxProjetosComRegistroFinanceiro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox ListBoxProjetosComRegistroFinanceiro;
         
         /// <summary>
         /// ButtonCadastrar control.
