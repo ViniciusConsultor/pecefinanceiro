@@ -37,5 +37,15 @@ namespace Vsf.Negocio
         {
             return DAL.ProjetoDAO.AtualizarProjeto(atualizarProjeto);
         }
+
+        /// <summary>
+        /// Retorna todos os projetos que o Aluno pode se matricular (e não está já matriculado)
+        /// </summary>
+        /// <param name="codigoPece"></param>
+        /// <returns></returns>
+        public List<Projeto> ObterProjetosDisponiveisAoAluno(int codigoPece)
+        {
+            return ProjetoDAO.ObterProjetosDisponiveisAoAluno(codigoPece);
+        }
     }
 }
