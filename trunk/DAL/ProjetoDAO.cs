@@ -226,6 +226,12 @@ namespace Vsf.DAL
             return (affected > 0);
         }
 
+        /// <summary>
+        /// NAO APAGA ESSA PORRA !!!!
+        /// Este Método retorna os Projetos em que um aluno pode se matricular
+        /// </summary>
+        /// <param name="codigoPece"></param>
+        /// <returns></returns>
         public static List<Projeto> ObterProjetosDisponiveisAoAluno(int codigoPece)
         {
             List<Projeto> listProjeto = new List<Projeto>();
