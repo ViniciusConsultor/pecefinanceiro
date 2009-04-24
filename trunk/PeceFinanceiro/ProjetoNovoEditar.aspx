@@ -22,17 +22,22 @@
                     <div class="formGenerico">
                         <fieldset>
                             <legend>Dados do Projeto</legend>
+                            <asp:HiddenField ID="HiddenFieldEditando" runat="server" Value="false" />
                             <ul>
                                 <li>
                                     <label>Código do Projeto</label>
                                     <asp:TextBox ID="TextBoxCodigoProjeto" runat="server" CssClass="textBox" Width="300px"></asp:TextBox>
                                 </li>
                                 <li>
-                                    <label>Nome Projeto</label>
-                                    <asp:TextBox ID="TextBoxNome" runat="server" CssClass="textBox" Width="300px"></asp:TextBox>
+                                    <label>Nome do Projeto</label>
+                                    <asp:TextBox ID="TextBoxNomeProjeto" runat="server" CssClass="textBox" Width="300px"></asp:TextBox>
                                </li>
                                <li>
-                                    <label>Valor Projeto</label>
+                                    <label>Descrição do Projeto</label>
+                                    <asp:TextBox ID="TextBoxDescricaoProjeto" runat="server" CssClass="textBox" Width="300px"></asp:TextBox>
+                               </li>
+                               <li>
+                                    <label>Valor do Projeto</label>
                                     <asp:TextBox ID="TextValorProjeto" runat="server" CssClass="textBox" Width="300px"></asp:TextBox>
                                </li>
                                 <li>
@@ -40,8 +45,8 @@
                             </ul>
                             <asp:Button ID="ButtonCadastrar" runat="server" Text="Salvar" 
                                 CssClass="botaoFormTick" onclick="ButtonCadastrar_Click"/>
-                            <asp:Button ID="ButtonCancelar" runat="server" Text="Cancelar" CssClass="botaoFormCross"/>
-                            <asp:Button ID="Button1" runat="server" Text="Limpar Campos" CssClass="botaoForm"/>
+                            <asp:Button ID="ButtonCancelar" runat="server" Text="Cancelar" 
+                                CssClass="botaoFormCross" onclick="ButtonCancelar_Click"/>
                         </fieldset>
                     </div>
                 </div>

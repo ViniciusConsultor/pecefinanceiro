@@ -20,39 +20,7 @@
                         onrowediting="GridViewListaProjetos_RowEditing" 
                         onselectedindexchanged="GridViewListaProjetos_SelectedIndexChanged">
                     </asp:GridView>
-                    <!--table>
-                    <tr>
-                        <th>Código</th>
-                        <th>Nome do Projeto</th>
-                        <th>Preço Total</th>
-                        <th></th>
-                    </tr>
                     
-                    <tr>
-                        <td>4444</td>
-                        <td>Automação Industrial</td>
-                        <td>R$ 5.000,00</td>
-                        <td><img src="Icons/page_edit.png" alt="Editar Projeto" title="Editar Projeto"/><img src="Icons/cross.png"  title="Remover Projeto"/></td>
-                    </tr>
-                    <tr>
-                        <td>5555</td>
-                        <td>Sust</td>
-                        <td>R$ 20.000,00</td>
-                        <td><img src="Icons/page_edit.png" alt="Editar Projeto" title="Editar Projeto"/><img src="Icons/cross.png"  title="Remover Projeto" /></td>
-                    </tr>
-                    <tr>
-                        <td>6666</td>
-                        <td>Informática</td>
-                        <td>R$ 2.000,00</td>
-                        <td><img src="Icons/page_edit.png" alt="Editar Projeto" title="Editar Projeto"/><img src="Icons/cross.png"  title="Remover Projeto" /></td>
-                    </tr>
-                    <tr>
-                        <td>7777</td>
-                        <td>Cozinha Industrial</td>
-                        <td>R$ 30.000,00</td>
-                        <td><img src="Icons/page_edit.png" alt="Editar Projeto" title="Editar Projeto"/><img src="Icons/cross.png"   title="Remover Projeto"/></td>
-                    </tr>
-                    </table-->
                 </div>
                 <br />
                 <div>
@@ -66,10 +34,13 @@
                 <div class="formBuscaDiv">
                     <fieldset>
                         <legend>Busca</legend>
-                            <label>Palavra Chave: </label><br />
+                            <label>Nome do Projeto: </label><br />
                             <asp:TextBox ID="TextBoxBuscaNomeProjeto" class="textBox" runat="server"></asp:TextBox>
                             <br />
-                            <asp:Button ID="ButtonBuscar" runat="server" Text="Buscar" CssClass="botao"/>
+                            <label>Código do Projeto: </label><br />
+                            <asp:TextBox ID="TextBoxBuscaCodigoProjeto" runat="server" CssClass="textBox"></asp:TextBox><br />
+                            <asp:Button ID="ButtonBuscar" runat="server" Text="Buscar" CssClass="botao" 
+                            onclick="ButtonBuscar_Click"/>
                     </fieldset>
                 </div>
             <br />

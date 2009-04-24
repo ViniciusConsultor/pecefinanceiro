@@ -257,7 +257,7 @@ namespace Vsf.DAL
                     usuario.Login = (reader["NomeAcesso"] != DBNull.Value) ? Convert.ToString(reader["NomeAcesso"]) : String.Empty;
                     usuario.IdUsuario = (reader["IdUsuario"] != DBNull.Value) ? Convert.ToInt32(reader["IdUsuario"]) : 0;
                     usuario.Nome = (reader["Nome"] != DBNull.Value) ? Convert.ToString(reader["Nome"]) : String.Empty;
-                    usuario.Tipo = (reader["Nome"] != DBNull.Value) ? Convert.ToInt32(reader["TipoUsuario"]) : 0;
+                    usuario.Tipo = (reader["TipoUsuario"] != DBNull.Value) ? Convert.ToInt32(reader["TipoUsuario"]) : 0;
                     listausuarios.Add(usuario);
                     
                 }

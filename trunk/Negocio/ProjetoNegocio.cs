@@ -38,6 +38,11 @@ namespace Vsf.Negocio
             return DAL.ProjetoDAO.AtualizarProjeto(atualizarProjeto);
         }
 
+        public List<Projeto> BuscaProjetosPeloCodigoENome(string Codigo, string Nome)
+        {
+            return DAL.ProjetoDAO.BuscaProjetosPeloCodigoENome(Codigo, Nome);
+        }
+
         /// <summary>
         /// Retorna todos os projetos que o Aluno pode se matricular (e não está já matriculado)
         /// </summary>

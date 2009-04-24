@@ -32,6 +32,15 @@ namespace PeceFinanceiro {
         protected global::System.Web.UI.WebControls.TextBox TextBoxBuscaNomeProjeto;
         
         /// <summary>
+        /// TextBoxBuscaCodigoProjeto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxBuscaCodigoProjeto;
+        
+        /// <summary>
         /// ButtonBuscar control.
         /// </summary>
         /// <remarks>
