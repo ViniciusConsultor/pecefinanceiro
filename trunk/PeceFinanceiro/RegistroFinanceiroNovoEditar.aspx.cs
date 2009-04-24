@@ -286,7 +286,7 @@ namespace PeceFinanceiro
                 {
                     if (financeiroNegocio.IncluirRegistroFinanceiro(registroFinanceiro, alunoProjeto))
                     {
-                        ShowSuccessMessage("Cadastro realizado com sucesso. <a href=\"ParcelamentoEditar.aspx?idRegistro=" + registroFinanceiro.AlunoProjeto.Id + "\">Clique aqui para editar o parcelamento deste registro.</a>");
+                        ShowSuccessMessage("Cadastro realizado com sucesso. <a href=\"ParcelamentoEditar.aspx?idRegistro=" + registroFinanceiro.IdRegistro + "\">Clique aqui para editar o parcelamento deste registro.</a>");
                         ButtonEditarParcelas.Visible = true;
                     }
                 }
