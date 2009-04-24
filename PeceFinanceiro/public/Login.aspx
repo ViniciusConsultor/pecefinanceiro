@@ -16,7 +16,7 @@
             FailureText="Não foi possível efetuar o login. Verifique o usuário e senha digitados" 
             onauthenticate="LoginFinanceiro_Authenticate" PasswordLabelText="Senha:" 
             PasswordRequiredErrorMessage="Digite a Senha." UserNameLabelText="Usuário:" 
-            UserNameRequiredErrorMessage="Digite o Usuário.">
+            UserNameRequiredErrorMessage="Digite o Usuário." DisplayRememberMe="False">
         </asp:Login>
         
     </div>
