@@ -138,6 +138,17 @@ namespace PeceFinanceiro
             this.DropDownListProjetos.DataBind();
         }
 
+        private void FillComboTodosAlunos(Projeto projeto)
+        {
+            List<Aluno> alunos = projeto.Alunos;
+
+            this.DropDownListAlunos.DataSource = alunos;
+
+            this.DropDownListAlunos.DataTextField = "Nome";
+            this.DropDownListAlunos.DataValueField = "NumeroPece";
+            this.DropDownListAlunos.DataBind();
+        }
+
         private void FillComboAlunos(Projeto projeto)
         {
             
@@ -174,7 +185,11 @@ namespace PeceFinanceiro
             this.HiddenFieldValorCurso.Value = Convert.ToString(projeto.Valor).Replace('.', ',');
             this.LabelValorFinal.Text = "R$ " + projeto.Valor.ToString("#0.00").Replace('.', ',');
 
-            FillComboAlunos(projeto);
+            if (Request.QueryString["idMatricula"] == null)
+                FillComboAlunos(projeto);
+            else
+                FillComboTodosAlunos(projeto);
+            
             VerificaAlunoSelecionado();
         }
 
