@@ -100,6 +100,8 @@ namespace PeceFinanceiro
                 textLBL3.Text = "Média de dias Atrasados: ";
                 lbl4.Text = relatorio.MaiorAtraso.ToString() + " dias";
                 textLBL4.Text = "Maior Atraso: ";
+                textLBL4.Visible = true;
+                lbl4.Visible = true;
 
                 GridViewInadimplentes.DataSource = listAlunoProjeto;
                 GridViewInadimplentes.AutoGenerateColumns = false;
@@ -160,6 +162,8 @@ namespace PeceFinanceiro
                 textLBL3.Text = "Número de Alunos: ";
                 lbl4.Text = relatorio.NumProjetos.ToString() + " projetos";
                 textLBL4.Text = "Número de Projetos: ";
+                textLBL4.Visible = true;
+                lbl4.Visible = true;
 
                 GridViewInadimplentes.DataSource = listProjeto;
                 GridViewInadimplentes.AutoGenerateColumns = false;
