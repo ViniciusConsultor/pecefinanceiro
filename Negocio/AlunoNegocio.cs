@@ -108,9 +108,9 @@ namespace Vsf.Negocio
             return exclusãoOK;
         }
 
-        public List<Aluno> BuscaAlunoPeloNumeroPeceENome(string p, string p_2)
+        public List<Aluno> BuscaAlunoPeloNumeroPeceENome(string NumeroPece, string Nome)
         {
-            throw new NotImplementedException();
+            return alunodao.BuscaAlunoPeloNumeroPeceENome(NumeroPece,Nome) ;
         }
 
         public bool AlunoPossuiMatricula(int AlunoNumeroPece)
@@ -121,6 +121,11 @@ namespace Vsf.Negocio
         public bool RemoverAluno(int numeropece)
         {
             return alunodao.RemoverAluno(numeropece);
+        }
+
+        public List<Aluno> ObterAlunosPorProjetoSemRegistroFinanceiro(string codigoProjeto)
+        {
+            return AlunoDAO.ObterAlunosPorProjetoSemRegistroFinanceiro(codigoProjeto);
         }
     }
 }
