@@ -93,7 +93,7 @@ namespace PeceFinanceiro
         {
             List<Usuario> listaUsuariosBusca= new List<Usuario>();
             listaUsuariosBusca = _usuarioNegocio.BuscaUsuariosPeloLoginENome(TextBoxBuscaLogin.Text, TextBoxBuscaNomeUsuario.Text);
-            GridViewListaUsuarios.Columns.Clear();
+            //GridViewListaUsuarios.Columns.Clear();
             GridViewListaUsuarios.DataSource = listaUsuariosBusca;
             GridViewListaUsuarios.DataBind();
         }

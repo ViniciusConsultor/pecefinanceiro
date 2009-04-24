@@ -224,12 +224,31 @@ namespace Vsf.DAL
             try
             {
                 List<SqlParameter> parameters = new List<SqlParameter>();
-                parameters.Add(new SqlParameter("@login", Login));
+                if (!Login.Equals(""))
+                {
+                    parameters.Add(new SqlParameter("@login", "%" + Login + "%"));
+                }
+                if (!Nome.Equals(""))
+                {
+                    parameters.Add(new SqlParameter("@Nome", "%" + Nome + "%"));
+                }
 
                 db.AbreConexao();
 
                 StringBuilder query = new StringBuilder("SELECT * FROM Usuario");
-                query.Append(" WHERE NomeAcesso LIKE % @login % AND Nome LIKE % @Nome % ");
+                query.Append(" WHERE ");
+                if (!Login.Equals(""))
+                {
+                    query.Append(" NomeAcesso LIKE @login ");
+                }
+                if (!Login.Equals("") && !Nome.Equals(""))
+                {
+                    query.Append(" OR ");
+                }
+                if (!Nome.Equals(""))
+                {
+                    query.Append(" Nome LIKE @Nome ");
+                }
                 SqlDataReader reader = db.ExecuteTextReader(query.ToString(), parameters);
 
                 while (reader.Read())
