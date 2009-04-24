@@ -123,7 +123,7 @@ namespace PeceFinanceiro
                 {
                     if (projetoNegocio.IncluirProjeto(projeto))
                     {
-                        ShowSuccessMessage("Cadastro  do projeto realizado com sucesso. <a href=\"ProjetoNovoEditar.aspx?idProjeto=" + projeto.Codigo + "\">Clique aqui para editar o parcelamento deste projeto.</a>");
+                        ShowSuccessMessage("Cadastro  do projeto realizado com sucesso. <a href=\"ProjetoNovoEditar.aspx?idProjeto=" + projeto.Codigo + "\">Clique aqui para editar este projeto.</a>");
                         
                     }
                 }

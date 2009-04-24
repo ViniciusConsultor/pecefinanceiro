@@ -20,6 +20,8 @@ namespace PeceFinanceiro
         protected void Page_Load(object sender, EventArgs e)
         {
             LoadGridViewListaProjetos();
+            PanelSucesso.Visible = false;
+            PanelErro.Visible = false;
         }
 
         private void LoadGridViewListaProjetos()
@@ -51,10 +53,8 @@ namespace PeceFinanceiro
             cmdField.ButtonType = ButtonType.Image;
             cmdField.DeleteImageUrl = "Icons/cross.png";
             cmdField.EditImageUrl = "Icons/page_edit.png";
-            cmdField.SelectImageUrl = "Icons/money_add.png";
             cmdField.ShowDeleteButton = true;
             cmdField.ShowEditButton = true;
-            cmdField.ShowSelectButton = true;
             cmdField.EditText = "Editar Projeto";
             cmdField.DeleteText = "Remover Projeto";
             
@@ -75,18 +75,25 @@ namespace PeceFinanceiro
         {
             List<Projeto> listProjeto = (List<Projeto>)GridViewListaProjetos.DataSource;
             String IdProjeto = listProjeto[e.RowIndex].Codigo;
-
-            Response.Redirect("ProjetoNovoEditar.aspx?idProjeto=" + IdProjeto);
-        }
-
-        protected void GridViewListaProjetos_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            //implementar...
-        }
-
-        protected void GridViewListaProjetos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //implementar
+            ProjetoNegocio projeto = new ProjetoNegocio();
+            ProjetoNegocio projetoNegocio = new ProjetoNegocio();
+            if (projetoNegocio.ProjetoDeletarOK(IdProjeto))
+            {
+                if (projetoNegocio.DeletarProjeto(IdProjeto))
+                {
+                    ShowSuccessMessage("Projeto deletado com sucesso.");
+                    LoadGridViewListaProjetos();
+                }
+                else
+                {
+                    ShowSuccessMessage("Ocorreu um erro no processo.");
+                }
+                
+            }
+            else 
+            {
+                ShowErrorMessage("Este Projeto não pode ser deletado.");
+            }
         }
 
         protected void ButtonBuscar_Click(object sender, EventArgs e)
@@ -96,6 +103,20 @@ namespace PeceFinanceiro
             //GridViewListaUsuarios.Columns.Clear();
             GridViewListaProjetos.DataSource = listaProjeto;
             GridViewListaProjetos.DataBind();
+        }
+
+        private void ShowSuccessMessage(string successMessage)
+        {
+            PanelErro.Visible = false;
+            PanelSucesso.Visible = true;
+            MensagemSucesso.Text = successMessage;
+        }
+
+        private void ShowErrorMessage(string errorMessage)
+        {
+            PanelSucesso.Visible = false;
+            PanelErro.Visible = true;
+            MensagemErro.Text = errorMessage;
         }
 
     }

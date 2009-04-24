@@ -52,5 +52,10 @@ namespace Vsf.Negocio
         {
             return ProjetoDAO.ObterProjetosDisponiveisAoAluno(codigoPece);
         }
+
+        public bool ProjetoDeletarOK(string codigoProjeto)
+        {
+            return DAL.ProjetoDAO.ProjetoDeletarOK(codigoProjeto);
+        }
     }
 }

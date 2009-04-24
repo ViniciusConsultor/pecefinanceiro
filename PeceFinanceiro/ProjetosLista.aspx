@@ -12,13 +12,21 @@
     <div id="container">
         <div id="primarycontainer">
             <div id="primarycontent">
-            
+                <asp:Panel ID="PanelErro" runat="server">
+                     <div class="DivErro">
+                            <asp:Label ID="MensagemErro" runat="server"></asp:Label><br />
+                            
+                       </div>
+                    </asp:Panel>
+                    <asp:Panel ID="PanelSucesso" runat="server">
+                        <div class="DivSucesso">
+                            <asp:Label ID="MensagemSucesso" runat="server"></asp:Label>
+                        </div>
+                    </asp:Panel>
                 <div class="grid">
                     <asp:GridView ID="GridViewListaProjetos" runat="server" 
-                        onrowcommand="GridViewListaProjetos_RowCommand" 
                         onrowdeleting="GridViewListaProjetos_RowDeleting" 
-                        onrowediting="GridViewListaProjetos_RowEditing" 
-                        onselectedindexchanged="GridViewListaProjetos_SelectedIndexChanged">
+                        onrowediting="GridViewListaProjetos_RowEditing">
                     </asp:GridView>
                     
                 </div>

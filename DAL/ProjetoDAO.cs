@@ -135,7 +135,7 @@ namespace Vsf.DAL
                 
                 db.AbreConexao();
 
-                StringBuilder query = new StringBuilder("UPDATE PROJETO");
+                StringBuilder query = new StringBuilder("DELETE PROJETO");
                 query.Append(" WHERE CodigoProjeto=@CodigoProjeto");
 
                 affected = db.ExecuteTextNonQuery(query.ToString(), parameters);
@@ -326,37 +326,39 @@ namespace Vsf.DAL
         }
 
         public static bool ProjetoDeletarOK(string codigoProjeto)
-        {   
-            int affected = 0;
+        {
+
+            int affected = 1;
             VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
             try
             {
                 List<SqlParameter> parameters = new List<SqlParameter>();
-                parameters.Add(new SqlParameter("@CodigoProjeto", atualizarProjeto.Codigo));
-                parameters.Add(new SqlParameter("@nome", atualizarProjeto.Nome));
-                parameters.Add(new SqlParameter("@descricao", atualizarProjeto.Descricao));
-                parameters.Add(new SqlParameter("@valorProjeto", atualizarProjeto.Valor));
+                parameters.Add(new SqlParameter("@codigoProjeto", codigoProjeto));
 
                 db.AbreConexao();
 
-                StringBuilder query = new StringBuilder("UPDATE PROJETO");
-                query.Append(" SET Nome=@nome,Descricao=@descricao,ValorProjeto=@valorProjeto");
-                query.Append(" WHERE CodigoProjeto=@CodigoProjeto");
-
-                affected = db.ExecuteTextNonQuery(query.ToString(), parameters);
+                StringBuilder query = new StringBuilder("SELECT Aluno.* FROM Aluno");
+                query.Append(" INNER JOIN Matricula ON Aluno.NumeroPece = Matricula.IdAluno");
+                query.Append(" WHERE IdProjeto = @codigoProjeto");
+                
+                SqlDataReader reader = db.ExecuteTextReader(query.ToString(), parameters);
+                
+                if (reader.Read())
+                {
+                    affected = 0;  
+                }
             }
             catch (Exception ex)
             {
                 Logger.Registrar(0, "Exceção em (DAO) " + ex.Source + " - " + ex.ToString() + " : " + ex.Message + "\n\n StackTrace: " + ex.StackTrace);
-                throw new ApplicationException("DAOProjeto.AtualizarProjeto(atualizarProjeto): " + ex.ToString(), ex);
+                throw new ApplicationException("DAOProjeto.ProjetoDeletarOK(): " + ex, ex);
             }
             finally
             {
                 db.FechaConexao();
             }
 
-            Logger.Registrar(1, "Projeto atualizado com número de projeto " + codigoProjeto + ".");
-
+            
             return (affected > 0);
 
         }
