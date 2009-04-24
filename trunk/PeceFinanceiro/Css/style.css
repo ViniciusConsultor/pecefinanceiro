@@ -247,7 +247,6 @@ h4
 {
     border: dotted 1px #ccc;
     background-color: #f0f0f0;
-	width: 682px;
 }
 
 .formGenerico fieldset li {
@@ -262,9 +261,9 @@ h4
 }
 
 .formGenerico fieldset label {
-  width: 34%;
+  width: 30%;
   float:left;
-  text-align: left;
+  text-align: right;
   margin-right: 10px;
 }
 
