@@ -2,7 +2,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-<script type="text/javascript">
+
+    <script type="text/javascript">
       this.setMenuAtivo("MenuItemRelatorios");
       function pagePrint() {
           var divimpressao = document.getElementById('Relatorios');
@@ -74,33 +75,40 @@
                     <br />
                     <div class="formGenerico" id="Relatorios" >
                         <fieldset >
-                        <ul>
-                            <li>
+                        <div>
+                        <div style="height:15px"></div>
+                            <div style="height:40px;">
                                 <center><asp:Label ID="lblTituloRelatorio" runat="server" Text="Relatório dos Alunos" Font-Size=Medium Font-Bold=true></asp:Label>
+                                    <br />
                                 </center>
-                            </li>
-                            <li>
+                            </div>
+                            <div style="height:30px;">
                             <center>
                                 <asp:Label ID="lblDataAtual" runat="server" Text=""></asp:Label>
+                                <br />
                             </center>
-                            </li>
-                            <li>
+                            </div>
+                            <div style="position:relative;left:27px; top: 0px; width: 625px;">
+                            <div>
                             <asp:label ID="textLBL1" runat="server" Text="Número de inadimplentes: "> </asp:label>
                             <asp:Label ID="lbl1" runat="server" Text=""></asp:Label>
-                            </li>
-                            <li>
+                            </div>
+                            <div>
                             <ASP:label ID="textLBL2" runat="server" Text="Valor Total não recebido: "></asp:label>
                             <asp:Label ID="lbl2" runat="server" Text=""></asp:Label>
-                            </li>
-                            <li>
+                            </div>
+                            <div>
                             <asp:label ID="textLBL3" runat="server" Text="Média de dias atrasados: "></asp:label>
                             <asp:Label ID="lbl3" runat="server" Text=""></asp:Label>
-                            </li>
-                            <li>
+                            </div>
+                            <div>
                             <asp:label ID="textLBL4" runat="server" Text="Maior Atraso: "></asp:label>
                             <asp:Label ID="lbl4" runat="server" Text=""></asp:Label>
-                            </li>
-                        </ul>
+                            </div>
+                            <div style="height:10px"></div>
+                            </div>
+                            
+                        </div>
                             <br />
                             <center >
                             <asp:GridView ID="GridViewInadimplentes" runat="server" Width="630px" 
