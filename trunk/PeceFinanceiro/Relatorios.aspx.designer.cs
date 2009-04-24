@@ -32,13 +32,13 @@ namespace PeceFinanceiro {
         protected global::System.Web.UI.WebControls.DropDownList DropDownListRelatorios;
         
         /// <summary>
-        /// txtMesReferencia control.
+        /// mnMesReferencia control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMesReferencia;
+        protected global::System.Web.UI.WebControls.DropDownList mnMesReferencia;
         
         /// <summary>
         /// txtAnoReferencia control.
@@ -57,6 +57,15 @@ namespace PeceFinanceiro {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonGerarRelatorio;
+        
+        /// <summary>
+        /// bttImpressao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button bttImpressao;
         
         /// <summary>
         /// lblTituloRelatorio control.

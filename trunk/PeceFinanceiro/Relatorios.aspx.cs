@@ -18,7 +18,7 @@ namespace PeceFinanceiro
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            bttImpressao.Attributes.Add("onclick", "pagePrint()");
         }
 
         protected void DropDownListRelatorios_SelectedIndexChanged(object sender, EventArgs e)
@@ -34,11 +34,21 @@ namespace PeceFinanceiro
         private void ChamarTipoRelatorio()
         {
             txtAnoReferencia.Enabled = true;
-            txtMesReferencia.Enabled = true;
+            mnMesReferencia.Enabled = true;
 
-            if (txtMesReferencia.Text == string.Empty)
+            PanelSucesso.Visible = false;
+            lbl1.Text = string.Empty;
+            lbl2.Text = string.Empty;
+            lbl3.Text = string.Empty;
+            lbl4.Text = string.Empty;
+            lblDataAtual.Text = string.Empty;
+            lblTituloRelatorio.Text = string.Empty;
+            GridViewInadimplentes.Visible = false;
+            bttImpressao.Visible = false;
+
+            if (mnMesReferencia.Text == string.Empty)
             {
-                txtMesReferencia.Text = DateTime.Now.Month.ToString();
+                mnMesReferencia.Text = DateTime.Now.Month.ToString();
             }
             if (txtAnoReferencia.Text == string.Empty)
             {
@@ -50,19 +60,21 @@ namespace PeceFinanceiro
                     RelatorioArrecadacaoMes_load();
                     break;
                 case 1:
-                    if (txtMesReferencia.Text != string.Empty)
+                    if (mnMesReferencia.Text != string.Empty)
                         RelatorioArrecadacaoPrevistaMes_load();
                     break;
                 case 2:
                     RelatorioInadimplentes_load();
                     txtAnoReferencia.Enabled = false;
-                    txtMesReferencia.Enabled = false;
+                    mnMesReferencia.Enabled = false;
                     break;
                 case 3:
-                    if (txtMesReferencia.Text != string.Empty)
+                    if (mnMesReferencia.Text != string.Empty)
                         RelatorioArrecadacaoDevidaMes_load();
                     break;
             }
+            
+            
         }
 
         private void RelatorioInadimplentes_load()
@@ -71,170 +83,225 @@ namespace PeceFinanceiro
             Relatorio relatorio = new Relatorio();
 
             lblTituloRelatorio.Text = "Relatório de Alunos Inadimplentes";
-            List<AlunoParcela> listAlunoProjeto = relatorioNegocio.ObterAlunosInadimplentes();
-            relatorio = relatorioNegocio.ObterRelatorioInadimplentes();
-            lbl1.Text = relatorio.ValorTotal.ToString(); 
-            textLBL1.Text = "Total: ";
-            lbl2.Text = relatorio.NumAlunos.ToString();
-            textLBL2.Text = "Número de Alunos: ";
-            lbl3.Text = relatorio.MediaDiasAtrasados.ToString();
-            textLBL3.Text = "Média de dias Atrasados: ";
-            lbl4.Text = relatorio.MaiorAtraso.ToString();
-            textLBL4.Text = "Maior Atraso: ";
-
+            lblDataAtual.Text = DateTime.Now.ToLongDateString();
             GridViewInadimplentes.Columns.Clear();
-            GridViewInadimplentes.DataSource = listAlunoProjeto;
-            GridViewInadimplentes.AutoGenerateColumns = false;
 
-            BoundField bfNomeAluno = new BoundField();
-            bfNomeAluno.DataField = "Nome";
-            bfNomeAluno.HeaderText = "Nome do Aluno";
-            GridViewInadimplentes.Columns.Add(bfNomeAluno);
+            relatorio = relatorioNegocio.ObterRelatorioInadimplentes();
+            if (relatorio.NumProjetos > 0 || relatorio.NumAlunos >0)
+            {
+                List<AlunoParcela> listAlunoProjeto = relatorioNegocio.ObterAlunosInadimplentes();
+                GridViewInadimplentes.Visible = true;
+                bttImpressao.Visible = true;
+                lbl1.Text = "R$ " + relatorio.ValorTotal.ToString();
+                textLBL1.Text = "Total: ";
+                lbl2.Text = relatorio.NumAlunos.ToString() + " alunos";
+                textLBL2.Text = "Número de Alunos: ";
+                lbl3.Text = relatorio.MediaDiasAtrasados.ToString() + " dias";
+                textLBL3.Text = "Média de dias Atrasados: ";
+                lbl4.Text = relatorio.MaiorAtraso.ToString() + " dias";
+                textLBL4.Text = "Maior Atraso: ";
 
-            BoundField bfNumeroPece = new BoundField();
-            bfNumeroPece.DataField = "NumeroPECE";
-            bfNumeroPece.HeaderText = "Número PECE";
-            GridViewInadimplentes.Columns.Add(bfNumeroPece);
+                GridViewInadimplentes.DataSource = listAlunoProjeto;
+                GridViewInadimplentes.AutoGenerateColumns = false;
 
-            BoundField bfParcelaVencida = new BoundField();
-            bfParcelaVencida.DataField = "ParcelaVencida";
-            bfParcelaVencida.HeaderText = "Parcela Vencida";
-            GridViewInadimplentes.Columns.Add(bfParcelaVencida);
+                BoundField bfNomeAluno = new BoundField();
+                bfNomeAluno.DataField = "Nome";
+                bfNomeAluno.HeaderText = "Nome do Aluno";
+                GridViewInadimplentes.Columns.Add(bfNomeAluno);
 
-            BoundField bfValorDevido = new BoundField();
-            bfValorDevido.DataField = "ValorParcela";
-            bfValorDevido.HeaderText = "Valor Devido";
-            GridViewInadimplentes.Columns.Add(bfValorDevido);
+                BoundField bfNumeroPece = new BoundField();
+                bfNumeroPece.DataField = "NumeroPECE";
+                bfNumeroPece.HeaderText = "Número PECE";
+                GridViewInadimplentes.Columns.Add(bfNumeroPece);
 
-            GridViewInadimplentes.DataBind();
+                BoundField bfParcelaVencida = new BoundField();
+                bfParcelaVencida.HtmlEncode = false;
+                bfParcelaVencida.DataField = "ParcelaVencida";
+                bfParcelaVencida.DataFormatString = "{0:d}";
+                bfParcelaVencida.HeaderText = "Parcela Vencida";
+                GridViewInadimplentes.Columns.Add(bfParcelaVencida);
+
+                BoundField bfValorDevido = new BoundField();
+                bfValorDevido.DataFormatString = "R$ {0:F2}";
+                bfValorDevido.DataField = "ValorParcela";
+                bfValorDevido.HeaderText = "Valor Devido";
+                GridViewInadimplentes.Columns.Add(bfValorDevido);
+
+                GridViewInadimplentes.DataBind();
+            }
+            else
+            {
+                PanelSucesso.Visible = true;
+            }
         }
         
         private void RelatorioArrecadacaoMes_load()
         {
             RelatorioNegocio relatorioNegocio = new RelatorioNegocio();
             Relatorio relatorio = new Relatorio();
-            int mes = Convert.ToInt32(txtMesReferencia.Text);
+            int mes = Convert.ToInt32(mnMesReferencia.Text);
             int ano = Convert.ToInt32(txtAnoReferencia.Text);
            
             lblTituloRelatorio.Text = "Relatório Mensal da Arrecadação Confirmada";
-
-            List<Projeto> listProjeto = relatorioNegocio.ObterArrecadacaoMes(mes,ano);
-            relatorio = relatorioNegocio.ObterRelatorioArrecadacaoMes(mes,ano);
-            lbl1.Text = relatorio.ValorTotal.ToString();
-            textLBL1.Text = "Total Arrecadado: ";
-            lbl2.Text = relatorio.ValorJuros.ToString();
-            textLBL2.Text = "Arrecadação com os juros: ";
-            lbl3.Text = relatorio.NumAlunos.ToString();
-            textLBL3.Text = "Número de Alunos: ";
-            lbl4.Text = relatorio.NumProjetos.ToString();
-            textLBL4.Text = "Número de Projetos: ";
+            lblDataAtual.Text = DateTime.Now.ToLongDateString();
             GridViewInadimplentes.Columns.Clear();
-            GridViewInadimplentes.DataSource = listProjeto;
-            GridViewInadimplentes.AutoGenerateColumns = false;
 
-            BoundField bfNomeProjeto = new BoundField();
-            bfNomeProjeto.DataField = "Nome";
-            bfNomeProjeto.HeaderText = "Nome do Projeto";
-            GridViewInadimplentes.Columns.Add(bfNomeProjeto);
+            relatorio = relatorioNegocio.ObterRelatorioArrecadacaoMes(mes,ano);
+            if (relatorio.NumProjetos > 0 || relatorio.NumAlunos > 0)
+            {
+                GridViewInadimplentes.Visible = true;
+                bttImpressao.Visible = true;
+                List<Projeto> listProjeto = relatorioNegocio.ObterArrecadacaoMes(mes, ano);
+                lbl1.Text = "R$ " + relatorio.ValorTotal.ToString();
+                textLBL1.Text = "Total Arrecadado: ";
+                lbl2.Text = "R$ " + relatorio.ValorJuros.ToString();
+                textLBL2.Text = "Arrecadação com os juros: ";
+                lbl3.Text = relatorio.NumAlunos.ToString() + " alunos";
+                textLBL3.Text = "Número de Alunos: ";
+                lbl4.Text = relatorio.NumProjetos.ToString() + " projetos";
+                textLBL4.Text = "Número de Projetos: ";
 
-            BoundField bfCodProjeto = new BoundField();
-            bfCodProjeto.DataField = "Codigo";
-            bfCodProjeto.HeaderText = "Código do Projeto";
-            GridViewInadimplentes.Columns.Add(bfCodProjeto);
+                GridViewInadimplentes.DataSource = listProjeto;
+                GridViewInadimplentes.AutoGenerateColumns = false;
 
-            BoundField bfValorArrecadado = new BoundField();
-            bfValorArrecadado.DataField = "Valor";
-            bfValorArrecadado.HeaderText = "Arrecadação no Mês";
-            GridViewInadimplentes.Columns.Add(bfValorArrecadado);
+                BoundField bfNomeProjeto = new BoundField();
+                bfNomeProjeto.DataField = "Nome";
+                bfNomeProjeto.HeaderText = "Nome do Projeto";
+                GridViewInadimplentes.Columns.Add(bfNomeProjeto);
 
+                BoundField bfCodProjeto = new BoundField();
+                bfCodProjeto.DataField = "Codigo";
+                bfCodProjeto.HeaderText = "Código do Projeto";
+                GridViewInadimplentes.Columns.Add(bfCodProjeto);
 
-            GridViewInadimplentes.DataBind();
+                BoundField bfValorArrecadado = new BoundField();
+                bfValorArrecadado.DataField = "Valor";
+                bfValorArrecadado.DataFormatString = "R$ {0:F2}";
+                bfValorArrecadado.HeaderText = "Arrecadação no Mês";
+                GridViewInadimplentes.Columns.Add(bfValorArrecadado);
+
+                GridViewInadimplentes.DataBind();
+            }
+            else
+            {
+                PanelSucesso.Visible = true;
+            }
         }
 
         private void RelatorioArrecadacaoPrevistaMes_load()
         {
             RelatorioNegocio relatorioNegocio = new RelatorioNegocio();
             Relatorio relatorio = new Relatorio();
-            int mes = Convert.ToInt32(txtMesReferencia.Text);
+            int mes = Convert.ToInt32(mnMesReferencia.Text);
             int ano = Convert.ToInt32(txtAnoReferencia.Text);
 
             lblTituloRelatorio.Text = "Relatório de Arrecadação Estimada no Mês";
-            List<Projeto> listProjeto = relatorioNegocio.ObterArrecadacaoPrevistaMes(mes,ano);
-            relatorio = relatorioNegocio.ObterRelatorioArrecadacaoPrevistaMes(mes,ano);
-            lbl1.Text = relatorio.ValorTotal.ToString();
-            textLBL1.Text = "Total: ";
-            lbl2.Text = relatorio.NumAlunos.ToString();
-            textLBL2.Text = "Número de Alunos: ";
-            lbl3.Text = relatorio.NumProjetos.ToString();
-            textLBL3.Text = "Número de Projetos: ";
-            lbl4.Visible = false;
-            textLBL4.Visible = false;
-
+            lblDataAtual.Text = DateTime.Now.ToLongDateString();
             GridViewInadimplentes.Columns.Clear();
-            GridViewInadimplentes.DataSource = listProjeto;
-            GridViewInadimplentes.AutoGenerateColumns = false;
 
-            BoundField bfNomeProjeto = new BoundField();
-            bfNomeProjeto.DataField = "Nome";
-            bfNomeProjeto.HeaderText = "Nome do Projeto";
-            GridViewInadimplentes.Columns.Add(bfNomeProjeto);
+            relatorio = relatorioNegocio.ObterRelatorioArrecadacaoPrevistaMes(mes,ano);
+            if (relatorio.NumProjetos > 0 || relatorio.NumAlunos > 0)
+            {
+                GridViewInadimplentes.Visible = true;
+                bttImpressao.Visible = true;
+                List<Projeto> listProjeto = relatorioNegocio.ObterArrecadacaoPrevistaMes(mes, ano);
+                lbl1.Text = "R$ " + relatorio.ValorTotal.ToString();
+                textLBL1.Text = "Total: ";
+                lbl2.Text = relatorio.NumAlunos.ToString() + " alunos";
+                textLBL2.Text = "Número de Alunos: ";
+                lbl3.Text = relatorio.NumProjetos.ToString()+" projetos";
+                textLBL3.Text = "Número de Projetos: ";
+                lbl4.Visible = false;
+                textLBL4.Visible = false;
 
-            BoundField bfCodProjeto = new BoundField();
-            bfCodProjeto.DataField = "Codigo";
-            bfCodProjeto.HeaderText = "Código do Projeto";
-            GridViewInadimplentes.Columns.Add(bfCodProjeto);
+                GridViewInadimplentes.DataSource = listProjeto;
+                GridViewInadimplentes.AutoGenerateColumns = false;
 
-            BoundField bfValorPrevisto = new BoundField();
-            bfValorPrevisto.DataField = "Valor";
-            bfValorPrevisto.HeaderText = "Arrecadação Prevista no Mês";
-            GridViewInadimplentes.Columns.Add(bfValorPrevisto);
+                BoundField bfNomeProjeto = new BoundField();
+                bfNomeProjeto.DataField = "Nome";
+                bfNomeProjeto.HeaderText = "Nome do Projeto";
+                GridViewInadimplentes.Columns.Add(bfNomeProjeto);
+
+                BoundField bfCodProjeto = new BoundField();
+                bfCodProjeto.DataField = "Codigo";
+                bfCodProjeto.HeaderText = "Código do Projeto";
+                GridViewInadimplentes.Columns.Add(bfCodProjeto);
+
+                BoundField bfValorPrevisto = new BoundField();
+                bfValorPrevisto.DataField = "Valor";
+                bfValorPrevisto.DataFormatString = "R$ {0:F2}";
+                bfValorPrevisto.HeaderText = "Arrecadação Prevista no Mês";
+                GridViewInadimplentes.Columns.Add(bfValorPrevisto);
 
 
-            GridViewInadimplentes.DataBind();
+                GridViewInadimplentes.DataBind();
+            }
+            else
+            {
+                PanelSucesso.Visible = true;
+            }
         }
 
         private void RelatorioArrecadacaoDevidaMes_load()
         {
             RelatorioNegocio relatorioNegocio = new RelatorioNegocio();
             Relatorio relatorio = new Relatorio();
-            int mes = Convert.ToInt32(txtMesReferencia.Text);
+            int mes = Convert.ToInt32(mnMesReferencia.Text);
             int ano = Convert.ToInt32(txtAnoReferencia.Text);
 
             lblTituloRelatorio.Text = "Relatório Mensal e Contas dos Alunos Inadimplentes";
-            List<Projeto> listProjeto = relatorioNegocio.ObterArrecadacaoDevidaMes(mes,ano);
-            relatorio = relatorioNegocio.ObterRelatorioArrecadacaoDevidaMes(mes,ano);
-            lbl1.Text = relatorio.ValorTotal.ToString();
-            textLBL1.Text = "Total: ";
-            lbl2.Text = relatorio.NumAlunos.ToString();
-            textLBL2.Text = "Número de Alunos: ";
-            lbl3.Text = relatorio.NumProjetos.ToString();
-            textLBL3.Text = "Número de Projetos: ";
-            lbl4.Visible = false;
-            textLBL4.Visible = false;
+            lblDataAtual.Text = DateTime.Now.ToLongDateString();
             GridViewInadimplentes.Columns.Clear();
-            GridViewInadimplentes.DataSource = listProjeto;
-            GridViewInadimplentes.AutoGenerateColumns = false;
 
-            BoundField bfNomeProjeto = new BoundField();
-            bfNomeProjeto.DataField = "Nome";
-            bfNomeProjeto.HeaderText = "Nome do Projeto";
-            GridViewInadimplentes.Columns.Add(bfNomeProjeto);
+            relatorio = relatorioNegocio.ObterRelatorioArrecadacaoDevidaMes(mes, ano);
+            if (relatorio.NumProjetos > 0 || relatorio.NumAlunos > 0)
+            {
+                GridViewInadimplentes.Visible = true;
+                bttImpressao.Visible = true;
+                List<Projeto> listProjeto = relatorioNegocio.ObterArrecadacaoDevidaMes(mes, ano);
+                lbl1.Text = "R$ " + relatorio.ValorTotal.ToString();
+                textLBL1.Text = "Total: ";
+                lbl2.Text = relatorio.NumAlunos.ToString()+ " alunos";
+                textLBL2.Text = "Número de Alunos: ";
+                lbl3.Text = relatorio.NumProjetos.ToString()+" projetos";
+                textLBL3.Text = "Número de Projetos: ";
+                lbl4.Visible = false;
+                textLBL4.Visible = false;
 
-            BoundField bfCodProjeto = new BoundField();
-            bfCodProjeto.DataField = "Codigo";
-            bfCodProjeto.HeaderText = "Código do Projeto";
-            GridViewInadimplentes.Columns.Add(bfCodProjeto);
+                GridViewInadimplentes.DataSource = listProjeto;
+                GridViewInadimplentes.AutoGenerateColumns = false;
 
-            BoundField bfValorDevido = new BoundField();
-            bfValorDevido.DataField = "Valor";
-            bfValorDevido.HeaderText = "Arrecadação Devida no Mês";
-            GridViewInadimplentes.Columns.Add(bfValorDevido);
+                BoundField bfNomeProjeto = new BoundField();
+                bfNomeProjeto.DataField = "Nome";
+                bfNomeProjeto.HeaderText = "Nome do Projeto";
+                GridViewInadimplentes.Columns.Add(bfNomeProjeto);
+
+                BoundField bfCodProjeto = new BoundField();
+                bfCodProjeto.DataField = "Codigo";
+                bfCodProjeto.HeaderText = "Código do Projeto";
+                GridViewInadimplentes.Columns.Add(bfCodProjeto);
+
+                BoundField bfValorDevido = new BoundField();
+                bfValorDevido.DataField = "Valor";
+                bfValorDevido.DataFormatString = "R$ {0:F2}";
+                bfValorDevido.HeaderText = "Arrecadação Devida no Mês";
+                GridViewInadimplentes.Columns.Add(bfValorDevido);
 
 
-            GridViewInadimplentes.DataBind();
+                GridViewInadimplentes.DataBind();
+            }
+            else
+            {
+                PanelSucesso.Visible = true;
+            }
         }
 
         protected void GridViewInadimplentes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ButtonGerarImpressao_Click(object sender, EventArgs e)
         {
 
         }
