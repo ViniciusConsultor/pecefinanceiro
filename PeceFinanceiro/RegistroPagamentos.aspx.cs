@@ -58,7 +58,7 @@ namespace PeceFinanceiro
 
         protected void Button3_Click(object sender, EventArgs e)
         {
-            Response.Redirect("RegistroFinanceiroNovoEditar.aspx?idMatricula=" + _idMatricula);
+            Response.Redirect("RegistroFinanceiroLista.aspx");
         }
 
         protected void Button2_Click(object sender, EventArgs e)
