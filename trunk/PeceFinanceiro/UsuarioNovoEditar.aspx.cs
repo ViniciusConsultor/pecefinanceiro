@@ -43,12 +43,20 @@ namespace PeceFinanceiro
                     TextBoxSenha.Enabled = false;
                     TextBoxSenhaConfirma.Enabled = false;
                 }
+                DropDownListTipo.Enabled = usuario.Tipo == 1 ? true : false;//se o usuario é administrador ele pode mudar seu tipo
             }
         }
 
         protected void ButtonCancelar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Login.aspx");
+            if (Session["login"].Equals(TextBoxLogin.Text))
+            {//se o usuario está editando o próprio cadastro, ele veio pelo link "Editar cadastro" e o botão cancelar volta para a página principal
+                Response.Redirect("~/RegistroFinanceiroLista.aspx");
+            }
+            else
+            {
+                Response.Redirect("~/UsuarioLista.aspx");
+            }
         }
         
         protected void ButtonCadastrar_Click(object sender, EventArgs e)

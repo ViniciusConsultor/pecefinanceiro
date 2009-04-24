@@ -10,6 +10,7 @@ namespace PeceFinanceiro
 {
     public partial class UsuarioLista : System.Web.UI.Page
     {
+        UsuarioNegocio _usuarioNegocio = new UsuarioNegocio();
         protected void Page_Load(object sender, EventArgs e)
         {
             LoadGridViewListaUsuarios();
@@ -65,7 +66,7 @@ namespace PeceFinanceiro
         protected void GridViewListaRegistros_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             List<Usuario> listUsuario = (List<Usuario>)GridViewListaUsuarios.DataSource;
-            String usuarioLogin = listUsuario[e.RowIndex].Nome;
+            String usuarioLogin = listUsuario[e.RowIndex].Login;
 
             Response.Redirect("UsuarioRemover.aspx?login=" + usuarioLogin);
             
@@ -86,6 +87,15 @@ namespace PeceFinanceiro
         protected void GridViewListaRegistros_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        protected void ButtonBuscar_Click(object sender, EventArgs e)
+        {
+            List<Usuario> listaUsuariosBusca= new List<Usuario>();
+            listaUsuariosBusca = _usuarioNegocio.BuscaUsuariosPeloLoginENome(TextBoxBuscaLogin.Text, TextBoxBuscaNomeUsuario.Text);
+            GridViewListaUsuarios.Columns.Clear();
+            GridViewListaUsuarios.DataSource = listaUsuariosBusca;
+            GridViewListaUsuarios.DataBind();
         }
     }
 }
