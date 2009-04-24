@@ -57,7 +57,7 @@ namespace PeceFinanceiro
         {
             if (DropDownListAlunos.Items.Count == 0)
             {
-                ShowErrorMessage("Não é possível incluir registro pois não há aluno para o projeto selecionado.");
+                ShowErrorMessage("Não é possível incluir registro pois não há alunos ou alunos sem registro para o projeto selecionado.");
                 MudaStatusForm(false);
             }
             else
@@ -140,7 +140,14 @@ namespace PeceFinanceiro
 
         private void FillComboAlunos(Projeto projeto)
         {
-            this.DropDownListAlunos.DataSource = projeto.Alunos;
+            
+            List<Aluno> alunos = new List<Aluno>();
+
+            AlunoNegocio alunoNegocio = new AlunoNegocio();
+            alunos = alunoNegocio.ObterAlunosPorProjetoSemRegistroFinanceiro(projeto.Codigo);
+
+            this.DropDownListAlunos.DataSource = alunos;
+
             this.DropDownListAlunos.DataTextField = "Nome";
             this.DropDownListAlunos.DataValueField = "NumeroPece";
             this.DropDownListAlunos.DataBind();
