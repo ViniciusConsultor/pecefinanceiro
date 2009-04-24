@@ -18,47 +18,6 @@
                         onrowediting="GridViewListaRegistros_RowEditing" 
                         onselectedindexchanged="GridViewListaRegistros_SelectedIndexChanged">
                     </asp:GridView>
-                    <!--table>
-                    <tr>
-                        <th>Nome do Aluno</th>
-                        <th>Projeto</th>
-                        <th>Status</th>
-                        <th></th>
-                    </tr>
-                    
-                    <tr>
-                        <td>João da Silva</td>
-                        <td>Segurança do Trabalho</td>
-                        <td class="Inadimplente">Inadimplente</td>
-                        <td>
-                        <img src="Icons/page_edit.png" alt="Editar Cadastro" title="Editar Cadastro" /> 
-                            <img src="Icons/money_add.png" alt="Registrar Pagamento" title="Registrar Pagamento"/></td>
-                    </tr>
-                    <tr>
-                        <td>Sust</td>
-                        <td>Automação Industrial</td>
-                        <td class="EmDia">Em dia</td>
-                        <td>
-                        <img src="Icons/page_edit.png" alt="Editar Cadastro" title="Editar Cadastro" /> 
-                            <img src="Icons/money_add.png" alt="Registrar Pagamento" title="Registrar Pagamento"/></td>
-                    </tr>
-                    <tr>
-                        <td>Sustança</td>
-                        <td>Automação Industrial</td>
-                        <td class="Inadimplente">Inadimplente</td>
-                        <td>
-                            <img src="Icons/page_edit.png"  alt="Editar Cadastro" title="Editar Cadastro"/> 
-                            <img src="Icons/money_add.png" alt="Registrar Pagamento" title="Registrar Pagamento" /></td>
-                    </tr>
-                    <tr>
-                        <td>Vitor</td>
-                        <td>Automação Industrial</td>
-                        <td class="EmDia">Em dia</td>
-                        <td>
-                        <img src="Icons/page_edit.png" alt="Editar Cadastro" title="Editar Cadastro" /> 
-                            <img src="Icons/money_add.png" alt="Registrar Pagamento" title="Registrar Pagamento"/></td>
-                    </tr>
-                    </table-->
                 </div>
                 <br />
                 <div>

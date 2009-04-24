@@ -58,5 +58,10 @@ namespace Vsf.Negocio
         {
             return Vsf.DAL.ParcelaDAO.EditarParcela(parcela, idRegistro);
         }
+
+        public bool RegistrarPagamento(Parcela parcela, int idRegistro)
+        {
+            return Vsf.DAL.ParcelaDAO.RegistrarPagamento(parcela, idRegistro);
+        }
     }
 }

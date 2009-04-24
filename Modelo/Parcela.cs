@@ -7,7 +7,8 @@ namespace Vsf.Modelo
     public class Parcela
     {
         private int _numeroParcela;
-        private DateTime _dtVencimento;
+        private DateTime _dataVencimento;
+        private DateTime _dataPagamento;
         private double _valorParcela;
         private double _valorPago;
         private string _observacaoPagamento;
@@ -22,8 +23,16 @@ namespace Vsf.Modelo
         public Parcela(int numeroParcela, DateTime dataVencimento, Double valorParcela)
         {
             this._numeroParcela = numeroParcela;
-            this._dtVencimento = dataVencimento;
+            this._dataVencimento = dataVencimento;
             this._valorParcela = valorParcela;
+        }
+
+        public Parcela(int numeroParcela, DateTime dataPagamento, Double valorPagamento, bool pago)
+        {
+            this._numeroParcela = numeroParcela;
+            this._dataPagamento = dataPagamento;
+            this._valorPago = valorPagamento;
+            this._pago = pago;
         }
 
         public Parcela()
@@ -38,12 +47,17 @@ namespace Vsf.Modelo
         }
 
 
-        public DateTime DtVencimento
+        public DateTime DataVencimento
         {
-            get { return _dtVencimento; }
-            set { _dtVencimento = value; }
+            get { return _dataVencimento; }
+            set { _dataVencimento = value; }
         }
 
+        public DateTime DataPagamento
+        {
+            get { return _dataPagamento; }
+            set { _dataPagamento = value; }
+        }
 
         public double ValorParcela
         {

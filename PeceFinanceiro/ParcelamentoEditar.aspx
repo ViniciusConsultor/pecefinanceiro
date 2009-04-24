@@ -5,15 +5,23 @@
 <script type="text/javascript">
       this.setMenuAtivo("MenuItemCadastrosFinanceiros");
       
+      setInterval("WriteStrings()", 1000);
+      
       function WriteStrings()
       {
         var strDatas = "", strValores = "";
         var tableGrid = document.getElementById("ctl00_ContentPlaceHolder1_GridViewParcelas").firstChild;
+        var saldo = 0;
         for(var i=1; i < tableGrid.childNodes.length; i++) {
             strDatas += tableGrid.childNodes[i].childNodes[1].firstChild.value + ";";
             strValores += tableGrid.childNodes[i].childNodes[2].firstChild.value + ";";
+            if(tableGrid.childNodes[i].childNodes[2].firstChild.value != "")
+                saldo += moeda2float(tableGrid.childNodes[i].childNodes[2].firstChild.value);
+            else
+                tableGrid.childNodes[i].childNodes[2].firstChild.value = float2moeda(0.00);
         }
         document.getElementById("ctl00_ContentPlaceHolder1_HiddenFieldDados").value = strDatas + "&" + strValores;
+        document.getElementById("SaldoDistribuir").value = float2moeda(moeda2float(document.getElementById("ctl00_ContentPlaceHolder1_HiddenFieldValorTotal").value) - saldo);
       }
       
 </script>
@@ -45,6 +53,7 @@
                                 <li>
                                     <label>Valor</label>
                                     <asp:Label runat="server" ID="LabelValor">R$ 4.500,00</asp:Label>
+                                    <asp:HiddenField ID="HiddenFieldValorTotal" runat="server" />
                                 </li>
                                 <li>
                                     <label>Número de Parcelas</label>
@@ -62,15 +71,15 @@
                                         <asp:TemplateField HeaderText="Vencimento">
                                             <ItemTemplate>
                                                 <asp:TextBox ID="TextBoxVencimento" runat="server" 
-                                                    Text='<%# Eval("DtVencimento", "{0:dd/MM/yyyy}") %>' 
-                                                    CssClass="textBoxRight" Width="90%"></asp:TextBox>
+                                                    Text='<%# Eval("DataVencimento", "{0:dd/MM/yyyy}") %>' 
+                                                    CssClass="textBoxRight" Width="90%" Enabled='<%# !(bool)Eval("Pago") %>'></asp:TextBox>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Valor">
                                             <ItemTemplate>
                                                 <asp:TextBox ID="TextBox2" runat="server" 
                                                     Text='<%# Eval("ValorParcela", "{0:#0.00}") %>' CssClass="textBoxRight" 
-                                                    Width="90%"></asp:TextBox>
+                                                    Width="90%" Enabled='<%# !(bool)Eval("Pago") %>'></asp:TextBox>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>
@@ -150,7 +159,7 @@
                             <ul>
                                 <li>
                                     <label>Saldo a distribuir</label>
-                                    <asp:Label runat="server" ID="Label3" ForeColor="Red" Font-Bold="true" Font-Size="14px">R$ 100,00</asp:Label>
+                                    <input type="text" readonly="readonly" name="SaldoDistribuir" style="color:Red; font-weight:bold; background-color:Transparent; border: 0px solid Transparent;" />
                                 </li>
                                 <asp:HiddenField ID="HiddenFieldDados" runat="server" />
                             </ul>
