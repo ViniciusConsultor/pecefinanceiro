@@ -24,45 +24,80 @@ namespace PeceFinanceiro
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            PanelErro.Visible = false;
-            PanelSucesso.Visible = false;
-            String operacao = (Request.QueryString["operacao"] !=null ? Request.QueryString["operacao"].ToString() : "");
-            if (operacao.Equals("editar"))
-            {
-                _operacao = "editar";
-                CarregarDadosDoAluno();
-            }
-            else
-            {
-                _operacao = "novo";
-               // ListBoxProjetosDisponiveis.DataSource = ListaProjetosDisponiveis;
-               // ListBoxProjetosDisponiveis.DataBind();
+            _operacao = (Request.QueryString["numeropece"] != null ? "editar" : "novo");
+            if (!Page.IsPostBack){
+                PanelErro.Visible = false;
+                PanelSucesso.Visible = false;
+                
+                if (_operacao.Equals("editar"))
+                {
+                    _aluno = alunoNegocio.ObterAlunoPeloNumeroPece(Convert.ToInt32(Request.QueryString["numeropece"]));
+                    CarregarDadosDoAluno();
+                    CarregarListBoxProjetosDisponiveis();
+                    CarregarListBoxProjetosMatriculados();
+                    BloquearMatriculasComRegistroFinanceiro();
+
+                }
+                else
+                {
+                    CarregarListBoxProjetosDisponiveisComTodosProjetos();
+                }
             }
 
         }
 
+        private void BloquearMatriculasComRegistroFinanceiro()
+        {
+            RegistroFinanceiroNegocio registroFinanceiroNegocio = new RegistroFinanceiroNegocio();
+            AlunoProjeto matricula;
+            foreach (ListItem item in ListBoxProjetosMatriculados.Items)
+            {
+                matricula = alunoNegocio.ObterRelacionamentoAlunoProjeto(_aluno.NumeroPece, item.Value);
+                if (registroFinanceiroNegocio.ExisteRegistroFinanceiroParaMatricula(matricula))
+                {
+                    ListBoxProjetosComRegistroFinanceiro.Items.Add(new ListItem(item.Text,item.Value));
+                    item.Enabled = false;
+                }
+            }
+        }
+
+        private void CarregarListBoxProjetosMatriculados()
+        {
+            List<Projeto> ListaProjetosMatriculados =  projetonegocio.ObterProjetosDoAluno(_aluno.NumeroPece);
+            ListBoxProjetosMatriculados.DataSource = ListaProjetosMatriculados;
+            ListBoxProjetosMatriculados.DataTextField = "Nome";
+            ListBoxProjetosMatriculados.DataValueField = "Codigo";
+            ListBoxProjetosMatriculados.DataBind();
+        }
+
+        private void CarregarListBoxProjetosDisponiveis()
+        {
+            List<Projeto> ListaProjetosDisponiveis = projetonegocio.ObterProjetosDisponiveisAoAluno(_aluno.NumeroPece);
+            ListBoxProjetosDisponiveis.DataSource = ListaProjetosDisponiveis;
+            ListBoxProjetosDisponiveis.DataTextField = "Nome";
+            ListBoxProjetosDisponiveis.DataValueField = "Codigo";
+            ListBoxProjetosDisponiveis.DataBind();
+        }
+
+        private void CarregarListBoxProjetosDisponiveisComTodosProjetos()
+        {
+            List<Projeto> ListaProjetosDisponiveis = projetonegocio.ObterTodosProjetos();
+            ListBoxProjetosDisponiveis.DataSource = ListaProjetosDisponiveis;
+            ListBoxProjetosDisponiveis.DataTextField = "Nome";
+            ListBoxProjetosDisponiveis.DataValueField = "Codigo";
+            ListBoxProjetosDisponiveis.DataBind();
+        }
+
         private void CarregarDadosDoAluno()
         {
-            int numeroPece = (Request.QueryString["idAluno"] != null ? Convert.ToInt32(Request.QueryString["idAluno"].ToString()) : 0);
+            int numeroPece = (Request.QueryString["numeropece"] != null ? Convert.ToInt32(Request.QueryString["numeropece"].ToString()) : 0);
             if (numeroPece != 0){
                 _aluno = alunoNegocio.ObterAlunoPeloNumeroPece(numeroPece);
-                TextBoxNumeroPece.Text = _aluno.NumeroPece.ToString();
+                TextBoxNumeroPece.Text = Convert.ToString(_aluno.NumeroPece);
                 TextBoxNome.Text = _aluno.Nome;
                 TextBoxTelefone.Text = _aluno.Telefone;
                 TextBoxEndereco.Text = _aluno.Endereco;
                 TextBoxNumeroPece.Enabled = false;
-                //bloqueia as matriculas que já possuem registro financeiro
-                RegistroFinanceiroNegocio registroFinanceiroNegocio = new RegistroFinanceiroNegocio();
-                AlunoProjeto matricula;
-                foreach (ListItem item in ListBoxProjetosMatriculados.Items)
-                {
-                    matricula = alunoNegocio.ObterRelacionamentoAlunoProjeto(_aluno.NumeroPece,item.Value);
-                    if (registroFinanceiroNegocio.ExisteRegistroFinanceiroParaMatricula(matricula))
-                    {
-                        item.Enabled=false;
-                    }
-                }
-
             }
             else{
                 ShowErrorMessage("Erro ao carregar dados do aluno");
@@ -70,14 +105,6 @@ namespace PeceFinanceiro
             
         }
 
-
-        protected List<Projeto> ObterProjetosDoAluno(int codigoPece)
-        {
-            return projetonegocio.ObterProjetosDoAluno(codigoPece);
-        }
-
-       
-       
 
         protected void ButtonCadastrar_Click(object sender, EventArgs e)
         {
@@ -125,7 +152,17 @@ namespace PeceFinanceiro
                     _aluno.Nome = TextBoxNome.Text;
                     _aluno.Endereco = TextBoxEndereco.Text;
                     _aluno.Telefone = TextBoxTelefone.Text;
+                    _aluno.NumeroPece = Convert.ToInt32(TextBoxNumeroPece.Text);
                     MontaListaProjetos();
+                    if (alunoNegocio.AtualizarAluno(_aluno,_projetosDoAluno))
+                    {
+                            Response.Redirect("AlunoLista.aspx?Action=AlunoAtualizado");
+                    }
+                    else
+                    {
+                            ShowErrorMessage("Falha ao atualizar o Aluno");
+                    }
+                    
 
                 }
             }
@@ -144,7 +181,8 @@ namespace PeceFinanceiro
             if (ListBoxProjetosDisponiveis.SelectedItem != null)
             {
                 ListItem selecteditem = ListBoxProjetosDisponiveis.SelectedItem;
-                ListBoxProjetosMatriculados.Items.Add(selecteditem);
+                ListBoxProjetosMatriculados.Items.Add(ListBoxProjetosDisponiveis.SelectedItem);
+                ListBoxProjetosMatriculados.DataBind();
                 ListBoxProjetosDisponiveis.SelectedItem.Selected = false;
                 ListBoxProjetosDisponiveis.Items.Remove(selecteditem);
                 
@@ -174,6 +212,11 @@ namespace PeceFinanceiro
             PanelErro.Visible = false;
             PanelSucesso.Visible = true;
             MensagemSucesso.Text = successMessage;
+        }
+
+        protected void ButtonCancelar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AlunoLista.aspx");
         }
 
         

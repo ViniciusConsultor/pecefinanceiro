@@ -9,34 +9,29 @@
     <div id="container">
         <div id="primarycontainer">
             <div id="primarycontent">
+            <asp:Panel ID="PanelErro" runat="server">
+                     <div class="DivErro">
+                            <asp:Label ID="MensagemErro" runat="server"></asp:Label><br />
+                            
+                       </div>
+                    </asp:Panel>
+                    <asp:Panel ID="PanelSucesso" runat="server">
+                        <div class="DivSucesso">
+                            <asp:Label ID="MensagemSucesso" runat="server">Cadastro realizado com sucesso! <a href="ParcelamentoEditar.aspx">Editar Parcelas</a></asp:Label>
+                        </div>
+                    </asp:Panel>
                 <div class="grid">
                   
-                            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
-                                DataSourceID="ListaTodosAlunos">
-                                <Columns>
-                                    <asp:BoundField DataField="NumeroPece" HeaderText="NumeroPece" 
-                                        SortExpression="NumeroPece" />
-                                    <asp:BoundField DataField="Nome" HeaderText="Nome" SortExpression="Nome" />
-                                    <asp:HyperLinkField DataNavigateUrlFields="NumeroPece" 
-                                        DataNavigateUrlFormatString="AlunoNovoEditar.aspx?operacao=editar&amp;IdAluno={0}" 
-                                        DataTextFormatString="Edit" 
-                                        Text="&lt;img src='Icons/page_edit.png' border='0' alt='Excluir'" />
-                                    <asp:CommandField ShowDeleteButton="True" 
-                                        DeleteText="&lt;img src='Icons/cross.png' border='0' alt='Excluir'" 
-                                        EditImageUrl="~/Icons/page_edit.png" />
-                                    <asp:HyperLinkField DataNavigateUrlFields="NumeroPece" 
-                                        DataNavigateUrlFormatString="RegistroFinanceiroLista.aspx?operacao=Busca&amp;NumeroPece={0}" 
-                                        DataTextFormatString="$$$$" 
-                                        Text="&lt;img src='Icons/Money_dollar.png' border='0' alt='Excluir'" />
-                                </Columns>
-                            </asp:GridView>
+                        <asp:GridView ID="GridViewListaAlunos" runat="server" 
+                        onrowcommand="GridViewListaAlunos_RowCommand" 
+                        onrowdeleting="GridViewListaAlunos_RowDeleting" 
+                        onrowediting="GridViewListaAlunos_RowEditing" 
+                        onselectedindexchanged="GridViewListaAlunos_SelectedIndexChanged">
+                    </asp:GridView>
                             </div>
-                            <asp:ObjectDataSource ID="ListaTodosAlunos" runat="server" 
-                                SelectMethod="ObterTodosAlunos" TypeName="Vsf.Negocio.AlunoNegocio">
-                            </asp:ObjectDataSource>
-                <br />
+                            <br />
                 <div>
-                    <a href="AlunoNovoEditar.aspx?operacao=novo" class="botaoAdd">Novo Aluno</a>
+                    <a href="AlunoNovoEditar.aspx" class="botaoAdd">Novo Aluno</a>
                 </div>
             </div>
         </div>

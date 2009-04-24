@@ -198,7 +198,10 @@ namespace Vsf.DAL
             {
                 foreach (Projeto projeto in projetosDoAluno)
                 {
-                    affected += InserirMatricula(aluno, projeto);
+                    if (InserirMatricula(aluno, projeto))
+                    {
+                        affected++;
+                    }
                 }
 
             }
@@ -210,7 +213,13 @@ namespace Vsf.DAL
             return (affected > 0);
         }
 
-        private int InserirMatricula(Aluno aluno, Projeto projeto)
+       /// <summary>
+       /// deprecated
+       /// </summary>
+       /// <param name="aluno"></param>
+       /// <param name="projeto"></param>
+       /// <returns></returns>
+        private int InserirMatriculaRetornaAffected(Aluno aluno, Projeto projeto)
         {
             
             int affected = 0;
@@ -231,7 +240,7 @@ namespace Vsf.DAL
             }
             catch (Exception ex)
             {
-                throw new ApplicationException("DAOAluno.InserirMatricula(Aluno,Projeto): " + ex.ToString(), ex);
+                throw new ApplicationException("DAOAluno.InserirMatriculaRetornaAffected(Aluno,Projeto): " + ex.ToString(), ex);
             }
             finally
             {
@@ -307,5 +316,152 @@ namespace Vsf.DAL
             }
             return Aluno;
         }
+
+        public bool AtualizarAluno(Aluno aluno)
+        {
+            int affected = 0;
+            VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@Nome", aluno.Nome));
+                parameters.Add(new SqlParameter("@Telefone", aluno.Telefone));
+                parameters.Add(new SqlParameter("@Endereco", aluno.Endereco));
+                parameters.Add(new SqlParameter("@NumeroPece", aluno.NumeroPece));
+                
+                
+                db.AbreConexao();
+
+                StringBuilder query = new StringBuilder("UPDATE Aluno");
+                query.Append(" set Nome = @Nome, Telefone=@Telefone, Endereco=@Endereco");
+                query.Append(" WHERE (NumeroPece=@NumeroPece)");
+                affected = db.ExecuteTextNonQuery(query.ToString(), parameters);
+
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("DAOUAluno.AtualizarAluno(Aluno): " + ex.ToString(), ex);
+            }
+            finally
+            {
+                db.FechaConexao();
+            }
+            return (affected > 0);
+        }
+
+        public bool ExcluirMatricula(Aluno aluno, Projeto projeto)
+        {
+
+            int affected = 0;
+            VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@IdAluno", aluno.NumeroPece));
+                parameters.Add(new SqlParameter("@IdProjeto", projeto.Codigo));
+                db.AbreConexao();
+
+                StringBuilder query = new StringBuilder("DELETE FROM Matricula");
+                query.Append(" WHERE IdAluno = @IdAluno AND IdProjeto = @IdProjeto ");
+                affected = db.ExecuteTextNonQuery(query.ToString(), parameters);
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("DAOAluno.ExcluirMatricula(Aluno,Projeto): " + ex.ToString(), ex);
+            }
+            finally
+            {
+                db.FechaConexao();
+            }
+            return (affected > 0);
+        }
+
+        public bool InserirMatricula(Aluno aluno, Projeto projeto)
+        {
+
+            int affected = 0;
+            VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@IdAluno", aluno.NumeroPece));
+                parameters.Add(new SqlParameter("@IdProjeto", projeto.Codigo));
+                db.AbreConexao();
+
+                StringBuilder query = new StringBuilder("INSERT INTO Matricula");
+                query.Append(" (IdAluno, IdProjeto,Estado)");
+                query.Append(" VALUES (@IdAluno, @IdProjeto,0)");
+                affected = db.ExecuteTextNonQuery(query.ToString(), parameters);
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("DAOAluno.InserirMatricula(Aluno,Projeto): " + ex.ToString(), ex);
+            }
+            finally
+            {
+                db.FechaConexao();
+            }
+            return (affected>0);
+        }
+
+        public bool AlunoPossuiMatricula(int NumeroPece)
+        {
+            int count = 0;
+            VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@IdAluno", NumeroPece));
+                db.AbreConexao();
+
+                StringBuilder query = new StringBuilder("Select Count(*) from Matricula");
+                query.Append(" WHERE IdAluno = @IdAluno ");
+                count = Convert.ToInt32(db.ExecuteScalar(query.ToString(), parameters));
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("DAOAluno.InserirMatricula(Aluno,Projeto): " + ex.ToString(), ex);
+            }
+            finally
+            {
+                db.FechaConexao();
+            }
+            return (count > 0);
+        }
+
+        public bool RemoverAluno(int numeropece)
+        {
+            int affected = 0;
+            VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@NumeroPece", numeropece));
+                db.AbreConexao();
+
+                StringBuilder query = new StringBuilder("DELETE FROM Aluno");
+                query.Append(" WHERE NumeroPece=@NumeroPece ");
+
+                affected = db.ExecuteTextNonQuery(query.ToString(), parameters);
+
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("DAOAluno.RemoverAluno(NumeroPece): " + ex.ToString(), ex);
+            }
+            finally
+            {
+                db.FechaConexao();
+            }
+            return (affected > 0);
+        }
+
+        
     }
 }
