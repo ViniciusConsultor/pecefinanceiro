@@ -65,5 +65,11 @@ namespace Vsf.Negocio
         {
             return _usuariodao.AtualizarUsuario(_usuario,senha);
         }
+
+        public List<Usuario> BuscaUsuariosPeloLoginENome(String Login, String Nome)
+        {
+            return _usuariodao.BuscaUsuariosPeloLoginENome(Login, Nome);
+            
+        }
     }
 }

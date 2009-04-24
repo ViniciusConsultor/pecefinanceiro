@@ -33,10 +33,11 @@
                     <fieldset>
                         <legend>Busca</legend>
                         <label>Nome: </label><br />
-                        <asp:TextBox ID="TextBoxBuscaNomeAluno" runat="server" CssClass="textBox"></asp:TextBox><br />
+                        <asp:TextBox ID="TextBoxBuscaNomeUsuario" runat="server" CssClass="textBox"></asp:TextBox><br />
                         <label>Login: </label><br />
-                        <asp:TextBox ID="TextBoxBuscaNumeroPece" runat="server" CssClass="textBox"></asp:TextBox><br />
-                        <asp:Button ID="ButtonBuscar" runat="server" Text="Buscar" CssClass="botao"/>
+                        <asp:TextBox ID="TextBoxBuscaLogin" runat="server" CssClass="textBox"></asp:TextBox><br />
+                        <asp:Button ID="ButtonBuscar" runat="server" Text="Buscar" CssClass="botao" 
+                            onclick="ButtonBuscar_Click"/>
                     </fieldset>
                 </div>
             <br />

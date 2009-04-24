@@ -24,9 +24,11 @@
     <form id="form1" runat="server">
     
     <div style="float:right; text-align: right; vertical-align:middle;">
-        Nome de usuário: <asp:Label ID="LoginName" runat="server"></asp:Label>
+        Usuário: <asp:Label ID="LoginName" runat="server"></asp:Label>
+        <asp:HyperLink ID="HyperLinkEditarCadastro" runat="server">Editar Cadastro</asp:HyperLink>
                 <asp:Button ID="ButtonLogout" runat="server" CssClass="botao" 
                         onclick="ButtonLogout_Click" Text="Logout" />
+                   
                         </div>
     
     <div id="menu">

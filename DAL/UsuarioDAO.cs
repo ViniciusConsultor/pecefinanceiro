@@ -216,5 +216,43 @@ namespace Vsf.DAL
             }
             return (affected > 0);
         }
+
+        public List<Usuario> BuscaUsuariosPeloLoginENome(string Login, string Nome)
+        {
+            VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
+            List<Usuario> listausuarios = new List<Usuario>();
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@login", Login));
+
+                db.AbreConexao();
+
+                StringBuilder query = new StringBuilder("SELECT * FROM Usuario");
+                query.Append(" WHERE NomeAcesso LIKE % @login % AND Nome LIKE % @Nome % ");
+                SqlDataReader reader = db.ExecuteTextReader(query.ToString(), parameters);
+
+                while (reader.Read())
+                {
+                    Usuario usuario = new Usuario();
+                    usuario.Login = (reader["NomeAcesso"] != DBNull.Value) ? Convert.ToString(reader["NomeAcesso"]) : String.Empty;
+                    usuario.IdUsuario = (reader["IdUsuario"] != DBNull.Value) ? Convert.ToInt32(reader["IdUsuario"]) : 0;
+                    usuario.Nome = (reader["Nome"] != DBNull.Value) ? Convert.ToString(reader["Nome"]) : String.Empty;
+                    usuario.Tipo = (reader["Nome"] != DBNull.Value) ? Convert.ToInt32(reader["TipoUsuario"]) : 0;
+                    listausuarios.Add(usuario);
+                    
+                }
+                return listausuarios;
+            }
+            catch (Exception ex)
+            {
+                Logger.Registrar(0, "Exceção em (DAO) " + ex.Source + " - " + ex.ToString() + " : " + ex.Message + "\n\n StackTrace: " + ex.StackTrace);
+                throw new ApplicationException("DAOUsuario.ConsultarUsuarioPeloLogin(): " + ex, ex);
+            }
+            finally
+            {
+                db.FechaConexao();
+            }
+        }
     }
 }

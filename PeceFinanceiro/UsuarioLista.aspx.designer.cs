@@ -23,22 +23,22 @@ namespace PeceFinanceiro {
         protected global::System.Web.UI.WebControls.GridView GridViewListaUsuarios;
         
         /// <summary>
-        /// TextBoxBuscaNomeAluno control.
+        /// TextBoxBuscaNomeUsuario control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxBuscaNomeAluno;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxBuscaNomeUsuario;
         
         /// <summary>
-        /// TextBoxBuscaNumeroPece control.
+        /// TextBoxBuscaLogin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxBuscaNumeroPece;
+        protected global::System.Web.UI.WebControls.TextBox TextBoxBuscaLogin;
         
         /// <summary>
         /// ButtonBuscar control.

@@ -22,7 +22,7 @@ namespace PeceFinanceiro
                 //carrega o nome do usuário na página
                 Usuario usuario = (Usuario)Session["usuario"];
                 LoginName.Text = usuario.Nome != "" ? usuario.Nome : usuario.Login;
-
+                HyperLinkEditarCadastro.NavigateUrl = "~/UsuarioNovoEditar.aspx?login=" + usuario.Login;
                 //verifica acesso de administrador
                 if (!usuario.isAdmin())
                 {
