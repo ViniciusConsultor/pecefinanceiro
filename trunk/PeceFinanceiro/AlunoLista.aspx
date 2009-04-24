@@ -44,7 +44,8 @@
                         <asp:TextBox ID="TextBoxBuscaNomeAluno" runat="server" CssClass="textBox"></asp:TextBox><br />
                         <label>Numero Pece: </label><br />
                         <asp:TextBox ID="TextBoxBuscaNumeroPece" runat="server" CssClass="textBox"></asp:TextBox><br />
-                        <asp:Button ID="ButtonBuscar" runat="server" Text="Buscar" CssClass="botao"/>
+                        <asp:Button ID="ButtonBuscar" runat="server" Text="Buscar" CssClass="botao" 
+                            onclick="ButtonBuscar_Click"/>
                     </fieldset>
                 </div>
             <br />
