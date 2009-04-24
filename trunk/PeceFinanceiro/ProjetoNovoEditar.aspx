@@ -5,4 +5,47 @@
 <script type="text/javascript">
       this.setMenuAtivo("MenuItemProjetos");
 </script>
+    <div id="container">
+            <div id="primarycontainer">
+                <div id="primarycontent">
+                <asp:Panel ID="PanelErro" runat="server">
+                     <div class="DivErro">
+                            <asp:Label ID="MensagemErro" runat="server"></asp:Label><br />
+                            
+                       </div>
+                    </asp:Panel>
+                    <asp:Panel ID="PanelSucesso" runat="server">
+                        <div class="DivSucesso">
+                            <asp:Label ID="MensagemSucesso" runat="server">Cadastro realizado com sucesso! <a href="ProjetoNovoEditar.aspx">Editar Projeto</a></asp:Label>
+                        </div>
+                    </asp:Panel>
+                    <div class="formGenerico">
+                        <fieldset>
+                            <legend>Dados do Projeto</legend>
+                            <ul>
+                                <li>
+                                    <label>Código do Projeto</label>
+                                    <asp:TextBox ID="TextBoxCodigoProjeto" runat="server" CssClass="textBox" Width="300px"></asp:TextBox>
+                                </li>
+                                <li>
+                                    <label>Nome Projeto</label>
+                                    <asp:TextBox ID="TextBoxNome" runat="server" CssClass="textBox" Width="300px"></asp:TextBox>
+                               </li>
+                               <li>
+                                    <label>Valor Projeto</label>
+                                    <asp:TextBox ID="TextValorProjeto" runat="server" CssClass="textBox" Width="300px"></asp:TextBox>
+                               </li>
+                                <li>
+                                &nbsp;</li>
+                            </ul>
+                            <asp:Button ID="ButtonCadastrar" runat="server" Text="Salvar" 
+                                CssClass="botaoFormTick" onclick="ButtonCadastrar_Click"/>
+                            <asp:Button ID="ButtonCancelar" runat="server" Text="Cancelar" CssClass="botaoFormCross"/>
+                            <asp:Button ID="Button1" runat="server" Text="Limpar Campos" CssClass="botaoForm"/>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+    </div>
+
 </asp:Content>
