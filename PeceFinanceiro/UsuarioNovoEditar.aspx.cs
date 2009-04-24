@@ -10,11 +10,41 @@ namespace PeceFinanceiro
 {
 	public partial class NovoUsuario : System.Web.UI.Page
 	{
+        Usuario _usuario = new Usuario();
+        UsuarioNegocio _usuarionegocio = new UsuarioNegocio();
+        String _operacao;
 		protected void Page_Load(object sender, EventArgs e)
 		{
             PanelErro.Visible = false;
             PanelSucesso.Visible = false;
+            if (Request.QueryString["login"] != null)
+            {
+                _operacao = "editar";
+                carregarDadosParaEdicao();
+            }
+            else{
+                _operacao = "novo";
+            }
 		}
+
+        private void carregarDadosParaEdicao()
+        {
+            if (!Page.IsPostBack)
+            {
+                _usuario = _usuarionegocio.ConsultarUsuario(Request.QueryString["login"].ToString());
+                TextBoxNome.Text = _usuario.Nome;
+                TextBoxLogin.Text = _usuario.Login;
+                DropDownListTipo.Items.FindByValue(_usuario.Tipo.ToString()).Selected = true;
+                TextBoxLogin.Enabled = false;
+                Usuario usuario = (Usuario)Session["usuario"];
+                if (!usuario.Login.Equals(_usuario.Login))
+                {
+                    TextBoxNome.Enabled = false;
+                    TextBoxSenha.Enabled = false;
+                    TextBoxSenhaConfirma.Enabled = false;
+                }
+            }
+        }
 
         protected void ButtonCancelar_Click(object sender, EventArgs e)
         {
@@ -26,24 +56,40 @@ namespace PeceFinanceiro
             
             if (!TextBoxLogin.Text.Equals(""))
             {
-                if (!TextBoxSenha.Text.Equals(""))
+                if (!TextBoxSenha.Text.Equals("") || _operacao.Equals("editar"))// se é uma edição a senha pode estar em branco
                 {
                     if (TextBoxSenha.Text.Equals(TextBoxSenhaConfirma.Text))
                     {
-                        Usuario novousuario = new Usuario();
-                        novousuario.Nome = TextBoxNome.Text;
-                        novousuario.Login = TextBoxLogin.Text;
-                        novousuario.Tipo = Convert.ToInt32(DropDownListTipo.SelectedValue);
-                        UsuarioNegocio usuarionegocio = new UsuarioNegocio();
-                        int novoUsuarioStatus = usuarionegocio.InserirUsuario(novousuario, TextBoxSenha.Text);
-                        if (novoUsuarioStatus == 0)
+                        if (_operacao.Equals("novo"))
                         {
-                            Response.Redirect("UsuarioLista.aspx?novoUsuario=" + novousuario.Login);
+                            _usuario.Nome = TextBoxNome.Text;
+                            _usuario.Login = TextBoxLogin.Text;
+                            _usuario.Tipo = Convert.ToInt32(DropDownListTipo.SelectedValue);
+
+                            int novoUsuarioStatus = _usuarionegocio.InserirUsuario(_usuario, TextBoxSenha.Text);
+                            if (novoUsuarioStatus == 0)
+                            {
+                                Response.Redirect("UsuarioLista.aspx?novoUsuario=" + _usuario.Login);
+                            }
+                            if (novoUsuarioStatus == -1)
+                            {
+                                ShowErrorMessage("O login: '" + _usuario.Login + "'Já existe. Escolha outro Login");
+                                TextBoxLogin.Focus();
+                            }
                         }
-                        if (novoUsuarioStatus == -1)
-                        {
-                            ShowErrorMessage("O login: '" + novousuario.Login + "'Já existe. Escolha outro Login");
-                            TextBoxLogin.Focus();
+                        else
+                        {//editar
+                            _usuario.Nome = TextBoxNome.Text;
+                            _usuario.Login = TextBoxLogin.Text;
+                            _usuario.Tipo = Convert.ToInt32(DropDownListTipo.SelectedValue);
+                            if (_usuarionegocio.AtualizarUsuario(_usuario,TextBoxSenha.Text.ToString()))
+                            {
+                                Response.Redirect("UsuarioLista.aspx?atualizaçãoUsuario=" + _usuario.Login);
+                            }
+                            else
+                            {
+                                ShowErrorMessage("Falha na atualização do usuario!");
+                            }
                         }
                     }
                     else

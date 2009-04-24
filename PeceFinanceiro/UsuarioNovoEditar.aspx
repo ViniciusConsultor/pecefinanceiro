@@ -2,11 +2,13 @@
     CodeBehind="UsuarioNovoEditar.aspx.cs" Inherits="PeceFinanceiro.NovoUsuario" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
+    <% if (Session["isadmin"])
+       { %>
     <script type="text/javascript">
         this.setMenuAtivo("MenuItemUsuarios");
     </script>
-
+    <% } %> %>
+<form action="">
     <div id="container">
         <div id="primarycontainer">
             <div id="primarycontent">
@@ -29,29 +31,28 @@
                             <li>
                                 <label>
                                     Nome</label>
-                                <asp:TextBox ID="TextBoxNome" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="TextBoxNome" runat="server"> </asp:TextBox>
                             </li>
                             <li>
-                                <label>
-                                    Login</label>
-                                <asp:TextBox ID="TextBoxLogin" runat="server" CausesValidation="True"></asp:TextBox>
+                                <label>Login</label>
+                                <asp:TextBox ID="TextBoxLogin" runat="server" CausesValidation="True" AutoPostBack="False"></asp:TextBox>
                             </li>
                             <li>
                                 <label>
                                     Senha</label>
-                                <asp:TextBox ID="TextBoxSenha" runat="server" ValidationGroup="senha" TextMode="Password"></asp:TextBox>
+                                <asp:TextBox ID="TextBoxSenha" runat="server" ValidationGroup="senha" TextMode="Password" AutoPostBack="False"></asp:TextBox>
                             </li>
                             <li>
                                 <label>
                                     Confirme a Senha</label>
-                                <asp:TextBox ID="TextBoxSenhaConfirma" runat="server" ValidationGroup="senha" TextMode="Password"></asp:TextBox>
+                                <asp:TextBox ID="TextBoxSenhaConfirma" runat="server" ValidationGroup="senha" TextMode="Password" AutoPostBack="False"></asp:TextBox>
                             </li>
                             <li>
                                 <label>
                                     Tipo de Usuário</label>
                                 <asp:DropDownList ID="DropDownListTipo" runat="server">
                                     <asp:ListItem Text="Administrador" Value="1" />
-                                    <asp:ListItem Text="Usuario" Value="0" />
+                                    <asp:ListItem Text="Operacional" Value="0" />
                                 </asp:DropDownList>
                             </li>
                         </ul>
@@ -64,4 +65,5 @@
             </div>
         </div>
     </div>
+    </form>
 </asp:Content>

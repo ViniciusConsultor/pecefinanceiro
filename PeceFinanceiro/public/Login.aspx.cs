@@ -29,6 +29,8 @@ namespace PeceFinanceiro
             {
                 _usuario = _usuarionegocio.ConsultarUsuario(LoginFinanceiro.UserName);
                Session.Add("usuario",_usuario);
+               Session.Add("login", _usuario.Login);
+               Session.Add("isadmin", _usuario.isAdmin() ? true : false);
                FormsAuthentication.RedirectFromLoginPage(LoginFinanceiro.UserName, true);
             }
         }
