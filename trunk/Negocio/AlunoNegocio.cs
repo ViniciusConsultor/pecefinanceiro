@@ -38,5 +38,10 @@ namespace Vsf.Negocio
         {
             return alunodao.ObterAlunoPeloNumeroPece(numeroPece);
         }
+
+        public List<Aluno> ObterAlunosPorProjetoSemRegistroFinanceiro(string codigoProjeto)
+        {
+            return AlunoDAO.ObterAlunosPorProjetoSemRegistroFinanceiro(codigoProjeto);
+        }
     }
 }

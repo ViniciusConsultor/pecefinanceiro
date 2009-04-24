@@ -14,6 +14,42 @@ namespace PeceFinanceiro {
     public partial class EditarParcelamento {
         
         /// <summary>
+        /// PanelErro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelErro;
+        
+        /// <summary>
+        /// MensagemErro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MensagemErro;
+        
+        /// <summary>
+        /// PanelSucesso control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PanelSucesso;
+        
+        /// <summary>
+        /// MensagemSucesso control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MensagemSucesso;
+        
+        /// <summary>
         /// LabelNomeAluno control.
         /// </summary>
         /// <remarks>
@@ -282,6 +318,15 @@ namespace PeceFinanceiro {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label3;
+        
+        /// <summary>
+        /// HiddenFieldDados control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HiddenFieldDados;
         
         /// <summary>
         /// Button2 control.

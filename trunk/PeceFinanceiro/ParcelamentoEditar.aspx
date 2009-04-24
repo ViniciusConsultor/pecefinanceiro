@@ -4,10 +4,32 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 <script type="text/javascript">
       this.setMenuAtivo("MenuItemCadastrosFinanceiros");
+      
+      function WriteStrings()
+      {
+        var strDatas = "", strValores = "";
+        var tableGrid = document.getElementById("ctl00_ContentPlaceHolder1_GridViewParcelas").firstChild;
+        for(var i=1; i < tableGrid.childNodes.length; i++) {
+            strDatas += tableGrid.childNodes[i].childNodes[1].firstChild.value + ";";
+            strValores += tableGrid.childNodes[i].childNodes[2].firstChild.value + ";";
+        }
+        document.getElementById("ctl00_ContentPlaceHolder1_HiddenFieldDados").value = strDatas + "&" + strValores;
+      }
+      
 </script>
     <div id="container">
             <div id="primarycontainer">
                 <div id="primarycontent">
+                <asp:Panel ID="PanelErro" Visible="false" runat="server">
+                        <div class="DivErro">
+                            <asp:Label ID="MensagemErro" runat="server">Teste</asp:Label>
+                        </div>
+                    </asp:Panel>
+                    <asp:Panel ID="PanelSucesso" Visible="false" runat="server">
+                        <div class="DivSucesso">
+                            <asp:Label ID="MensagemSucesso" runat="server">Cadastro realizado com sucesso! <a href="ParcelamentoEditar.aspx">Editar Parcelas</a></asp:Label>
+                        </div>
+                    </asp:Panel>
                     <div class="formGenerico">
                         <fieldset>
                             <legend>Dados do Parcelamento</legend>
@@ -130,8 +152,10 @@
                                     <label>Saldo a distribuir</label>
                                     <asp:Label runat="server" ID="Label3" ForeColor="Red" Font-Bold="true" Font-Size="14px">R$ 100,00</asp:Label>
                                 </li>
+                                <asp:HiddenField ID="HiddenFieldDados" runat="server" />
                             </ul>
-                            <asp:Button ID="Button2" runat="server" Text="Salvar" Enabled="false" CssClass="botaoFormTick"/>
+                            <asp:Button ID="Button2" runat="server" Text="Salvar" 
+                                CssClass="botaoFormTick" onclick="Button2_Click"/>
                             <asp:Button ID="Button3" runat="server" Text="Cancelar" 
                                 CssClass="botaoFormCross" onclick="Button3_Click"/>
                         </fieldset>

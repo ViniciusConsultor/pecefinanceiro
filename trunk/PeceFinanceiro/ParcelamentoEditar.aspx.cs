@@ -34,6 +34,7 @@ namespace PeceFinanceiro
             {
                 FillGrids();
                 FillSummary();
+                this.Button2.Attributes.Add("onmousedown", "javascript:WriteStrings();");
             }
         }
 
@@ -57,6 +58,71 @@ namespace PeceFinanceiro
         protected void Button3_Click(object sender, EventArgs e)
         {
             Response.Redirect("RegistroFinanceiroNovoEditar.aspx?idMatricula=" + _idMatricula);
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+
+            bool sucesso = true;
+
+            //Dictionary<DateTime, Double> dictionaryValores = new Dictionary<DateTime, double>();
+            string[] strHidden = this.HiddenFieldDados.Value.Split('&');
+            string[] datasString = strHidden[0].Split(';');
+            string[] valoresString = strHidden[1].Split(';');
+
+            ParcelaNegocio parcelaNegocio = new ParcelaNegocio();
+
+            int i = 0;
+            foreach (string strVencimento in datasString)    
+            {
+                string strValor = valoresString[i];
+                if (strVencimento != String.Empty && strValor != String.Empty)
+                {
+                    DateTime vencimento;
+                    Double valor;
+                    if (Double.TryParse(strValor, out valor) &&
+                        DateTime.TryParse(strVencimento, out vencimento))
+                    {
+                        if (!parcelaNegocio.EditarParcela(new Parcela(i + 1, vencimento, valor), _idRegistro))
+                        {
+                            sucesso = false;
+                            throw new Exception("Não foi possível editar parcela " + (i + 1).ToString());
+                        }
+                    }
+                    else
+                    {
+                        sucesso = false;
+                        ShowErrorMessage("Vencimento ou Valor de parcela inválidos na parcela " + (i + 1).ToString());
+                        break;
+                    }
+                    i++;
+                }
+                else
+                {
+                    if (i != datasString.Length - 1)
+                    {
+                        sucesso = false;
+                        ShowErrorMessage("Vencimento ou Valor de parcela não podem estar vazios.");
+                    }
+                    break;
+                }
+            }
+
+            if (sucesso)
+                ShowSuccessMessage("Parcelas editadas com sucesso.");
+        }
+
+        private void ShowErrorMessage(string errorMessage)
+        {
+            PanelSucesso.Visible = false;
+            PanelErro.Visible = true;
+            MensagemErro.Text = errorMessage;
+        }
+        private void ShowSuccessMessage(string successMessage)
+        {
+            PanelErro.Visible = false;
+            PanelSucesso.Visible = true;
+            MensagemSucesso.Text = successMessage;
         }
 
     }

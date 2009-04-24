@@ -76,5 +76,37 @@ namespace Vsf.DAL
             }
             return listParcela;
         }
+
+        public static bool EditarParcela(Parcela parcela, int idRegistro)
+        {
+            int affected = 0;
+            VsfDatabase db = new VsfDatabase(Properties.Settings.Default.StringConexao);
+            try
+            {
+                List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@numeroParcela", parcela.NumeroParcela));
+                parameters.Add(new SqlParameter("@dataVencimento", parcela.DtVencimento));
+                parameters.Add(new SqlParameter("@valorPagar", parcela.ValorParcela));
+                parameters.Add(new SqlParameter("@idFinanceiro", idRegistro));
+                db.AbreConexao();
+
+                StringBuilder query = new StringBuilder("UPDATE Parcelas SET");
+                query.Append(" DataVencimento = @dataVencimento,");
+                query.Append(" ValorPagar = @valorPagar");
+                query.Append(" WHERE IdFinanceiro = @idFinanceiro");
+                query.Append(" AND NumeroParcela = @numeroParcela");
+
+                affected = db.ExecuteTextNonQuery(query.ToString(), parameters);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("DAOAluno.InserirAluno(Aluno): " + ex.ToString(), ex);
+            }
+            finally
+            {
+                db.FechaConexao();
+            }
+            return (affected > 0);
+        }
     }
 }
